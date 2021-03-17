@@ -13,12 +13,16 @@ namespace HE_ARC::RPG
             int getAgility();
             Hero();
             Hero(int _strength, int _agility, int _intelligence, double _hp, string _name);
+            Hero(const Hero& hero);
         private:
+            friend class Sword;
             int strength;
             int agility;
             int intelligence;
             double hp;
             string name;
+            Sword Sword;
+             
     };
 }
 #endif //Hero_h

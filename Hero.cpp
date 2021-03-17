@@ -24,7 +24,7 @@ namespace HE_ARC::RPG
     }
     int Hero::getAgility()
     {
-        return 0;
+        return this->agility;
     }
 
     Hero::Hero()
@@ -43,6 +43,14 @@ namespace HE_ARC::RPG
         this->hp = _hp;
         this->intelligence = _intelligence;
         this->name = _name;
+    }
+    Hero::Hero(const Hero& hero)
+    {
+        this->strength = hero.strength;
+        this->agility = hero.agility;
+        this->hp = hero.hp;
+        this->intelligence = hero.intelligence;
+        this->name = hero.name;
     }
 }
 
