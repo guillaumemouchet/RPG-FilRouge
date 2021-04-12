@@ -1,17 +1,28 @@
-#ifndef Sword_h
-#define Sword_h
+#ifndef sword_h
+#define sword_h
+
 using namespace std;
 
 namespace HE_ARC::RPG
 {
     class Sword
-    {   
+    {
         public:
-            Sword(int damage);
-            int getDamage() const;
+            //CONSTRUCTEURS
+            //par défaut
+            Sword() : damage(0) { }
+            //par paramètres
+            Sword(int _damage) : damage(_damage) { }
+            //par recopie
+            Sword(Sword &s): damage(s.damage) { }
+
+            //GETTER
+            int getDamage() const { return this->damage; };
         private:
-            friend class Hero;
+            //ATTRIBUTS
             int damage;
+            //CLASSE AMIE
+            friend class Hero;
     };
 }
 #endif //Sword_h
