@@ -33,13 +33,13 @@ namespace HE_ARC::RPG
             string getName() const { return this->name; }
 
             //FONCTIONS
-            void show();
-            void interact(const Hero &);
+            void virtual show();
+            void virtual interact(const Hero &) = 0;
 
             //SURCHARGE D'OPÉRATEUR =
             Hero& operator=(const Hero &hero);
 
-        private:
+        protected:
             //ATTRIBUTS
             int strength;
             int agility;

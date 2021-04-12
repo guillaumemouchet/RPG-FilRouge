@@ -56,7 +56,7 @@ namespace HE_ARC::RPG
     //FONCTIONS
     void Hero::show()
     {
-        cout << "=========================" << endl
+        cout << endl << "=========================" << endl
         << "Hero's name : " << this->name <<endl
         << "=========================" << endl
         << "Strength : " << this->strength << endl
@@ -64,13 +64,13 @@ namespace HE_ARC::RPG
         << "Agility : " << this->agility << endl
         << "Intelligence : " << this->intelligence << endl
         << "Sword damage : " << this->sword->getDamage() << endl
-        << endl;
+        << "=========================" << endl << endl;
     }
 
-    void Hero::interact(const Hero& hero )
+  /* void Hero::interact(const Hero& hero )
     {
         cout << this->name << " says hi to " << hero.name << endl;
-    }
+    } */
 
     //SURCHARGE D'OPÉRATEUR =
     Hero& Hero::operator=(const Hero &hero)
