@@ -11,7 +11,7 @@ namespace HE_ARC::RPG
         int mana;
         public:
         Wizard(int _strength, int _agility, int _intelligence, double _hp, string _name, Sword _sword, int _mana);
-        Wizard::Wizard();
+        Wizard();
         void interact(const Hero &) override;
         void castSpell();
         void show();

@@ -24,8 +24,7 @@ namespace HE_ARC::RPG
     }
     void Wizard::interact(const Hero & hero)
     {
-        cout << "BUG" <<endl;
-        cout << this->name << "do a magic trick for" << hero.getName() << endl;
+        cout << this->name << " do a magic trick for " << hero.getName() << endl;
     } 
 
     void Wizard::castSpell()

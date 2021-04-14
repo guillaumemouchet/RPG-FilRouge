@@ -95,7 +95,7 @@ namespace HE_ARC::RPG
         << "Agility : " << h.agility << endl
         << "Intelligence : " << h.intelligence << endl
         << "Sword damage : " << h.sword->getDamage() << endl
-        << endl;
+        << "=========================" << endl << endl;
     }
 }
 

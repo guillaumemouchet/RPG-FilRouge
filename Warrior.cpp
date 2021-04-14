@@ -24,7 +24,7 @@ namespace HE_ARC::RPG
     /* Interact of the Warrior is different from hero, it's an override */
     void Warrior::interact(const Hero & hero) 
     {
-        cout << "BUG" <<endl;
+        
         cout << this->name << " Punch " << hero.getName() << endl;
     }
 }
