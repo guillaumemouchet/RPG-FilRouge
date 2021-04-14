@@ -8,6 +8,8 @@
 		"args": [
 			"-g",
 			"${fileDirname}\\*.cpp",
+			"${fileDirname}\\libs\\actors\\src\\*.cpp",
+			"${fileDirname}\\libs\\weapons\\src\\*.cpp",
 			"-o",
 			"${fileDirname}\\${fileBasenameNoExtension}.exe"
 		],
