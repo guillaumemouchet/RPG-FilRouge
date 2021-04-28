@@ -15,12 +15,12 @@ namespace HE_ARC::RPG
             //CONSTUCTEURS
             double currentHp;
             //par défaut
-            Monster();
+            Monster()=default;
             //par paramètres
             Monster(int _strength, int _agility, int _intelligence, double _hp);
 
             //DESTRUCTEUR
-            ~Monster();
+            virtual ~Monster();
 
             //GETTER
             //comme il n'y a qu'un return à faire, on peut se permettre de les laisser dans le .h(pp)
@@ -32,10 +32,6 @@ namespace HE_ARC::RPG
 
             //FONCTIONS
             void virtual show();
-
-            //SURCHARGE D'OPÉRATEUR =
-            Monster& operator=(const Monster &monster);
-
             
         protected:
             //ATTRIBUTS

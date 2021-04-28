@@ -15,7 +15,7 @@ namespace HE_ARC::RPG
         public:
         // constructeurs
         //par défaut
-        Undead();
+        Undead()= default;
         //par paramètre
         Undead(int _strength, int _agility, int _intelligence, double _hp);
         

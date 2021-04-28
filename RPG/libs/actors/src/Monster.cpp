@@ -9,11 +9,6 @@ using namespace std;
 namespace HE_ARC::RPG
 {
     //CONSTUCTEURS
-    //par défaut
-    Monster::Monster()
-    {
-        cout << "CONSTRUCTEUR par defaut" << endl;
-    }
     //par paramètres
     Monster::Monster(int _strength, int _agility, int _intelligence, double _hp)
     {
@@ -44,15 +39,6 @@ namespace HE_ARC::RPG
         << "=========================" << endl << endl;
     }
 
-    //SURCHARGE D'OPÉRATEUR =
-    Monster& Monster::operator=(const Monster &monster)
-    {
-        this->strength = monster.strength;
-        this->agility = monster.agility;
-        this->hp = monster.hp;
-        this->intelligence = monster.intelligence;
-        return *this;
-    }
 
     //SURCHARGE D'OPÉRATEUR AMIE <<
     ostream& operator<<(ostream &s,const Monster &m)

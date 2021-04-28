@@ -32,6 +32,7 @@ namespace HE_ARC::RPG
         void Fireball(Monster *_monster);
         void Blizzard(Monster *_monster);
         void Leech(Monster *_monster);
+        void Attack(Monster *_monster);
 
     };
     

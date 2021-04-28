@@ -14,7 +14,7 @@ namespace HE_ARC::RPG
         //par paramètre
         Necromancer(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *pObject, int Mana);
         //par défaut
-        Necromancer();
+        Necromancer()= default;
         //destruveteur
         virtual ~Necromancer() override = default;
         

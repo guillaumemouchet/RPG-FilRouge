@@ -24,7 +24,7 @@ namespace HE_ARC::RPG
         this->hp = 0.0;
         this->intelligence = 0;
         this->name = "NoName";
-        this->pObject = new Sword();
+        this->pObject = new Shield();
     }
     /* Interact of the Warrior is different from hero, it's an override */
     void Warrior::interact(const Hero &hero)
@@ -77,7 +77,7 @@ namespace HE_ARC::RPG
     //le héro frappe violamanent tous les ennemis
     void Warrior::Rampage(Monster *_monster)
     {
-        int cDamage = 14;
+        int cDamage = 12;
         double damage = 0;
         cout << this->getName() << " Devient fou et frappe tout ce qui bouge" << endl;
         
@@ -89,7 +89,7 @@ namespace HE_ARC::RPG
             damage = (this->getStrength() * cDamage) / 10;
         }
         _monster->currentHp -= damage;
-        this->currentHp -= damage / 3;
+        this->currentHp -= damage / 2;
         cout << "votre adversaire perd " << damage << "HP" << endl;
         cout << "vous perdez " << damage / 3 << "HP" << endl;
     }

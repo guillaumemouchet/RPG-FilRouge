@@ -7,37 +7,35 @@
 using namespace std;
 namespace HE_ARC::RPG
 {
-    //c'est pour faire un patterne pour les attaques, ce sera remplacé par de l'entrée de commande
-    int Battle::hCounter = 0;
+    //c'est pour faire un pattern pour les attaques du monstre
     int Battle::mCounter = 0;
 
     void Battle::Fight(Hero *_hero, Monster *_monster)
     {
         cout << "=======================================" << endl;
         cout << "=======================================" << endl;
-        cout << "le combat commence" << endl;
+        cout << "Le combat commence" << endl;
         cout << "=======================================" << endl;
         cout << "=======================================" << endl;
         cout << endl;
-        while ((isHAlive(_hero) && isMAlive(_monster)))
+        while ((isHAlive(_hero) && isMAlive(_monster))) // vérifie si quelqu'un est mort
         {
             cout << "========================================" << endl;
             MonsterAttack(_monster, _hero);
             show(_hero, _monster);
-            if (not isHAlive(_hero))
+            if (not isHAlive(_hero)) //Pour éviter que le héro attaque en étant mort
             {
                 break;
             }
             HeroAction(_hero, _monster);
             show(_hero, _monster);
         }
-        cout << "fin du combat" << endl;
+        cout << "Fin du combat" << endl;
         if (isHAlive(_hero) == true)
         {
             cout << "BRAVO!!! vous avez gagné votre premier combat" << endl
                  << endl;
-
-            _monster->currentHp = _monster->getHp();
+            _monster->currentHp = _monster->getHp(); //on le ramène à la vie pour éviter de crée trop de monstre
         }
         else
         {
@@ -47,13 +45,14 @@ namespace HE_ARC::RPG
         }
     }
 
+    //fonction qui permet au héro de choisir qu'elle action faire
     void Battle::HeroAction(Hero *_hero, Monster *_monster)
     {
         int action = -1;
         int status = 0;
         do
         {
-            cout << "[0] Go into attack" << endl;
+            cout << "[0] Attack" << endl;
             cout << "[1] Concede" << endl;
             cout << "[2] Backpack" << endl;
             fflush(stdin);
@@ -65,7 +64,7 @@ namespace HE_ARC::RPG
             HeroAttack(_hero, _monster);
             break;
         case 1:
-            cout << "you left the run" << endl;
+            cout << "You abondon the run" << endl;
             _hero->currentHp = 0;
             break;
         case 2:
@@ -78,7 +77,7 @@ namespace HE_ARC::RPG
         }
     }
 
-    //TO see if player or hero is Alive
+    //Pour voir si les personnages sont en vie
     bool Battle::isHAlive(Hero *_hero)
     {
         return (_hero->getcHp() > 0);
@@ -151,15 +150,12 @@ namespace HE_ARC::RPG
             {
             case 0:
                 _warrior->Rampage(_monster);
-
                 break;
             case 1:
                 _warrior->ShieldBash(_monster);
-
                 break;
             case 2:
                 _warrior->Taunt(_monster);
-
                 break;
             default:
                 HeroAttack(_hero, _monster);
@@ -183,18 +179,15 @@ namespace HE_ARC::RPG
             {
             case 0:
                 _wizard->Fireball(_monster);
-
                 break;
             case 1:
                 _wizard->Blizzard(_monster);
-
                 break;
             case 2:
                 _wizard->Leech(_monster);
-
                 break;
             default:
-            HeroAttack(_hero, _monster);
+                HeroAttack(_hero, _monster);
                 break;
             }
         }
@@ -211,7 +204,6 @@ namespace HE_ARC::RPG
                 cout << "[4] Cataclysme" << endl;
                 fflush(stdin);
                 status = scanf("%d", &action);
-
             } while (not(0 <= action && action <= 4 && status == 1));
             Necromancer *_necromancer = dynamic_cast<Necromancer *>(_hero);
             switch (action)
@@ -221,22 +213,18 @@ namespace HE_ARC::RPG
                 break;
             case 1:
                 _necromancer->Blizzard(_monster);
-
                 break;
             case 2:
                 _necromancer->Leech(_monster);
-
                 break;
             case 3:
                 _necromancer->RiseUndead(_monster);
-
                 break;
             case 4:
                 _necromancer->Cataclysme(_monster);
-
                 break;
             default:
-            HeroAttack(_hero, _monster);
+                HeroAttack(_hero, _monster);
                 break;
             }
         }
