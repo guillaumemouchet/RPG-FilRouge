@@ -2,26 +2,19 @@
 #include <string>
 
 //TOUJOURS inclure les headers !!
-#include "..\include\hero.h"
+#include "..\include\Hero.h"
+#include "..\..\Stuff\include\IObject.h"
+#include "..\..\Stuff\include\Potion.h"
+#include "..\..\Stuff\include\Shield.h"
+#include "..\..\Stuff\include\Sword.h"
 
 using namespace std;
 
 namespace HE_ARC::RPG
 {
     //CONSTUCTEURS
-    //par défaut
-    Hero::Hero()
-    {
-        cout << "CONSTRUCTEUR par defaut" << endl;
-        this->strength = 0;
-        this->agility = 0;
-        this->hp = 0.0;
-        this->intelligence = 0;
-        this->name = "NoName";
-        this->sword = new Sword();
-    }
     //par paramètres
-    Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, Sword _sword)
+    Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pObject) : pObject(_pObject)
     {
         cout << "CONSTRUCTEUR par parametres: " << _name << endl;
         this->strength = _strength;
@@ -29,27 +22,16 @@ namespace HE_ARC::RPG
         this->hp = _hp;
         this->intelligence = _intelligence;
         this->name = _name;
-        //this->sword = _sword;
-        this->sword = new Sword(_sword);
+        this->currentHp=_hp;
     }
-    //par recopie
-    Hero::Hero(const Hero& hero)
-    {
-        cout << "CONSTRUCTEUR par recopie: " << hero.name << endl;
-        this->strength = hero.strength;
-        this->agility = hero.agility;
-        this->hp = hero.hp;
-        this->intelligence = hero.intelligence;
-        this->name = hero.name;
-        this->sword = new Sword(hero.sword->damage);
-    }
+   
 
     //DESTRUCTEUR
     Hero::~Hero()
     {
         cout << "DESTRUCTEUR: " << this->name << endl;
-        delete this->sword;
-        this->sword = nullptr;
+        delete this->pObject;
+        this->pObject = nullptr;
     }
 
 
@@ -63,26 +45,10 @@ namespace HE_ARC::RPG
         << "Health : " << this->hp << endl
         << "Agility : " << this->agility << endl
         << "Intelligence : " << this->intelligence << endl
-        << "Sword damage : " << this->sword->getDamage() << endl
+        << "Object(" <<this->pObject->getName() <<") : " << this->pObject->getFeature() << endl
         << "=========================" << endl << endl;
     }
 
-  /* void Hero::interact(const Hero& hero )
-    {
-        cout << this->name << " says hi to " << hero.name << endl;
-    } */
-
-    //SURCHARGE D'OPÉRATEUR =
-    Hero& Hero::operator=(const Hero &hero)
-    {
-        this->strength = hero.strength;
-        this->agility = hero.agility;
-        this->hp = hero.hp;
-        this->intelligence = hero.intelligence;
-        this->name = hero.name;
-        this->sword = new Sword(hero.sword->damage);
-        return *this;
-    }
 
     //SURCHARGE D'OPÉRATEUR AMIE <<
     ostream& operator<<(ostream &s,const Hero &h)
@@ -94,8 +60,42 @@ namespace HE_ARC::RPG
         << "Health : " << h.hp << endl
         << "Agility : " << h.agility << endl
         << "Intelligence : " << h.intelligence << endl
-        << "Sword damage : " << h.sword->getDamage() << endl
+        << "Object(" <<h.pObject->getName() <<") : " << h.pObject->getFeature() << endl
         << "=========================" << endl << endl;
     }
+
+    //----------------FONCTION ET CONSTRUCTEUR QUI NE SONT PLUS UTILE--------------------------------------
+    //par recopie
+    /*
+    Hero::Hero(const Hero& hero)
+    {
+        cout << "CONSTRUCTEUR par recopie: " << hero.name << endl;
+        this->strength = hero.strength;
+        this->agility = hero.agility;
+        this->hp = hero.hp;
+        this->intelligence = hero.intelligence;
+        this->name = hero.name;
+        this->pObject = new IObject(*hero.pObject);
+    }
+    */
+
+    /* void Hero::interact(const Hero& hero )
+    {
+        cout << this->name << " says hi to " << hero.name << endl;
+    } */
+
+    //SURCHARGE D'OPÉRATEUR =
+    /*
+    Hero& Hero::operator=(const Hero &hero)
+    {
+        this->strength = hero.strength;
+        this->agility = hero.agility;
+        this->hp = hero.hp;
+        this->intelligence = hero.intelligence;
+        this->name = hero.name;
+        this->pObject = new IObject(hero.pObject);
+        return *this;
+    }
+    */
 }
 
