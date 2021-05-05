@@ -59,16 +59,13 @@ namespace HE_ARC::RPG
     void Wizard::Fireball(Monster *_monster)
     {
 
-        int cDamage = 5; //constante de dégat du sort
+        int cDamage = 3; //constante de dégat du sort
         int ManaCost = 5;
-        double damage = 0;
         if (this->cMana >= ManaCost)
         {
             cout << this->getName() << " lance une violente boule de feu" << endl;
-            damage = (this->getIntelligence() * cDamage) / 10;
-            _monster->currentHp -= damage;
+            _monster->looseHp(cDamage ,this->getIntelligence());
             this->cMana -= ManaCost;
-            cout << "votre adversaire perd " << damage << "HP" << endl;
         }
         else
         {
@@ -79,16 +76,15 @@ namespace HE_ARC::RPG
     //Lance un Bizzard qui fait de faible dégats sur tout les ennemis
     void Wizard::Blizzard(Monster *_monster)
     {
-        int cDamage = 7;
+        int cDamage = 4;
         int ManaCost = 7;
-        double damage = 0;
+
         if (this->cMana >= ManaCost)
         {
             cout << this->getName() << " lance un magnifique Blizzard" << endl;
-            damage = (this->getIntelligence() * cDamage) / 10;
-            _monster->currentHp -= damage;
+             _monster->looseHp(cDamage ,this->getIntelligence());
             this->cMana -= ManaCost;
-            cout << "votre adversaire perd " << damage << "HP" << endl;
+
         }
         else
         {
@@ -99,51 +95,52 @@ namespace HE_ARC::RPG
     //Vole de la vie au monstre et reconvertis un pourcentage en vie
     void Wizard::Leech(Monster *_monster)
     {
-        int cDamage = 8;
+        int cDamage = 4;
         int ManaCost = 10;
-        double damage = 0;
         if (this->cMana >= ManaCost)
         {
             cout << this->getName() << " Inflige des dégats à l'adversaire et se soigne" << endl;
-            damage = (this->getIntelligence() * cDamage) / 10;
-            _monster->currentHp -= damage;
+            _monster->looseHp(cDamage , this->getIntelligence());
             this->cMana -= ManaCost;
-            this->currentHp += damage ;
-            cout << "votre adversaire perd " << damage << "HP" << endl;
-            cout << "vous gagnez " << damage << "HP " << endl;
+            this->Heal(cDamage*this->getIntelligence()/2.0);
         }
         else
         {
             Attack(_monster);
         }
     }
+    void Wizard::mHeal(double _mHeal)
+    {
+        if (_mHeal > this->getMana())
+        {
+            this->cMana = this->getMana();
+        }
+        else
+        {
+            this->cMana += _mHeal;
+        }
+    }
     //Ce sera l'attaque par défaut en cas de manque de mana
     void Wizard::Attack(Monster *_monster)
     {
-        int damage = 0;
         if (typeid(*pObject) == typeid(Sword))
         {
             cout << "Tu n'as pas assez de mana" << endl;
             cout << "Tu frappe l'adversaire avec ton épée" << endl;
-            damage = (this->getStrength()) / 2 + (this->pObject->getFeature());
-            _monster->currentHp -= damage;
-            cout << "votre adversaire perd " << damage << "HP" << endl;
+            
+            _monster->looseHp((this->pObject->getFeature()) ,this->getStrength());
         }
         else if (typeid(*pObject) == typeid(Shield))
         {
             cout << "Tu n'as pas assez de mana" << endl;
             cout << "Tu frappe l'adversaire avec ton bouclier" << endl;
-            damage = (this->getStrength()) / 2 + (this->pObject->getFeature() / 2);
-            _monster->currentHp -= damage;
-            cout << "votre adversaire perd " << damage << "HP" << endl;
+            _monster->looseHp((this->pObject->getFeature()/2.0) ,this->getStrength());
         }
         else if (typeid(*pObject) == typeid(Potion))
         {
             cout << "Tu n'as pas assez de mana" << endl;
             cout << "Tu frappe l'adversaire à main nue" << endl;
-            damage = (this->getStrength()) / 2;
-            _monster->currentHp -= damage;
-            cout << "votre adversaire perd " << damage << "HP" << endl;
+            _monster->looseHp(2 ,this->getStrength());
         }
     }
 

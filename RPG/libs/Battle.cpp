@@ -36,6 +36,7 @@ namespace HE_ARC::RPG
             cout << "BRAVO!!! vous avez gagné votre premier combat" << endl
                  << endl;
             _monster->currentHp = _monster->getHp(); //on le ramène à la vie pour éviter de crée trop de monstre
+            //il faut faire un moyen de drop du loot
         }
         else
         {
@@ -53,8 +54,8 @@ namespace HE_ARC::RPG
         do
         {
             cout << "[0] Attack" << endl;
-            cout << "[1] Concede" << endl;
-            cout << "[2] Backpack" << endl;
+            cout << "[1] Backpack " << endl;
+            cout << "[2] Concede" << endl;
             fflush(stdin);
             status = scanf("%d", &action);
         } while (not(0 <= action && action <= 2 && status == 1));
@@ -64,11 +65,12 @@ namespace HE_ARC::RPG
             HeroAttack(_hero, _monster);
             break;
         case 1:
-            cout << "You abondon the run" << endl;
-            _hero->currentHp = 0;
+            cout << "Ouverture du sac" << endl;
+            UseBackpack(_hero, _monster);
             break;
         case 2:
-            cout << "Open Backpack" << endl;
+            cout << "Vous avez abondonner la partie" << endl;
+            _hero->currentHp = 0;
             break;
         default:
             cout << "erreur" << endl;
@@ -96,13 +98,16 @@ namespace HE_ARC::RPG
             switch (Battle::mCounter)
             {
             case 0:
-                _goblin->Steal(_hero);
+                _goblin->steal(_hero);
                 Battle::mCounter++;
                 break;
             case 1:
-                _goblin->Rallye(_hero);
-                Battle::mCounter = 0;
+                _goblin->rallye(_hero);
+                Battle::mCounter++;
                 break;
+            case 2:
+                _goblin->slingShot(_hero);
+                Battle::mCounter = 0;
             default:
                 break;
             }
@@ -168,9 +173,9 @@ namespace HE_ARC::RPG
             int status = 0;
             do
             {
-                cout << "[0] Fireball" << endl;
-                cout << "[1] Blizzard" << endl;
-                cout << "[2] Leech" << endl;
+                cout << "[0] Fireball (5)" << endl;
+                cout << "[1] Blizzard (7)" << endl;
+                cout << "[2] Leech (10)" << endl;
                 fflush(stdin);
                 status = scanf("%d", &action);
             } while (not(0 <= action && action <= 2 && status == 1));
@@ -197,11 +202,11 @@ namespace HE_ARC::RPG
             int status = 0;
             do
             {
-                cout << "[0] Fireball" << endl;
-                cout << "[1] Blizzard" << endl;
-                cout << "[2] Leech" << endl;
-                cout << "[3] RiseUndead" << endl;
-                cout << "[4] Cataclysme" << endl;
+                cout << "[0] Fireball (5)" << endl;
+                cout << "[1] Blizzard (7)" << endl;
+                cout << "[2] Leech (10)" << endl;
+                cout << "[3] RiseUndead (5)" << endl;
+                cout << "[4] Cataclysme (8)" << endl;
                 fflush(stdin);
                 status = scanf("%d", &action);
             } while (not(0 <= action && action <= 4 && status == 1));
@@ -241,5 +246,98 @@ namespace HE_ARC::RPG
         }
         cout << "Monster current HP: " << _monster->getcHp() << endl;
         cout << "========================================" << endl;
+    }
+
+    //on regarde ce qui a dans le sac puis on avise si on l'utilise ou non
+    void Battle::UseBackpack(Hero *_hero, Monster *_monster)
+    {
+
+        if (_hero->backpack.isNotEmpty() == true)
+        {
+            cout << "Vous ouvrez votre sac" << endl;
+            IObject *mItem = _hero->backpack.unPack();
+            cout << "il y a tout en haut " << mItem->getName() << "(" << mItem->getFeature() << ")" << endl;
+
+            if (typeid(*mItem) == typeid(Potion))
+            {
+                int action = -1;
+                int status = 0;
+                do
+                {
+                    cout << "Voulez vous boire la potion?" << endl;
+                    cout << "[0] Oui" << endl
+                         << "[1] Non" << endl;
+                    fflush(stdin);
+                    status = scanf("%d", &action);
+                } while (not(0 <= action && action <= 1 && status == 1));
+                switch (action)
+                {
+                case 0:
+                    _hero->Heal(mItem->getFeature() * 10.0);
+                    break;
+                case 1:
+                    // vu qu'on ne l'utilise pas on le remet au dessus
+                    _hero->backpack.pack(mItem);
+                    HeroAction(_hero, _monster);
+                    break;
+                default:
+                    break;
+                }
+            }
+            else
+            {
+                int action = -1;
+                int status = 0;
+                do
+                {
+                    cout << "Voulez vous équipez l'objet?" << endl;
+                    cout << "[0] Oui" << endl
+                         << "[1] Non" << endl;
+                    fflush(stdin);
+                    status = scanf("%d", &action);
+                } while (not(0 <= action && action <= 1 && status == 1));
+
+                switch (action)
+                {
+                case 0:
+                {
+                    //on va d'abord enlever l'équipement actif
+                    IObject *mItem1 = _hero->unequip();
+                    //on va lui équiper le nouvel objet
+                    _hero->equip(mItem);
+                    //on remet l'autre objet en haut du sac
+                    _hero->backpack.pack(mItem1);
+                    break;
+                }
+                case 1:
+                    HeroAction(_hero, _monster);
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        else
+        {
+            cout << "votre sac est vide" << endl;
+            HeroAction(_hero, _monster);
+        }
+    }
+
+    void Battle::Restsite(Hero *_hero)
+    {
+        cout << "Vous vous reposer et regagnez de HP" << endl;
+        _hero->Heal((_hero->getHp() * 30 / 100));
+        if (typeid(*_hero) == typeid(Wizard))
+        {
+            Wizard *_wizard = dynamic_cast<Wizard *>(_hero);
+            _wizard->mHeal(_wizard->getMana() * 30 / 100);
+        }
+        else if (typeid(*_hero) == typeid(Necromancer))
+        {
+            Necromancer *_necromancer = dynamic_cast<Necromancer *>(_hero);
+            _necromancer->mHeal(_necromancer->getMana() * 30 / 100);
+        }
+        //il faudra faire un truc pour réaranger le sac mais ca risque d'etre chaud
     }
 }

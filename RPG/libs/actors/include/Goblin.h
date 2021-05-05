@@ -18,8 +18,9 @@ namespace HE_ARC::RPG
         Goblin() = default;
         
         //liste des sorts du monstre
-        void Rallye(Hero *_hero);
-        void Steal(Hero *_hero);
+        void rallye(Hero *_hero);
+        void steal(Hero *_hero);
+        void slingShot(Hero *_hero);
 
     };
     

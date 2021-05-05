@@ -10,7 +10,7 @@ namespace HE_ARC::RPG
     }
     IObject* Backpack::unPack()
     {
-        IObject* topStack = this->mStack.top();
+        IObject *topStack = this->mStack.top();
         this->mStack.pop();
         return topStack;
     }

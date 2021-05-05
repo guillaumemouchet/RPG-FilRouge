@@ -41,9 +41,7 @@ namespace HE_ARC::RPG
         int cDamage = 4;
         double damage = 0;
         cout << this->getName() << " insulte l'adversaire" << endl;
-        damage = (this->getIntelligence() * cDamage) / 10.0;
-        _monster->currentHp -= damage;
-        cout << "votre adversaire perd " << damage << "HP" << endl;
+        _monster->looseHp(cDamage,this->getIntelligence());
     }
 
     //le héro frappe violament un ennemi avec son bouclier si il en a un
@@ -54,43 +52,37 @@ namespace HE_ARC::RPG
         if (typeid(*pObject) == typeid(Shield))
         {
             cout << this->getName() << " frappe violament l'adversaire avec son bouclier" << endl;
-            damage = (this->getStrength() * cDamage) / 10.0 + (this->pObject->getFeature());
-            _monster->currentHp -= damage;
-            cout << "votre adversaire perd " << damage << "HP" << endl;
+            _monster->looseHp(cDamage  + (this->pObject->getFeature()) ,this->getStrength());
         }
         else if (typeid(*pObject) == typeid(Sword))
         {
             cout << this->getName() << " n'a pas de bouclier mais frappe son ennemi avec son épée" << endl;
-            damage = (this->getStrength() * cDamage) / 10.0 + (this->pObject->getFeature()) / 2;
-            _monster->currentHp -= damage;
-            cout << "votre adversaire perd " << damage << "HP" << endl;
+            _monster->looseHp(cDamage  + (this->pObject->getFeature()) ,this->getStrength());
         }
         else
         {
             cout << this->getName() << " n'a pas de bouclier mais frappe son ennemi à main nue" << endl;
-            damage = (this->getStrength() * cDamage) / 10.0;
-            _monster->currentHp -= damage;
-            cout << "votre adversaire perd " << damage << "HP" << endl;
+            _monster->looseHp(cDamage ,this->getStrength());
         }
     }
 
     //le héro frappe violamanent tous les ennemis
     void Warrior::Rampage(Monster *_monster)
     {
-        int cDamage = 12;
+        int cDamage = 10;
         double damage = 0;
         cout << this->getName() << " Devient fou et frappe tout ce qui bouge" << endl;
         
         if (typeid(*pObject) == typeid(Sword))
         {
-            damage = (this->getStrength() * cDamage) / 10 + this->pObject->getFeature();
+            damage = (this->getStrength() * cDamage) / 2.0 + this->pObject->getFeature();
         }else
         {
-            damage = (this->getStrength() * cDamage) / 10;
+            damage = (this->getStrength() * cDamage) / 2.0;
         }
         _monster->currentHp -= damage;
-        this->currentHp -= damage / 2;
+        this->currentHp -= damage / 2.0;
         cout << "votre adversaire perd " << damage << "HP" << endl;
-        cout << "vous perdez " << damage / 3 << "HP" << endl;
+        cout << "vous perdez " << damage / 2.0 << "HP" << endl;
     }
 }

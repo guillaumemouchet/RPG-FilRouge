@@ -24,10 +24,11 @@ namespace HE_ARC::RPG
 
         //GETTER
         double getcMana() const {return this->cMana;}
+        double getMana() const {return this->mana;}
         //Fonctions;
         void interact(const Hero &) override;
         void show();
-        
+        void mHeal(double _mHeal);
         //liste des sorts du héros
         void Fireball(Monster *_monster);
         void Blizzard(Monster *_monster);

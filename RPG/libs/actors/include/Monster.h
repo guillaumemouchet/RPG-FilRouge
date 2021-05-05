@@ -32,6 +32,7 @@ namespace HE_ARC::RPG
 
             //FONCTIONS
             void virtual show();
+            void looseHp(int _damage, int _stat);
             
         protected:
             //ATTRIBUTS

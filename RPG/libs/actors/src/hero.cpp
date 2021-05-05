@@ -22,9 +22,8 @@ namespace HE_ARC::RPG
         this->hp = _hp;
         this->intelligence = _intelligence;
         this->name = _name;
-        this->currentHp=_hp;
+        this->currentHp = _hp;
     }
-   
 
     //DESTRUCTEUR
     Hero::~Hero()
@@ -34,36 +33,71 @@ namespace HE_ARC::RPG
         this->pObject = nullptr;
     }
 
-
     //FONCTIONS
     void Hero::show()
     {
-        cout << endl << "=========================" << endl
-        << "Hero's name : " << this->name <<endl
-        << "=========================" << endl
-        << "Strength : " << this->strength << endl
-        << "Health : " << this->hp << endl
-        << "Agility : " << this->agility << endl
-        << "Intelligence : " << this->intelligence << endl
-        << "Object(" <<this->pObject->getName() <<") : " << this->pObject->getFeature() << endl
-        << "=========================" << endl << endl;
+        cout << endl
+             << "=========================" << endl
+             << "Hero's name : " << this->name << endl
+             << "=========================" << endl
+             << "Strength : " << this->strength << endl
+             << "Health : " << this->hp << endl
+             << "Agility : " << this->agility << endl
+             << "Intelligence : " << this->intelligence << endl
+             << "Object(" << this->pObject->getName() << ") : " << this->pObject->getFeature() << endl
+             << "=========================" << endl
+             << endl;
     }
-
 
     //SURCHARGE D'OPÉRATEUR AMIE <<
-    ostream& operator<<(ostream &s,const Hero &h)
+    ostream &operator<<(ostream &s, const Hero &h)
     {
-        return s  << "=========================" << endl
-        << "Hero's name : " << h.name <<endl
-        << "=========================" << endl
-        << "Strength : " << h.strength << endl
-        << "Health : " << h.hp << endl
-        << "Agility : " << h.agility << endl
-        << "Intelligence : " << h.intelligence << endl
-        << "Object(" <<h.pObject->getName() <<") : " << h.pObject->getFeature() << endl
-        << "=========================" << endl << endl;
+        return s << "=========================" << endl
+                 << "Hero's name : " << h.name << endl
+                 << "=========================" << endl
+                 << "Strength : " << h.strength << endl
+                 << "Health : " << h.hp << endl
+                 << "Agility : " << h.agility << endl
+                 << "Intelligence : " << h.intelligence << endl
+                 << "Object(" << h.pObject->getName() << ") : " << h.pObject->getFeature() << endl
+                 << "=========================" << endl
+                 << endl;
     }
-
+    void Hero::equip(IObject *_pObject)
+    {
+        this->pObject = _pObject;
+    }
+    IObject *Hero::unequip()
+    {
+        IObject *mItem = this->pObject;
+        this->pObject = nullptr;
+        return mItem;
+    }
+    void Hero::Heal(double _heal)
+    {
+        if (_heal > this->getHp())
+        {
+            this->currentHp = this->getHp();
+        }
+        else
+        {
+            this->currentHp += _heal;
+        }
+    }
+    void Hero::looseHp(int _damage, int _stat)
+    {
+        double damage = 0;
+        if (typeid(this->pObject) == typeid(Shield))
+        {
+            damage = (_stat * _damage) / 2.0 - this->pObject->getFeature();
+        }
+        else
+        {
+            damage = (_stat * _damage) / 2.0;
+        }
+        _hero->currentHp -= damage;
+        cout << "vous perdez " << damage << " HP" << endl;
+    }
     //----------------FONCTION ET CONSTRUCTEUR QUI NE SONT PLUS UTILE--------------------------------------
     //par recopie
     /*
@@ -98,4 +132,3 @@ namespace HE_ARC::RPG
     }
     */
 }
-

@@ -22,9 +22,7 @@ namespace HE_ARC::RPG
         int cDamage = 5;
         int damage = 0;
         cout << "votre adversaire invoque un monstre pour vous blesser" << endl;
-        damage = (this->getStrength() * cDamage) / 2;
-        _hero->currentHp -= damage;
-        cout << "vous perdez " << damage << " HP" << endl;
+        _hero->looseHp(cDamage, this->getStrength());
     }
 
     //Si la cible est un Wizard ou Necromancer il lui vole une partie de son mana
@@ -36,7 +34,7 @@ namespace HE_ARC::RPG
         {
             Wizard *_wizard = dynamic_cast<Wizard *>(_hero);
             cout << "votre adversaire absorbe votre mana" << endl;
-            damage = (this->getIntelligence() * cDamage/2);
+            damage = (this->getIntelligence() * cDamage/2.0);
             _wizard->cMana -= damage;
             cout << "vous perdez " << damage << "MP" << endl;
         }
@@ -52,9 +50,7 @@ namespace HE_ARC::RPG
         int cDamage = 7;
         int damage = 0;
         cout << "Votre adversaire vous empoigne et vous blesse" << endl;
-        damage = (this->getStrength() * cDamage) / 2;
-        _hero->currentHp -= damage;
-        cout << "vous perdez " << damage << " HP" << endl;
+        _hero->looseHp(cDamage, this->getStrength());
     }
 
 }

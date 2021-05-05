@@ -20,21 +20,23 @@
 #include "libs\actors\include\Undead.h"
 
 //inclusions du sytème de combat
-#include "libs/Battle.h"
+#include "libs\Battle.h"
+
 using namespace std;
 using namespace HE_ARC::RPG;
 
-int w =0;
+int w = 0;
 //c'est ce qui commence les combats
 void Room(Hero *_hero, Monster *_monster)
 {
-    
+
     string tab[] = {"première", "deuxième", "troisième"};
-    cout << "Vous entrez dans la "<<tab[w]<< " salle du donjon" << endl;
-    if (typeid(*_monster)== typeid(Goblin))
+    cout << "Vous entrez dans la " << tab[w] << " salle du donjon" << endl;
+    if (typeid(*_monster) == typeid(Goblin))
     {
         cout << "Vous tomber sur un goblin, préparez vous au combat" << endl;
-    }else if (typeid(*_monster)== typeid(Undead))
+    }
+    else if (typeid(*_monster) == typeid(Undead))
     {
         cout << "Vous tomber sur un mort-vivant, préparez vous au combat" << endl;
     }
@@ -42,6 +44,7 @@ void Room(Hero *_hero, Monster *_monster)
     Battle bataille;
     bataille.Fight(_hero, _monster);
     w++;
+    bataille.Restsite(_hero);
 }
 //faire le choix des stats
 int Stat(int i, int tot)
@@ -53,7 +56,8 @@ int Stat(int i, int tot)
     {
         cout << "=======================================" << endl;
         cout << "You have 5 Stats, strength, agility, intelligence, HP, Mana (not for the Warrior)" << endl;
-        cout << "You have a total of (" << tot <<"/" << "30) points" << endl;
+        cout << "You have a total of (" << tot << "/"
+             << "30) points" << endl;
         cout << "Choose the number of point for " << tab[i] << endl;
         cout << "=======================================" << endl;
         fflush(stdin);
@@ -71,9 +75,9 @@ int main()
     Undead *ptrU1 = new Undead(5, 5, 5, 50);
 
     //Valeur par défaut des objects pour les personnages
-    Sword *ptrS = new Sword(2);
-    Potion *ptrP = new Potion(2);
-    Shield *ptrSh = new Shield(2);
+    Sword *ptrS = new Sword(5);
+    Potion *ptrP = new Potion(5);
+    Shield *ptrSh = new Shield(5);
 
     //sélection de la classe
     int status = 0;
@@ -110,7 +114,10 @@ int main()
         } while (total != 30);
 
         Warrior *hero = new Warrior(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Chandra", ptrSh);
+        hero->backpack.pack(new Potion(3));
+        hero->backpack.pack(new Sword(3));
         Room(hero, ptrG1);
+        
         Room(hero, ptrU1);
     }
     else if (action == 1)
@@ -128,7 +135,10 @@ int main()
             }
         } while (total != 30);
         Wizard *hero = new Wizard(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Jace", ptrS, (tab[4] * 10));
+        hero->backpack.pack(new Potion(3));
+        hero->backpack.pack(new Shield(3));
         Room(hero, ptrG1);
+        
         Room(hero, ptrU1);
     }
     else if (action == 2)
@@ -145,13 +155,16 @@ int main()
                 total += tab[i];
             }
         } while (total != 30);
-        Necromancer *hero = new Necromancer(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Liliana", ptrP, (tab[4] * 10));
+        Necromancer *hero = new Necromancer(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Liliana", ptrS, (tab[4] * 10));
+        hero->backpack.pack(new Potion(3));
+        hero->backpack.pack(new Shield(3));
         Room(hero, ptrG1);
+        
         Room(hero, ptrU1);
     }
-
-    
-    /*//Creation of the Backpack and filling it for the Warrior
+    /*
+    Warrior *ptrW1 = new Warrior(5,5,5,10.0,"hi", ptrSh);
+    //Creation of the Backpack and filling it for the Warrior
     ptrW1->backpack.pack(new Potion(3));
     ptrW1->backpack.pack(new Potion(6));
     ptrW1->backpack.pack(new Sword(15));
@@ -168,5 +181,4 @@ int main()
         delete mItem;
         mItem = nullptr;
     }*/
-
 }

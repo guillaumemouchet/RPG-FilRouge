@@ -9,6 +9,7 @@
 #include "actors\include\Monster.h"
 #include "actors\include\Goblin.h"
 #include "actors\include\Undead.h"
+#include "Stuff\include\IObject.h"
 
 using namespace std;
 namespace HE_ARC::RPG
@@ -34,7 +35,8 @@ namespace HE_ARC::RPG
         void HeroAttack(Hero *_hero, Monster *_monster);
         //pas encore implémentée mais aura pour but soit de changer d'armes en cas de sword ou shield sinon utilise
         //une potion, il faudra surement faire une fonction (LookBack)qui appelera ensuite (UseBackpack)
-        void UseBackpack(Hero *_hero);
+        void UseBackpack(Hero *_hero,Monster *_monster);
+        void Restsite(Hero *_hero);
         static int mCounter;
     };
 }

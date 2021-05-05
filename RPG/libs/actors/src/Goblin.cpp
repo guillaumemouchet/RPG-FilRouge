@@ -20,9 +20,7 @@ namespace HE_ARC::RPG
         int cDamage = 8; // constante de dégat de l'attaque
         double damage = 0;
         cout << "Des Goblins aux alentours sont venus vous faire des dégats" << endl;
-        damage = (this->getStrength() * cDamage) / 2;
-        _hero->currentHp -= damage;
-        cout << "vous perdez " << damage << " HP" << endl;
+        _hero->looseHp(cDamage, this->getStrength());
     }
 
     //si le sac a dos n'est pas vide vole l'objet au dessus
@@ -33,17 +31,25 @@ namespace HE_ARC::RPG
         if (_hero->backpack.isNotEmpty() == false /*|| ou alors que la chance sur 8 ne fonctionne pas*/)
         {
             cout << "Le Gobelin vous donne une giffle" << endl;
-            damage = (this->getStrength() * cDamage) / 2;
-            _hero->currentHp -= damage;
-            cout << "vous perdez " << damage << " HP" << endl;
+            _hero->looseHp(cDamage, this->getStrength());
+            
         }else
         {
-            cout << "Le Gobelin vous donne une giffle et vole votre objet" << endl;
-            _hero->backpack.unPack();
-            damage = (this->getStrength() * cDamage) / 2;
-            _hero->currentHp -= damage;
-            cout << "vous perdez " << damage << " HP" << endl;
+            cout << "Le Gobelin vous donne une giffle et essaie de voler votre sac" << endl;
+            if ((rand()%8 +1) == 8)
+            {
+                _hero->backpack.unPack();
+            }
+            cout << "ouf, il a échoué." << endl;
+            _hero->looseHp(cDamage, this->getStrength());
         }
     }
+    void Goblin::SlingShot(Hero *_hero)
+    {
+        int cDamage = 3; // constante de dégat de l'attaque
+        double damage = 0;
 
+        cout << "Le Gobelin vous tire dessus avec une fronde" << endl;
+        _hero->looseHp(cDamage, this->getIntelligence());
+    }
 }

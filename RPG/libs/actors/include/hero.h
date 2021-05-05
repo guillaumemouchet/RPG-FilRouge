@@ -6,6 +6,7 @@
 //TOUJOURS inclure les headers !!
 #include "..\..\Stuff\include\Sword.h"
 #include "..\..\Stuff\include\Backpack.h"
+#include "..\..\Stuff\include\Potion.h"
 using namespace std;
 
 namespace HE_ARC::RPG
@@ -38,7 +39,10 @@ namespace HE_ARC::RPG
         //FONCTIONS
         void virtual show();
         void virtual interact(const Hero &) = 0;
-
+        void equip(IObject *_pObject);
+        IObject* unequip();
+        void Heal(double _heal);
+        void looseHp(int _damage, int _stat);
         //SURCHARGE D'OPÉRATEUR =
         Hero &operator=(const Hero &hero) = delete;
         

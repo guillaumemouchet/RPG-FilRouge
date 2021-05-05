@@ -21,16 +21,13 @@ namespace HE_ARC::RPG
     //Réveille des monstres pour l'aider dans le combat
     void Necromancer::RiseUndead(Monster *_monster)
     {
-        int cDamage = 4;
+        int cDamage = 3;
         int ManaCost = 5;
-        double damage = 0;
         if (this->cMana >= ManaCost)
         {
             cout << this->getName() << " invoque des morts pour attaquer votre ennemi" << endl;
-            damage = (this->getIntelligence() * cDamage) / 10;
-            _monster->currentHp -= damage;
             this->cMana -= ManaCost;
-            cout << "votre adversaire perd " << damage << " HP" << endl;
+            _monster->looseHp(cDamage,this->getIntelligence());
         }
         else
         {
@@ -41,18 +38,14 @@ namespace HE_ARC::RPG
     //Invoque une cataclysme qui blesse tout les ennemis, mais lui fait perdre un quart de sa vie
     void Necromancer::Cataclysme(Monster *_monster)
     {
-        int cDamage = 4;
+        int cDamage = 6;
         int ManaCost = 8;
-        double damage = 0;
         if (this->cMana >= ManaCost)
         {
             cout << this->getName() << " un cataclyme sur votre ennemi" << endl;
-            damage = (this->getIntelligence() * cDamage) / 10;
-            _monster->currentHp -= damage;
-            this->currentHp -= damage / 2;
+            _monster->looseHp(cDamage,this->getIntelligence());
+            this->looseHp(cDamage/2.0,this->getIntelligence());
             this->cMana -= ManaCost;
-            cout << "votre adversaire perd " << damage << " HP" << endl;
-            cout << "vous perdez " << damage / 2 << " HP" << endl;
         }
         else
         {
