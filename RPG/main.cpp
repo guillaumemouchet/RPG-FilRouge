@@ -18,6 +18,7 @@
 #include "libs\actors\include\Monster.h"
 #include "libs\actors\include\Goblin.h"
 #include "libs\actors\include\Undead.h"
+#include "libs\actors\include\Azazel.h"
 
 //inclusions du sytème de combat
 #include "libs\Battle.h"
@@ -25,54 +26,26 @@
 using namespace std;
 using namespace HE_ARC::RPG;
 
-int w = 0;
-//c'est ce qui commence les combats
-void Room(Hero *_hero, Monster *_monster)
-{
+int nSalle = 0;
 
-    string tab[] = {"première", "deuxième", "troisième"};
-    cout << "Vous entrez dans la " << tab[w] << " salle du donjon" << endl;
-    if (typeid(*_monster) == typeid(Goblin))
-    {
-        cout << "Vous tomber sur un goblin, préparez vous au combat" << endl;
-    }
-    else if (typeid(*_monster) == typeid(Undead))
-    {
-        cout << "Vous tomber sur un mort-vivant, préparez vous au combat" << endl;
-    }
-    //création du premier combat
-    Battle bataille;
-    bataille.Fight(_hero, _monster);
-    w++;
-    bataille.Restsite(_hero);
-}
+//c'est ce qui commence les combats
+void Room(Hero *_hero, Monster *_monster);
+
+//fais la boucle pour choisir les stats
+void WhileStat(int tab[], int size);
 //faire le choix des stats
-int Stat(int i, int tot)
-{
-    int status = 0;
-    string tab[] = {"strength", "agility", "intelligence", "HP", "Mana"};
-    int stat = 0;
-    do
-    {
-        cout << "=======================================" << endl;
-        cout << "You have 5 Stats, strength, agility, intelligence, HP, Mana (not for the Warrior)" << endl;
-        cout << "You have a total of (" << tot << "/"
-             << "30) points" << endl;
-        cout << "Choose the number of point for " << tab[i] << endl;
-        cout << "=======================================" << endl;
-        fflush(stdin);
-        status = scanf(" %d", &stat);
-        cout << endl;
-    } while (status != 1);
-    return stat;
-}
+int Stat(int i, int tot, int size);
+
+//Valeur clobal pour avoir les actions en erreur de base (souvent compris entre 0 et x)
+int action = -1;
+
 int main()
 {
-    int action = -1;
 
     //Création des Monstres pour les combats (les monstres sont soigné en fin de combat)
-    Goblin *ptrG1 = new Goblin(3, 3, 3, 30);
-    Undead *ptrU1 = new Undead(5, 5, 5, 50);
+    Goblin *ptrG1 = new Goblin(3, 3, 3, 60);
+    Undead *ptrU1 = new Undead(4, 4, 4, 80);
+    Azazel *ptrA = new Azazel(6, 6, 6, 150);
 
     //Valeur par défaut des objects pour les personnages
     Sword *ptrS = new Sword(5);
@@ -97,88 +70,126 @@ int main()
     cout << "BRAVO, Vous avez crée votre premier héro!" << endl;
     cout << "=======================================" << endl;
     //Création du personnage en fonction de sa classe
-    //l'utilisation du if peut paraitre bizarre mais avec le switch ça ne fonctionne pas
-    //car il détermine que hero aura déjà été déclaré comme Warrior et ne vouda pas faire le changement
     if (action == 0)
     {
-        int tab[4];
-        int total = 0;
-        do
-        {
-            total = 0;
-            for (int i = 0; i < 4; i++)
-            {
-                tab[i] = Stat(i, total);
-                total += tab[i];
-            }
-        } while (total != 30);
+        int statSize = 4;
+        int tab[statSize];
+        WhileStat(tab, statSize);
 
         Warrior *hero = new Warrior(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Chandra", ptrSh);
-        hero->backpack.pack(new Potion(3));
+        //Stockage d'objet par défaut
         hero->backpack.pack(new Sword(3));
-        Room(hero, ptrG1);
-        
-        Room(hero, ptrU1);
+        hero->backpack.pack(new Potion(3));
+
+        //Combat de goblin
+        //Room(hero, ptrG1);
+        //Combat de mort-vivant
+        //Room(hero, ptrU1);
+        //Combat de Boss contre Azazel
+        Room(hero, ptrA);
     }
     else if (action == 1)
     {
-        int tab[5];
-        int total = 0;
-        do
-        {
-            total = 0;
-
-            for (int i = 0; i < 5; i++)
-            {
-                tab[i] = Stat(i, total);
-                total += tab[i];
-            }
-        } while (total != 30);
+        int statSize = 5;
+        int tab[statSize];
+        WhileStat(tab, statSize);
         Wizard *hero = new Wizard(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Jace", ptrS, (tab[4] * 10));
-        hero->backpack.pack(new Potion(3));
+        //Stockage d'objet par défaut
         hero->backpack.pack(new Shield(3));
+        hero->backpack.pack(new Potion(3));
+        //Combat de goblin
         Room(hero, ptrG1);
-        
+        //Combat de mort-vivant
         Room(hero, ptrU1);
+        //Combat de Boss contre Azazel
+        Room(hero, ptrA);
     }
     else if (action == 2)
     {
-        int tab[5];
-        int total = 0;
-        do
-        {
-            total = 0;
-
-            for (int i = 0; i < 5; i++)
-            {
-                tab[i] = Stat(i, total);
-                total += tab[i];
-            }
-        } while (total != 30);
+        int statSize = 5;
+        int tab[statSize];
+        WhileStat(tab, statSize);
         Necromancer *hero = new Necromancer(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Liliana", ptrS, (tab[4] * 10));
-        hero->backpack.pack(new Potion(3));
+        //Stockage d'objet par défaut
         hero->backpack.pack(new Shield(3));
+        hero->backpack.pack(new Potion(3));
+        //Combat de goblin
         Room(hero, ptrG1);
-        
+        //Combat de mort-vivant
         Room(hero, ptrU1);
+        //Combat de Boss contre Azazel
+        Room(hero, ptrA);
     }
-    /*
-    Warrior *ptrW1 = new Warrior(5,5,5,10.0,"hi", ptrSh);
-    //Creation of the Backpack and filling it for the Warrior
-    ptrW1->backpack.pack(new Potion(3));
-    ptrW1->backpack.pack(new Potion(6));
-    ptrW1->backpack.pack(new Sword(15));
-    ptrW1->backpack.pack(new Sword(23));
-    ptrW1->backpack.pack(new Sword(12));
-    ptrW1->backpack.pack(new Shield(30));
-    ptrW1->backpack.pack(new Shield(27));
-
-    //unpacking the bag
-    for (int k = 0; k < ptrW1->backpack.getSize(); k++)
+}
+void Room(Hero *_hero, Monster *_monster)
+{
+    string tab[] = {"première", "deuxième", "troisième", "quatrième"};
+    cout << "Vous entrez dans la " << tab[nSalle] << " salle du donjon" << endl;
+    if (typeid(*_monster) == typeid(Goblin))
     {
-        IObject *mItem = ptrW1->backpack.unPack();
-        cout << "you removed : " << mItem->getName() << "\t" << mItem->getFeature() << " from your backpack." << endl;
-        delete mItem;
-        mItem = nullptr;
-    }*/
+        cout << "Vous tombez sur un goblin, préparez-vous au combat" << endl;
+    }
+    else if (typeid(*_monster) == typeid(Undead))
+    {
+        cout << "Vous tombez sur un mort-vivant, préparez-vous au combat" << endl;
+    }
+    else if (typeid(*_monster) == typeid(Azazel))
+    {
+        cout << "Vous tombez sur Azazel, préparez vous pour votre ultime combat" << endl;
+    }
+    //création du système de combat
+    Battle bataille;
+    //Combat
+    bataille.Fight(_hero, _monster);
+    nSalle++;
+    //Une fois le combat fini le héro se repose
+    bataille.Restsite(_hero);
+}
+void WhileStat(int tab[], int size)
+{
+    int total = 0;
+    int erreur = 0;
+    do
+    {
+        if (erreur == -1)
+        {
+            cout << endl
+                 << "ERREUR DE SAISIE, Recommencer de distribuer vos compétences" << endl
+                 << endl;
+        }
+
+        total = 0;
+        for (int i = 0; i < size; i++)
+        {
+            tab[i] = Stat(i, total, size);
+            total += tab[i];
+        }
+        erreur = -1; // comme ça si on répère le while on sait si c'était une erreur ou non;
+    } while (total != 30);
+}
+
+int Stat(int i, int tot, int size)
+{
+    int status = 0;
+    string tab[] = {"Force", "Agilité", "Intelligence", "HP", "Mana"};
+    int stat = 0;
+    do
+    {
+        cout << "=======================================" << endl;
+        cout << "Vous possèdez " << size << " compétences";
+        for (int k = 0; k < size; k++)
+        {
+            cout << ", " << tab[k];
+        }
+
+        cout << ":" << endl
+             << "Vous avez dépensé un total de (" << tot << "/"
+             << "30) points" << endl;
+        cout << "Choissisez le nombre de point pour: " << tab[i] << endl;
+        cout << "=======================================" << endl;
+        fflush(stdin);
+        status = scanf(" %d", &stat);
+        cout << endl;
+    } while (status != 1);
+    return stat;
 }

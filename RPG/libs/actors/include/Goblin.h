@@ -4,6 +4,7 @@
 #include "Monster.h"
 #include "Hero.h"
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 

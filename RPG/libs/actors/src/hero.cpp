@@ -16,7 +16,7 @@ namespace HE_ARC::RPG
     //par paramètres
     Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pObject) : pObject(_pObject)
     {
-        cout << "CONSTRUCTEUR par parametres: " << _name << endl;
+        // cout << "CONSTRUCTEUR par parametres: " << _name << endl;
         this->strength = _strength;
         this->agility = _agility;
         this->hp = _hp;
@@ -28,9 +28,18 @@ namespace HE_ARC::RPG
     //DESTRUCTEUR
     Hero::~Hero()
     {
-        cout << "DESTRUCTEUR: " << this->name << endl;
+        // cout << "DESTRUCTEUR: " << this->name << endl;
+        //On détruit l'objet courrant
         delete this->pObject;
         this->pObject = nullptr;
+        //on détruit les éléments du sac
+        for (int k = 0; k < this->backpack.getSize(); k++)
+        {
+            IObject *mItem = this->backpack.unPack();
+            //cout << "you removed : " << mItem->getName() << "\t" << mItem->getFeature() << " from your backpack." << endl;
+            delete mItem;
+            mItem = nullptr;
+        }
     }
 
     //FONCTIONS
@@ -73,9 +82,9 @@ namespace HE_ARC::RPG
         this->pObject = nullptr;
         return mItem;
     }
-    void Hero::Heal(double _heal)
+    void Hero::heal(double _heal)
     {
-        if (_heal > this->getHp())
+        if (_heal >= (this->getHp() - this->getcHp()))
         {
             this->currentHp = this->getHp();
         }
@@ -87,16 +96,60 @@ namespace HE_ARC::RPG
     void Hero::looseHp(int _damage, int _stat)
     {
         double damage = 0;
-        if (typeid(this->pObject) == typeid(Shield))
+        if (this->dodge())
         {
-            damage = (_stat * _damage) / 2.0 - this->pObject->getFeature();
+            cout << "Vous avez esquivé l'attaque" << endl;
         }
         else
         {
-            damage = (_stat * _damage) / 2.0;
+            if (typeid(this->pObject) == typeid(Shield))
+            {
+                damage = (_stat * _damage) / 2.0 - this->pObject->getFeature();
+            }
+            else
+            {
+                damage = (_stat * _damage) / 2.0;
+            }
+            this->currentHp -= damage;
+            cout << "Vous perdez " << damage << " HP" << endl;
         }
-        _hero->currentHp -= damage;
-        cout << "vous perdez " << damage << " HP" << endl;
+    }
+
+    bool Hero::dodge()
+    {
+        srand(time(nullptr));
+        //return (((rand() % 15 + 1) + this->getAgility()) >= 15);
+        return (rand() % 100 + 1 <= this->getAgility());
+    }
+    
+    void Hero::loot()
+    {
+        srand(time(nullptr));
+        int valeur = rand() % 10 + 5;
+        int i = rand() %3;
+        IObject *tab[] = {new Sword(valeur), new Shield(valeur), new Potion(valeur)};
+        cout << "Vous trouvez un "; tab[i]->show();
+        int action = -1;
+        int status = 0;
+        do
+        {
+            cout << "Voulez vous le mettre dans votre sac?" << endl;
+            cout << "[0] Oui" << endl
+                 << "[1] Non" << endl;
+            fflush(stdin);
+            status = scanf("%d", &action);
+        } while (not(0 <= action && action <= 1 && status == 1));
+        switch (action)
+        {
+        case 0:
+            cout << "Vous mettez l'object en haut de votre sac" << endl;
+            this->backpack.pack(tab[i]);
+            break;
+        case 1:
+            cout << "L'object n'est pas utile vous le laissez par terre" << endl;
+        default:
+            break;
+        }
     }
     //----------------FONCTION ET CONSTRUCTEUR QUI NE SONT PLUS UTILE--------------------------------------
     //par recopie

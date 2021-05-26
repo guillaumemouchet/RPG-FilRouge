@@ -20,7 +20,6 @@ namespace HE_ARC::RPG
     void Undead::RiseUndead(Hero *_hero)
     {
         int cDamage = 5;
-        int damage = 0;
         cout << "votre adversaire invoque un monstre pour vous blesser" << endl;
         _hero->looseHp(cDamage, this->getStrength());
     }
@@ -28,15 +27,12 @@ namespace HE_ARC::RPG
     //Si la cible est un Wizard ou Necromancer il lui vole une partie de son mana
     void Undead::ManaDrain(Hero *_hero)
     {
-        int cDamage = 4;
-        int damage = 0;
+        int cDamage = 3;
         if (typeid(*_hero) == typeid(Wizard) || typeid(*_hero) == typeid(Necromancer))
         {
             Wizard *_wizard = dynamic_cast<Wizard *>(_hero);
             cout << "votre adversaire absorbe votre mana" << endl;
-            damage = (this->getIntelligence() * cDamage/2.0);
-            _wizard->cMana -= damage;
-            cout << "vous perdez " << damage << "MP" << endl;
+            _wizard->looseMana(this->getIntelligence() * cDamage / 2.0);
         }
         else
         {
@@ -48,7 +44,6 @@ namespace HE_ARC::RPG
     void Undead::PoisonGrip(Hero *_hero)
     {
         int cDamage = 7;
-        int damage = 0;
         cout << "Votre adversaire vous empoigne et vous blesse" << endl;
         _hero->looseHp(cDamage, this->getStrength());
     }

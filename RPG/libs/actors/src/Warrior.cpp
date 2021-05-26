@@ -35,11 +35,10 @@ namespace HE_ARC::RPG
 
     //Liste des capacités du Héro
 
-    //Le héro insulte les ennemi, il se prendra toute les prochaines attaques
+    //Le héro insulte les ennemi
     void Warrior::Taunt(Monster *_monster)
     {
-        int cDamage = 4;
-        double damage = 0;
+        int cDamage = 2;
         cout << this->getName() << " insulte l'adversaire" << endl;
         _monster->looseHp(cDamage,this->getIntelligence());
     }
@@ -47,8 +46,7 @@ namespace HE_ARC::RPG
     //le héro frappe violament un ennemi avec son bouclier si il en a un
     void Warrior::ShieldBash(Monster *_monster)
     {
-        int cDamage = 5;
-        double damage = 0;
+        int cDamage = 3;
         if (typeid(*pObject) == typeid(Shield))
         {
             cout << this->getName() << " frappe violament l'adversaire avec son bouclier" << endl;
@@ -57,32 +55,29 @@ namespace HE_ARC::RPG
         else if (typeid(*pObject) == typeid(Sword))
         {
             cout << this->getName() << " n'a pas de bouclier mais frappe son ennemi avec son épée" << endl;
-            _monster->looseHp(cDamage  + (this->pObject->getFeature()) ,this->getStrength());
+            _monster->looseHp(cDamage  + (this->pObject->getFeature()/2.0) ,this->getStrength());
         }
         else
         {
             cout << this->getName() << " n'a pas de bouclier mais frappe son ennemi à main nue" << endl;
-            _monster->looseHp(cDamage ,this->getStrength());
+            _monster->looseHp(cDamage/2.0 ,this->getStrength());
         }
     }
 
-    //le héro frappe violamanent tous les ennemis
+    //le héro frappe violamanent tout ce qui bouge
     void Warrior::Rampage(Monster *_monster)
     {
-        int cDamage = 10;
-        double damage = 0;
+        int cDamage = 2;
         cout << this->getName() << " Devient fou et frappe tout ce qui bouge" << endl;
         
         if (typeid(*pObject) == typeid(Sword))
         {
-            damage = (this->getStrength() * cDamage) / 2.0 + this->pObject->getFeature();
+            _monster->looseHp(cDamage  + (this->pObject->getFeature()) ,this->getStrength());
+            this->looseHp((cDamage  + this->pObject->getFeature()), this->getStrength()/2.0);
         }else
         {
-            damage = (this->getStrength() * cDamage) / 2.0;
+            _monster->looseHp(cDamage ,this->getStrength());
+            this->looseHp(cDamage, this->getStrength()/2.0);
         }
-        _monster->currentHp -= damage;
-        this->currentHp -= damage / 2.0;
-        cout << "votre adversaire perd " << damage << "HP" << endl;
-        cout << "vous perdez " << damage / 2.0 << "HP" << endl;
     }
 }

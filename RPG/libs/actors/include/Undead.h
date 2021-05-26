@@ -20,9 +20,9 @@ namespace HE_ARC::RPG
         Undead(int _strength, int _agility, int _intelligence, double _hp);
         
         //liste des sorts du monstre
-        void RiseUndead(Hero *_hero);
-        void ManaDrain(Hero *_hero);
-        void PoisonGrip(Hero *_hero);
+        virtual void RiseUndead(Hero *_hero);
+        void manaDrain(Hero *_hero);
+        virtual void PoisonGrip(Hero *_hero);
 
        
 

@@ -65,7 +65,7 @@ namespace HE_ARC::RPG
         {
             cout << this->getName() << " lance une violente boule de feu" << endl;
             _monster->looseHp(cDamage ,this->getIntelligence());
-            this->cMana -= ManaCost;
+            this->looseMana(ManaCost);
         }
         else
         {
@@ -83,7 +83,7 @@ namespace HE_ARC::RPG
         {
             cout << this->getName() << " lance un magnifique Blizzard" << endl;
              _monster->looseHp(cDamage ,this->getIntelligence());
-            this->cMana -= ManaCost;
+            this->looseMana(ManaCost);
 
         }
         else
@@ -101,8 +101,8 @@ namespace HE_ARC::RPG
         {
             cout << this->getName() << " Inflige des dégats à l'adversaire et se soigne" << endl;
             _monster->looseHp(cDamage , this->getIntelligence());
-            this->cMana -= ManaCost;
-            this->Heal(cDamage*this->getIntelligence()/2.0);
+            this->looseMana(ManaCost);
+            this->heal((cDamage*this->getIntelligence()));
         }
         else
         {
@@ -111,7 +111,7 @@ namespace HE_ARC::RPG
     }
     void Wizard::mHeal(double _mHeal)
     {
-        if (_mHeal > this->getMana())
+        if (_mHeal >= (this->getMana()-this->getcMana()))
         {
             this->cMana = this->getMana();
         }
@@ -119,6 +119,17 @@ namespace HE_ARC::RPG
         {
             this->cMana += _mHeal;
         }
+    }
+    void Wizard::looseMana(double _lMana)
+    {
+        if(_lMana > this->getcMana())
+        {
+            this->cMana = 0;
+        }else
+        {
+            this->cMana -= _lMana;
+        }
+        cout << "vous perdez " << _lMana << "MP" << endl;
     }
     //Ce sera l'attaque par défaut en cas de manque de mana
     void Wizard::Attack(Monster *_monster)

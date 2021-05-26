@@ -2,6 +2,7 @@
 #define HERO_h
 
 #include <string>
+#include <ctime>
 
 //TOUJOURS inclure les headers !!
 #include "..\..\Stuff\include\Sword.h"
@@ -16,7 +17,7 @@ namespace HE_ARC::RPG
     public:
         //CONSTUCTEURS
         Backpack backpack;
-        double currentHp;
+        
         //par défaut
         Hero() = default;
         //par paramètres
@@ -39,10 +40,13 @@ namespace HE_ARC::RPG
         //FONCTIONS
         void virtual show();
         void virtual interact(const Hero &) = 0;
+        void loot();
         void equip(IObject *_pObject);
         IObject* unequip();
-        void Heal(double _heal);
+
+        void heal(double _heal);
         void looseHp(int _damage, int _stat);
+        bool dodge();
         //SURCHARGE D'OPÉRATEUR =
         Hero &operator=(const Hero &hero) = delete;
         
@@ -52,6 +56,7 @@ namespace HE_ARC::RPG
         int agility=0;
         int intelligence=0;
         double hp=0;
+        double currentHp;
         string name ="NoName";
         IObject *pObject = nullptr;
 

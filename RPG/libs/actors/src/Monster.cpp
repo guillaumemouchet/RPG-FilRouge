@@ -12,7 +12,7 @@ namespace HE_ARC::RPG
     //par paramètres
     Monster::Monster(int _strength, int _agility, int _intelligence, double _hp)
     {
-        cout << "CONSTRUCTEUR par parametres: " << endl;
+        //cout << "CONSTRUCTEUR par parametres: " << endl;
         this->strength = _strength;
         this->agility = _agility;
         this->hp = _hp;
@@ -53,8 +53,20 @@ namespace HE_ARC::RPG
     void Monster::looseHp(int _damage, int _stat)
     {
         double damage = 0;
-        damage = (_stat * _damage) / 2.0;
-        this->currentHp -= damage;
-        cout << "votre adversaire perd " << damage << " HP" << endl;
+        if (this->dodge())
+        {
+            cout << "Le monstre a esquivé l'attauqze" << endl;
+        }
+        else
+        {
+            damage = (_stat * _damage) / 2.0;
+            this->currentHp -= damage;
+            cout << "votre adversaire perd " << damage << " HP" << endl;
+        }
+    }
+    bool Monster::dodge()
+    {
+        //return (((rand() % 10 + 1) + this->getAgility()) >= 15);
+        return (rand()%100 +1 <= this->getAgility());
     }
 }

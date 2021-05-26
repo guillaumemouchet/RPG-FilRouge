@@ -26,7 +26,7 @@ namespace HE_ARC::RPG
         if (this->cMana >= ManaCost)
         {
             cout << this->getName() << " invoque des morts pour attaquer votre ennemi" << endl;
-            this->cMana -= ManaCost;
+            this->looseMana(ManaCost);
             _monster->looseHp(cDamage,this->getIntelligence());
         }
         else
@@ -38,14 +38,14 @@ namespace HE_ARC::RPG
     //Invoque une cataclysme qui blesse tout les ennemis, mais lui fait perdre un quart de sa vie
     void Necromancer::Cataclysme(Monster *_monster)
     {
-        int cDamage = 6;
+        int cDamage = 5;
         int ManaCost = 8;
         if (this->cMana >= ManaCost)
         {
-            cout << this->getName() << " un cataclyme sur votre ennemi" << endl;
+            cout << this->getName() << " lance un cataclyme sur votre ennemi" << endl;
             _monster->looseHp(cDamage,this->getIntelligence());
-            this->looseHp(cDamage/2.0,this->getIntelligence());
-            this->cMana -= ManaCost;
+            this->looseHp(cDamage,this->getIntelligence()/2.0);
+            this->looseMana(ManaCost);
         }
         else
         {

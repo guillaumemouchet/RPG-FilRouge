@@ -13,7 +13,7 @@ namespace HE_ARC::RPG
     {
         public:
             //CONSTUCTEURS
-            double currentHp;
+            
             //par défaut
             Monster()=default;
             //par paramètres
@@ -29,17 +29,19 @@ namespace HE_ARC::RPG
             int getIntelligence() const { return this->intelligence; }
             double getHp() const { return this->hp; }
             double getcHp() const { return this->currentHp; }
-
+            //SETTER
+            void resetcHp() { this->currentHp = hp;}
             //FONCTIONS
             void virtual show();
             void looseHp(int _damage, int _stat);
-            
+            bool dodge();
         protected:
             //ATTRIBUTS
             int strength=0;
             int agility=0;
             int intelligence=0;
             double hp=0;
+            double currentHp;
             
             //SURCHARGE D'OPÉRATEUR AMIE <<
             friend ostream& operator<<(ostream &s,const Monster &h);
