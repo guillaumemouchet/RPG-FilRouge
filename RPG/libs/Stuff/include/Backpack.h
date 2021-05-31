@@ -15,7 +15,7 @@ namespace HE_ARC::RPG
     public:
         Backpack() = default;
         ~Backpack() = default;
-        int getSize(){return mStack.size();}
+        int getSize() const {return mStack.size();}
         bool isNotEmpty() const;
         IObject* unPack();
         void pack(IObject *);

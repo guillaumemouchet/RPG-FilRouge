@@ -17,7 +17,7 @@ namespace HE_ARC::RPG
         // constructeurs par défaut et par paramètre
         Goblin(int _strength, int _agility, int _intelligence, double _hp);
         Goblin() = default;
-        
+        ~Goblin() = default;
         //liste des sorts du monstre
         void rallye(Hero *_hero);
         void steal(Hero *_hero);

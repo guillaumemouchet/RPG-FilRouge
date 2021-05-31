@@ -2,6 +2,7 @@
 #include <string>
 #include <list>
 #include <algorithm>
+#include <fstream>
 
 //TOUJOURS inclure les headers !!
 //inclusion des objets utilisables
@@ -41,6 +42,8 @@ int action = -1;
 
 int main()
 {
+    //string const nomFichier("C:\\DEV\\cpp_filrouge_iscc_mouchetg\\log.txt");
+    //ofstream cout(nomFichier.c_str());
 
     //Création des Monstres pour les combats (les monstres sont soigné en fin de combat)
     Goblin *ptrG1 = new Goblin(3, 3, 3, 60);
@@ -81,10 +84,11 @@ int main()
         hero->backpack.pack(new Sword(3));
         hero->backpack.pack(new Potion(3));
 
+        hero->show();
         //Combat de goblin
-        //Room(hero, ptrG1);
+        Room(hero, ptrG1);
         //Combat de mort-vivant
-        //Room(hero, ptrU1);
+        Room(hero, ptrU1);
         //Combat de Boss contre Azazel
         Room(hero, ptrA);
     }

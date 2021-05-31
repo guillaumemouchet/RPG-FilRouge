@@ -17,7 +17,7 @@ namespace HE_ARC::RPG
         //par défaut
         Warrior();
         //Destructeur
-        ~Warrior() override = default;
+        ~Warrior() = default;
         //fonction
         void interact(const Hero &) override;
 

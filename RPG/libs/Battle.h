@@ -16,22 +16,16 @@
 using namespace std;
 namespace HE_ARC::RPG
 {
+    class Monster;
+    class Hero;
+    
     class Battle
     {
     private:
-        //vérifie si les personnages sont encore en vie
-        bool isHAlive(Hero *_hero) const;
-        bool isMAlive(Monster *_monster) const;
         //affiche l'état du monstre et du joueur
-        void show(Hero *_hero, Monster *_monster)const;
-        //les attaques du monstre
-        void MonsterAttack(Monster *_monster, Hero *_hero);
-        //les actions et attaque du joueur
-        void HeroAction(Hero *_hero, Monster *_monster);
-        void HeroAttack(Hero *_hero, Monster *_monster);
-        //utilisation du BackPack
-        void UseBackpack(Hero *_hero, Monster *_monster);
-        //repos entre les combats ou on gagne de la vie et trie le sac
+        void show(Hero *_hero, Monster *_monster) const;
+        
+        
     public:
         //CONSTRUCTEUR
         //par défaut ne fait rien
@@ -42,8 +36,7 @@ namespace HE_ARC::RPG
         void Fight(Hero *_hero, Monster *_monster);
         //création de la zone de repos
         void Restsite(Hero *_hero);
-        //Pour le pattern des monstres
-        static int mCounter;
+        
     };
 }
 #endif

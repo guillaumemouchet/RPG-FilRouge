@@ -5,7 +5,6 @@
 #include "..\..\Stuff\include\Potion.h"
 #include "..\..\Stuff\include\Shield.h"
 #include "..\..\Stuff\include\Sword.h"
-#include "..\..\..\libs\Battle.h"
 #include <iostream>
 using namespace std;
 

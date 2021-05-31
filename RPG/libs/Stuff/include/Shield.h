@@ -16,7 +16,7 @@ namespace HE_ARC::RPG
         Shield(int _solidity) : solidity(_solidity) {}
         //par recopie
         Shield(Shield &s) : solidity(s.solidity) {}
-
+        ~Shield() = default;
         //GETTER
         int getFeature() const override;
         string getName() const override;

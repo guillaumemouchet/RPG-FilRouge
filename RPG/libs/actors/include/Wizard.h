@@ -12,7 +12,6 @@ namespace HE_ARC::RPG
         protected:
         int mana;
         int cMana;
-        private:
         
         public:
         //CONSTUCTEURS
@@ -23,7 +22,7 @@ namespace HE_ARC::RPG
         Wizard(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pObject, int _mana);
         
         //Destructeur
-        virtual ~Wizard() override = default;
+        virtual ~Wizard() = default;
 
         //GETTER
         double getcMana() const {return this->cMana;}

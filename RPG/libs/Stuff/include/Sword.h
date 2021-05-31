@@ -16,7 +16,7 @@ namespace HE_ARC::RPG
         Sword(int _damage) : damage(_damage) {}
         //par recopie
         Sword(Sword &s) : damage(s.damage) {}
-
+        ~Sword() = default;
         //GETTER
         int getFeature() const override;
         string getName() const override;

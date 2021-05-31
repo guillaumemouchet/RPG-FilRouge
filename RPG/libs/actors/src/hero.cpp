@@ -3,10 +3,13 @@
 
 //TOUJOURS inclure les headers !!
 #include "..\include\Hero.h"
-#include "..\..\Stuff\include\IObject.h"
+#include "..\include\Warrior.h"
+#include "..\include\Wizard.h"
+#include "..\include\Necromancer.h"
 #include "..\..\Stuff\include\Potion.h"
-#include "..\..\Stuff\include\Shield.h"
 #include "..\..\Stuff\include\Sword.h"
+#include "..\..\Stuff\include\Shield.h"
+#include "..\..\Stuff\include\IObject.h"
 
 using namespace std;
 
@@ -58,20 +61,6 @@ namespace HE_ARC::RPG
              << endl;
     }
 
-    //SURCHARGE D'OPÉRATEUR AMIE <<
-    ostream &operator<<(ostream &s, const Hero &h)
-    {
-        return s << "=========================" << endl
-                 << "Hero's name : " << h.name << endl
-                 << "=========================" << endl
-                 << "Strength : " << h.strength << endl
-                 << "Health : " << h.hp << endl
-                 << "Agility : " << h.agility << endl
-                 << "Intelligence : " << h.intelligence << endl
-                 << "Object(" << h.pObject->getName() << ") : " << h.pObject->getFeature() << endl
-                 << "=========================" << endl
-                 << endl;
-    }
     void Hero::equip(IObject *_pObject)
     {
         this->pObject = _pObject;
@@ -121,14 +110,15 @@ namespace HE_ARC::RPG
         //return (((rand() % 15 + 1) + this->getAgility()) >= 15);
         return (rand() % 100 + 1 <= this->getAgility());
     }
-    
+
     void Hero::loot()
     {
         srand(time(nullptr));
         int valeur = rand() % 10 + 5;
-        int i = rand() %3;
+        int i = rand() % 3;
         IObject *tab[] = {new Sword(valeur), new Shield(valeur), new Potion(valeur)};
-        cout << "Vous trouvez un "; tab[i]->show();
+        cout << "Vous trouvez un ";
+        tab[i]->show();
         int action = -1;
         int status = 0;
         do
@@ -149,6 +139,220 @@ namespace HE_ARC::RPG
             cout << "L'object n'est pas utile vous le laissez par terre" << endl;
         default:
             break;
+        }
+    }
+
+    //fonction qui permet au héro de choisir qu'elle action faire
+    void Hero::HeroAction(Monster *_monster)
+    {
+        int action = -1;
+        int status = 0;
+        do
+        {
+            cout << "[0] Attack" << endl;
+            cout << "[1] Backpack " << endl;
+            cout << "[2] Concede" << endl;
+            fflush(stdin);
+            status = scanf("%d", &action);
+        } while (not(0 <= action && action <= 2 && status == 1));
+        switch (action)
+        {
+        case 0:
+            this->HeroAttack(_monster);
+            break;
+        case 1:
+            cout << "Ouverture du sac" << endl;
+            this->UseBackpack(_monster);
+            break;
+        case 2:
+            cout << "Vous avez abondonné la partie" << endl;
+            this->Concede(); // on met ses points de vie à 0
+            break;
+        default:
+            cout << "Erreur" << endl;
+            this->HeroAttack(_monster); // on fait un retour à la fonction en cas d'erreur qu'il puisse rejouer son tour
+            break;
+        }
+    }
+
+    //Après avoir choisir "Attaque" dans HeroAction, on choisi des attaques spécifique à la calsse
+    void Hero::HeroAttack(Monster *_monster)
+    {
+        if (typeid(*this) == typeid(Warrior))
+        {
+            int action = -1;
+            int status = 0;
+            do
+            {
+                cout << "[0] Rampage" << endl;
+                cout << "[1] Shieldbash" << endl;
+                cout << "[2] Taunt" << endl;
+                fflush(stdin);
+                status = scanf("%d", &action);
+            } while (not(0 <= action && action <= 2 && status == 1));
+            Warrior *_warrior = dynamic_cast<Warrior *>(this);
+            switch (action)
+            {
+            case 0:
+                _warrior->Rampage(_monster);
+                break;
+            case 1:
+                _warrior->ShieldBash(_monster);
+                break;
+            case 2:
+                _warrior->Taunt(_monster);
+                break;
+            default:
+                this->HeroAttack(_monster);
+                break;
+            }
+        }
+        if (typeid(*this) == typeid(Wizard))
+        {
+            int action = -1;
+            int status = 0;
+            do
+            {
+                cout << "[0] Fireball (5)" << endl;
+                cout << "[1] Blizzard (7)" << endl;
+                cout << "[2] Leech (10)" << endl;
+                fflush(stdin);
+                status = scanf("%d", &action);
+            } while (not(0 <= action && action <= 2 && status == 1));
+            Wizard *_wizard = dynamic_cast<Wizard *>(this);
+            switch (action)
+            {
+            case 0:
+                _wizard->Fireball(_monster);
+                break;
+            case 1:
+                _wizard->Blizzard(_monster);
+                break;
+            case 2:
+                _wizard->Leech(_monster);
+                break;
+            default:
+                this->HeroAttack(_monster);
+                break;
+            }
+        }
+        if (typeid(*this) == typeid(Necromancer))
+        {
+            int action = -1;
+            int status = 0;
+            do
+            {
+                cout << "[0] Leech (10)" << endl;
+                cout << "[1] RiseUndead (5)" << endl;
+                cout << "[2] Cataclysme (8)" << endl;
+                fflush(stdin);
+                status = scanf("%d", &action);
+            } while (not(0 <= action && action <= 4 && status == 1));
+            Necromancer *_necromancer = dynamic_cast<Necromancer *>(this);
+            switch (action)
+            {
+            case 0:
+                _necromancer->Leech(_monster);
+                break;
+            case 1:
+                _necromancer->RiseUndead(_monster);
+                break;
+            case 2:
+                _necromancer->Cataclysme(_monster);
+                break;
+            default:
+                this->HeroAttack(_monster);
+                break;
+            }
+        }
+    }
+    //On regarde ce qui a dans le sac puis on avise si on l'utilise ou non
+    void Hero::UseBackpack(Monster *_monster)
+    {
+
+        if (this->backpack.isNotEmpty() == true)
+        {
+            cout << "Vous ouvrez votre sac" << endl;
+            IObject *mItem = this->backpack.unPack();
+            cout << "Il y a tout en haut ";
+            mItem->show();
+
+            if (typeid(*mItem) == typeid(Potion))
+            {
+                int action = -1;
+                int status = 0;
+                do
+                {
+                    cout << "Voulez vous boire la potion?" << endl;
+                    cout << "[0] Oui" << endl
+                         << "[1] Non" << endl
+                         << "[2] Jeter" << endl;
+                    fflush(stdin);
+                    status = scanf("%d", &action);
+                } while (not(0 <= action && action <= 2 && status == 1));
+                switch (action)
+                {
+                case 0:
+                    //on utilise l'objet
+                    this->heal(mItem->getFeature() * 10.0);
+                    break;
+                case 1:
+                    // vu qu'on ne l'utilise pas on le remet au dessus
+                    this->backpack.pack(mItem);
+                    this->HeroAction(_monster);
+                    break;
+                case 2:
+                    // on jete l'objet du coup rien n'est fait on passe à la suite
+                    cout << "Vous jetez votre objet: ";
+                    mItem->show();
+                default:
+                    break;
+                }
+            }
+            else
+            {
+                int action = -1;
+                int status = 0;
+                do
+                {
+                    cout << "Voulez vous équipez l'objet?" << endl;
+                    cout << "[0] Oui" << endl
+                         << "[1] Non" << endl
+                         << "[2] Jeter" << endl;
+                    fflush(stdin);
+                    status = scanf("%d", &action);
+                } while (not(0 <= action && action <= 2 && status == 1));
+
+                switch (action)
+                {
+                case 0:
+                {
+                    //on va d'abord enlever l'équipement actif
+                    IObject *mItem1 = this->unequip();
+                    //on va lui équiper le nouvel objet
+                    this->equip(mItem);
+                    //on remet l'autre objet en haut du sac
+                    this->backpack.pack(mItem1);
+                    break;
+                }
+                case 1:
+                    // on la range et on refait le tour
+                    this->backpack.pack(mItem);
+                    this->HeroAction(_monster);
+                    break;
+                case 2:
+                    // on jete l'objet du coup rien n'est fait on passe à la suite
+                    cout << "Vous jetez votre objet: ";
+                    mItem->show();
+                default:
+                    break;
+                }
+            }
+        }
+        else
+        {
+            cout << "votre sac est vide" << endl;
+            this->HeroAction(_monster);
         }
     }
     //----------------FONCTION ET CONSTRUCTEUR QUI NE SONT PLUS UTILE--------------------------------------
@@ -184,4 +388,18 @@ namespace HE_ARC::RPG
         return *this;
     }
     */
+    /*//SURCHARGE D'OPÉRATEUR AMIE <<
+    ostream &operator<<(ostream &s, const Hero &h)
+    {
+        return s << "=========================" << endl
+                 << "Hero's name : " << h.name << endl
+                 << "=========================" << endl
+                 << "Strength : " << h.strength << endl
+                 << "Health : " << h.hp << endl
+                 << "Agility : " << h.agility << endl
+                 << "Intelligence : " << h.intelligence << endl
+                 << "Object(" << h.pObject->getName() << ") : " << h.pObject->getFeature() << endl
+                 << "=========================" << endl
+                 << endl;
+    }*/
 }

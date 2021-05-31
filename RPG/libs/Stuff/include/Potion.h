@@ -16,7 +16,7 @@ namespace HE_ARC::RPG
         Potion(int _power) : power(_power) {}
         //par recopie
         Potion(Potion &s) : power(s.power) {}
-
+        ~Potion() = default;
         //GETTER
         int getFeature() const override;
         string getName() const override;

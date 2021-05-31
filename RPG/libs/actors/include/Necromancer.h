@@ -16,7 +16,7 @@ namespace HE_ARC::RPG
         //par défaut
         Necromancer()= default;
         //destruveteur
-        virtual ~Necromancer() override = default;
+        ~Necromancer() = default;
         
         //Liste des sorts du héro
         void RiseUndead(Monster *_monster);

@@ -3,11 +3,15 @@
 
 //TOUJOURS inclure les headers !!
 #include "..\include\Monster.h"
+#include "..\include\Goblin.h"
+#include "..\include\Undead.h"
+#include "..\include\Azazel.h"
 
 using namespace std;
 
 namespace HE_ARC::RPG
 {
+    int Monster::mCounter = 0;
     //CONSTUCTEURS
     //par paramètres
     Monster::Monster(int _strength, int _agility, int _intelligence, double _hp)
@@ -26,30 +30,6 @@ namespace HE_ARC::RPG
         cout << "DESTRUCTEUR: " << endl;
     }
 
-    //FONCTIONS
-    void Monster::show()
-    {
-        cout << endl
-             << "=========================" << endl
-             << "Strength : " << this->strength << endl
-             << "Health : " << this->hp << endl
-             << "Agility : " << this->agility << endl
-             << "Intelligence : " << this->intelligence << endl
-             << "=========================" << endl
-             << endl;
-    }
-
-    //SURCHARGE D'OPÉRATEUR AMIE <<
-    ostream &operator<<(ostream &s, const Monster &m)
-    {
-        return s << "=========================" << endl
-                 << "Strength : " << m.strength << endl
-                 << "Health : " << m.hp << endl
-                 << "Agility : " << m.agility << endl
-                 << "Intelligence : " << m.intelligence << endl
-                 << "=========================" << endl
-                 << endl;
-    }
     void Monster::looseHp(int _damage, int _stat)
     {
         double damage = 0;
@@ -67,6 +47,80 @@ namespace HE_ARC::RPG
     bool Monster::dodge()
     {
         //return (((rand() % 10 + 1) + this->getAgility()) >= 15);
-        return (rand()%100 +1 <= this->getAgility());
+        return (rand() % 100 + 1 <= this->getAgility());
     }
+    //Les attaques des monstres fonctionnent sur un pattern simple
+    void Monster::MonsterAttack(Hero *_hero)
+    {
+        if (typeid(*this) == typeid(Goblin))
+        {
+            Goblin *_goblin = dynamic_cast<Goblin *>(this);
+            switch (Monster::mCounter)
+            {
+            case 0:
+                _goblin->steal(_hero);
+                Monster::mCounter++;
+                break;
+            case 1:
+                _goblin->rallye(_hero);
+                Monster::mCounter++;
+                break;
+            case 2:
+                _goblin->slingShot(_hero);
+                Monster::mCounter = 0;
+            default:
+                break;
+            }
+        }
+        if (typeid(*this) == typeid(Undead))
+        {
+            Undead *_undead = dynamic_cast<Undead *>(this);
+            switch (Monster::mCounter)
+            {
+            case 0:
+                _undead->PoisonGrip(_hero);
+                Monster::mCounter++;
+                break;
+            case 1:
+                _undead->manaDrain(_hero);
+                Monster::mCounter++;
+                break;
+            case 2:
+                _undead->RiseUndead(_hero);
+                Monster::mCounter = 0;
+                break;
+            default:
+                break;
+            }
+        }
+        //vu que c'est le boss les attaques sont sur random pour ne pas avoir de pattern
+        if (typeid(*this) == typeid(Azazel))
+        {
+            Azazel *_azazel = dynamic_cast<Azazel *>(this);
+            srand(time(nullptr));
+            int random = rand() % 3;
+            switch (random)
+            {
+            case 0:
+                _azazel->manaDrain(_hero);
+
+                break;
+            case 1:
+                _azazel->brimStorm(_hero);
+
+                break;
+            case 2:
+                _azazel->doubleSlash(_hero);
+                break;
+            case 3:
+                _azazel->apocalypse(_hero);
+            default:
+                //si jamais le random fait une mauvaise valeur (ce qui ne devrait pas mais double protection)
+                cout << "Mauvaise Valeur, reessai" << endl;
+                this->MonsterAttack( _hero);
+                break;
+            }
+        }
+    }
+
 }

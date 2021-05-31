@@ -1,0 +1,38 @@
+=======================================
+Veuillez selectionner votre classe, cela déterminera vos attaques
+[0] Warrior
+[1] Wizard
+[2] Necromancer
+=======================================
+
+=======================================
+Veuillez selectionner votre classe, cela déterminera vos attaques
+[0] Warrior
+[1] Wizard
+[2] Necromancer
+=======================================
+
+=======================================
+Veuillez selectionner votre classe, cela déterminera vos attaques
+[0] Warrior
+[1] Wizard
+[2] Necromancer
+=======================================
+
+=======================================
+Veuillez selectionner votre classe, cela déterminera vos attaques
+[0] Warrior
+[1] Wizard
+[2] Necromancer
+=======================================
+
+=======================================
+Veuillez selectionner votre classe, cela déterminera vos attaques
+[0] Warrior
+[1] Wizard
+[2] Necromancer
+=======================================
+
+=======================================
+BRAVO, Vous avez crée votre premier héro!
+=======================================

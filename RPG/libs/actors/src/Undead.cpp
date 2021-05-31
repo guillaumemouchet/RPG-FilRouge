@@ -25,7 +25,7 @@ namespace HE_ARC::RPG
     }
 
     //Si la cible est un Wizard ou Necromancer il lui vole une partie de son mana
-    void Undead::ManaDrain(Hero *_hero)
+    void Undead::manaDrain(Hero *_hero)
     {
         int cDamage = 3;
         if (typeid(*_hero) == typeid(Wizard) || typeid(*_hero) == typeid(Necromancer))
