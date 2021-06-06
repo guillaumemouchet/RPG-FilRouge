@@ -1,28 +1,30 @@
 #include <iostream>
+#include <windows.h>
 #include "Battle.h"
-/*
-    Pour l'instant le combat suivera un paterne prédéfini d'attack au tour par tour, et qui se fait
-    jusqu'à la mort d'un personnage, il y a un transtypage pour savoir à quelle calsse nous appartenons
-*/
+
 using namespace std;
 namespace HE_ARC::RPG
 {
-    //c'est pour faire un pattern pour les attaques du monstre
-    
-
+    /**
+    *@brief le joueur combat un monstre, le monstre aura soit un pattern défini ou aura des attaques aléatoire
+    *@param _hero le pointeur du joueur
+    *@param _monster le pointeur du monstre qu'il combat
+    */
     void Battle::Fight(Hero *_hero, Monster *_monster)
     {
-        cout << "=======================================" << endl;
-        cout << "=======================================" << endl;
+        cout << endl
+             << "=======================================" << endl;
         cout << "Le combat commence" << endl;
         cout << "=======================================" << endl;
-        cout << "=======================================" << endl;
+        Sleep(3000);
         cout << endl;
         while ((_hero->isHAlive() && _monster->isMAlive())) // vérifie si quelqu'un est mort
         {
             cout << "========================================" << endl;
             _monster->MonsterAttack(_hero);
+            
             show(_hero, _monster);
+            
             if (not _hero->isHAlive()) //Pour éviter que le héro attaque en étant mort
             {
                 break;
@@ -31,6 +33,7 @@ namespace HE_ARC::RPG
             show(_hero, _monster);
         }
         cout << "Fin du combat" << endl;
+        Sleep(500);
         if (_hero->isHAlive() == true)
         {
             cout << "BRAVO!!!" << endl
@@ -50,28 +53,38 @@ namespace HE_ARC::RPG
             cout << "le monstre a gagné ='(" << endl
                  << "Game Over"
                  << endl;
-            exit(-1); // il est mort donc fin de la partie
+            exit(-1); // il est mort donc fin de la partie, et du programme
         }
     }
-    
-
+    /**
+    *@brief Affichage des points de vie du monster et du joueur (et du mana si il en )
+    *@param _hero le pointeur du joueur
+    *@param _monster le pointeur du monstre qu'il combat
+    */
     void Battle::show(Hero *_hero, Monster *_monster) const
     {
-        cout << "========================================" << endl;
-        cout << "Hero current HP: " << _hero->getcHp() << endl;
+
+        Logger::writeBattle("========================================");
+        Logger::writeBattle("Hero current HP: " + to_string(_hero->getcHp()));
         if (typeid(*_hero) == typeid(Wizard) || typeid(*_hero) == typeid(Necromancer))
         {
             Wizard *_wizard = dynamic_cast<Wizard *>(_hero);
-            cout << "Hero current MP: " << _wizard->getcMana() << endl;
-        }
-        cout << "Monster current HP: " << _monster->getcHp() << endl;
-        cout << "========================================" << endl;
+            Logger::writeBattle("Hero current MP: " + to_string(_wizard->getcMana()));
+           }
+        Logger::writeBattle("Monster current HP: " + to_string(_monster->getcHp()));
+        Logger::writeBattle("========================================");
+        Sleep(3000);
+        
     }
 
-    
-
+    /**
+    *@brief le joueur regagne une partie de ses points de vie et de son mana, il doit aussi trier son sac
+    *@param _hero le pointeur du joueur
+    *@param _monster le pointeur du monstre qu'il combat
+    */
     void Battle::Restsite(Hero *_hero)
     {
+
         cout << "Vous vous reposez et regagnez de HP" << endl;
         _hero->heal((_hero->getHp() * 30 / 100));
         if (typeid(*_hero) == typeid(Wizard))
@@ -84,12 +97,13 @@ namespace HE_ARC::RPG
             Necromancer *_necromancer = dynamic_cast<Necromancer *>(_hero);
             _necromancer->mHeal(_necromancer->getMana() * 30 / 100);
         }
-
+Sleep(3000);
         _hero->show();
 
         //Rangement du sac
-        cout << "Ouverture du sac pour le trier" << endl;
 
+        cout << "Ouverture du sac pour le trier" << endl;
+        Sleep(3000);
         //on détermine la taille du sac
         int size = _hero->backpack.getSize();
         IObject *Sac[size];
@@ -108,9 +122,11 @@ namespace HE_ARC::RPG
 
             cout << "Choissiez l'emplacement dans votre sac, 0 étant le fond de votre sac" << endl;
             cout << "Votre sac à une taille de " << size << endl;
+            Sleep(3000);
             //on sort de ce qui il y en haut du sac et on demande ou il veut le stocker
             do
             {
+
                 cout << "Rentrez des valeurs entre 0 et " << size - 1 << endl;
                 cout << "Ou voulez vous ranger l'objet -> " << Item->getName() << "(" << Item->getFeature() << ")" << endl;
                 fflush(stdin);
@@ -118,7 +134,7 @@ namespace HE_ARC::RPG
                 //on fait un premier controle pour savoir si la saisie est juste et est dans la taille du tab
             } while (not(0 <= action && action <= size - 1 && status == 1));
 
-            //si lemplacement dans le sac vaut nullptr alors on y a rien mit donc on peut y stocker item
+            //si l'emplacement dans le sac vaut nullptr alors on y a rien mit donc on peut y stocker item
             if (Sac[action] == nullptr)
             {
                 Sac[action] = Item;
@@ -126,7 +142,9 @@ namespace HE_ARC::RPG
             }
             else
             {
+
                 cout << "Erreur, place déjà prise, veuillez prendre une autre valeur que " << action << endl;
+                Sleep(3000);
                 //on rerange pour faire denouveau la boucle
                 _hero->backpack.pack(Item);
             }

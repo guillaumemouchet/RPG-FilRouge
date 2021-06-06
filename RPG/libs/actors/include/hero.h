@@ -8,6 +8,7 @@
 #include "..\..\Stuff\include\Potion.h"
 #include "..\..\Stuff\include\Sword.h"
 #include "..\..\Stuff\include\Backpack.h"
+#include "..\..\Logger.h"
 
 
 using namespace std;
@@ -52,7 +53,7 @@ namespace HE_ARC::RPG
 
         bool isHAlive() const { return (this->getcHp() > 0); }
         void HeroAction(Monster *_monster);
-        void HeroAttack(Monster *_monster);
+        void virtual HeroAttack(Monster *_monster) = 0;
         //utilisation du BackPack
         void UseBackpack(Monster *_monster);
 

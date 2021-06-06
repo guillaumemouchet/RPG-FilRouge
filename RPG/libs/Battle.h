@@ -12,7 +12,7 @@
 #include "actors\include\Undead.h"
 #include "actors\include\Azazel.h"
 #include "Stuff\include\IObject.h"
-
+#include "Logger.h"
 using namespace std;
 namespace HE_ARC::RPG
 {

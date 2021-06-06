@@ -21,6 +21,7 @@ namespace HE_ARC::RPG
         //Liste des sorts du héro
         void RiseUndead(Monster *_monster);
         void Cataclysme(Monster *_monster);
+        void virtual HeroAttack(Monster *_monster) override;
         
        
 

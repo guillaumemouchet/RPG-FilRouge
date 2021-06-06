@@ -39,6 +39,7 @@ namespace HE_ARC::RPG
         // on ne veut pas que Necromancer ait trop de sort
         virtual void Fireball(Monster *_monster);
         virtual void Blizzard(Monster *_monster);
+        void virtual HeroAttack(Monster *_monster)override;
 
     };
     

@@ -25,6 +25,7 @@ namespace HE_ARC::RPG
         void Taunt(Monster *_monster);
         void ShieldBash(Monster *_monster);
         void Rampage(Monster *_monster);
+        void HeroAttack(Monster *_monster) override;
 
     };
     

@@ -25,6 +25,7 @@ namespace HE_ARC::RPG
         void brimStorm(Hero *_hero);
         void doubleSlash(Hero *_hero);
         void apocalypse(Hero *_hero);
+        void MonsterAttack(Hero *_hero) override;
     };
 
 }

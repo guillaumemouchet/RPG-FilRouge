@@ -12,9 +12,12 @@ namespace HE_ARC::RPG
     public:
         virtual string getName() const = 0;
         virtual int getFeature() const = 0;
+        /**
+        *@brief Affiche le nom et les caractéristiques de l'objet
+        */
         void show() const
         {
-           cout << this->getName() << "(" << this->getFeature() << ")" << endl;
+            cout << this->getName() << "(" << this->getFeature() << ")" << endl;
         }
         IObject() = default;
         ~IObject() = default;

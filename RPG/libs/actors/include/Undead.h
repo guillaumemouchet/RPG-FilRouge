@@ -23,6 +23,7 @@ namespace HE_ARC::RPG
         virtual void RiseUndead(Hero *_hero);
         void manaDrain(Hero *_hero);
         virtual void PoisonGrip(Hero *_hero);
+        void MonsterAttack(Hero *_hero)override;
 
     };
     

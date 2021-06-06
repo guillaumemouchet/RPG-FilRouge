@@ -2,7 +2,7 @@
 #define MONSTER_h
 
 #include <string>
-
+#include "..\..\Logger.h"
 //TOUJOURS inclure les headers !!
 
 using namespace std;
@@ -37,7 +37,7 @@ namespace HE_ARC::RPG
         void looseHp(int _damage, int _stat);
         bool dodge();
         //les attaques du monstre
-        void MonsterAttack(Hero *_hero);
+        void virtual MonsterAttack(Hero *_hero) = 0;
 
         //Pour le pattern des monstres
         static int mCounter;
