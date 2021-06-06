@@ -66,7 +66,7 @@ namespace HE_ARC::RPG
              << "Mana : " << this->mana << endl
              << "=========================" << endl
              << endl;*/
-             Logger::writeGame("\n =========================");
+             Logger::writeGame("=========================");
              Logger::writeGame("Hero's name : " + this->name);
              Logger::writeGame("=========================");
              Logger::writeGame("Strength : " + to_string(this->strength));
@@ -83,7 +83,7 @@ namespace HE_ARC::RPG
     //Liste des sorts du Héro
 
     /**
-    *@brief Le joueur lance une boule de feu sur le monstre
+    *@brief Le joueur lance une boule de feu sur le monstre, attaque magique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
     void Wizard::Fireball(Monster *_monster)
@@ -104,7 +104,7 @@ namespace HE_ARC::RPG
     }
 
     /**
-    *@brief Le joueur invoque un grand blizzard
+    *@brief Le joueur invoque un grand blizzard, attaque magique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
     void Wizard::Blizzard(Monster *_monster)
@@ -125,7 +125,7 @@ namespace HE_ARC::RPG
     }
 
     /**
-    *@brief Le joueur inflige des points de dégats au monstre et les reconvertis en points de vie
+    *@brief Le joueur inflige des points de dégats au monstre et les reconvertis en points de vie, attaque magique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
     void Wizard::Leech(Monster *_monster)
@@ -153,10 +153,12 @@ namespace HE_ARC::RPG
         if (_mHeal >= (this->getMana() - this->getcMana()))
         {
             this->cMana = this->getMana();
+            Logger::writeBattle("Vous regagnez tous vos Mp.");
         }
         else
         {
             this->cMana += _mHeal;
+            Logger::writeBattle("Vous vous soignez de " + to_string(_mHeal) + "Mp.");
         }
     }
     /**
@@ -176,7 +178,7 @@ namespace HE_ARC::RPG
         cout << "vous perdez " << _lMana << " MP" << endl;
     }
     /**
-    *@brief Le joueur frappe avec ce qu'il a sous la main quand il n'a plus de mana
+    *@brief Le joueur frappe avec ce qu'il a sous la main quand il n'a plus de mana, attaque physique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
     void Wizard::Attack(Monster *_monster)

@@ -2,6 +2,7 @@
 #define IOBJECT_H
 
 #include <iostream>
+#include "..\..\Logger.h"
 using namespace std;
 
 namespace HE_ARC::RPG
@@ -17,7 +18,7 @@ namespace HE_ARC::RPG
         */
         void show() const
         {
-            cout << this->getName() << "(" << this->getFeature() << ")" << endl;
+            Logger::writeGame(this->getName() + "(" + to_string(this->getFeature()) + ")");
         }
         IObject() = default;
         ~IObject() = default;

@@ -23,7 +23,7 @@ namespace HE_ARC::RPG
     //liste des sorts du monstre
 
     /**
-    *@brief Le monstre invoque des morts pour blesser le joueur
+    *@brief Le monstre invoque des morts pour blesser le joueur, attaque physique
     *@param _hero pointeur sur le joueur
     */
     void Undead::RiseUndead(Hero *_hero)
@@ -34,7 +34,7 @@ namespace HE_ARC::RPG
     }
 
     /**
-    *@brief Le monstre fait perdre des points de mana au joueur si il en posssède sinon rien ne se passe
+    *@brief Le monstre fait perdre des points de mana au joueur si il en posssède sinon rien ne se passe, attaque magique
     *@param _hero pointeur sur le joueur
     */
     void Undead::manaDrain(Hero *_hero)
@@ -53,7 +53,7 @@ namespace HE_ARC::RPG
     }
 
     /**
-    *@brief Le monstre aggripe le joueur et lui inflige de lourd dégat
+    *@brief Le monstre aggripe le joueur et lui inflige de lourd dégat, attaque physique
     *@param _hero pointeur sur le joueur
     */
     void Undead::PoisonGrip(Hero *_hero)
@@ -63,7 +63,7 @@ namespace HE_ARC::RPG
         _hero->looseHp(cDamage, this->getStrength());
     }
 /**
-    *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini, sauf pour Azazel ou c'est aléatoire
+    *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini
     *@param _hero pointeur sur le hero qu'il attaque
     */
     void Undead::MonsterAttack(Hero *_hero)

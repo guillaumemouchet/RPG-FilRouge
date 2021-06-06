@@ -58,7 +58,7 @@ namespace HE_ARC::RPG
     }
 
     /**
-    *@brief Le joueur frappe avec son bouclier si il en possède un sinon il fait avec ce qu'il a
+    *@brief Le joueur frappe avec son bouclier si il en possède un sinon il fait avec ce qu'il a, attaque physique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
     void Warrior::ShieldBash(Monster *_monster)
@@ -82,7 +82,7 @@ namespace HE_ARC::RPG
     }
 
     /**
-    *@brief Le joueur frappe tout ce qui bouge, lui compris
+    *@brief Le joueur frappe tout ce qui bouge, lui compris, attaque physique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
     void Warrior::Rampage(Monster *_monster)
@@ -93,11 +93,11 @@ namespace HE_ARC::RPG
         if (typeid(*pObject) == typeid(Sword))
         {
             _monster->looseHp(cDamage  + (this->pObject->getFeature()) ,this->getStrength());
-            this->looseHp((cDamage  + this->pObject->getFeature()), this->getStrength()/2.0);
+            this->looseHp((cDamage  + this->pObject->getFeature()), this->getStrength()/4.0);
         }else
         {
             _monster->looseHp(cDamage ,this->getStrength());
-            this->looseHp(cDamage, this->getStrength()/2.0);
+            this->looseHp(cDamage, this->getStrength()/4.0);
         }
     }
     /**

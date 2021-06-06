@@ -41,10 +41,6 @@ namespace HE_ARC::RPG
         if (_hero->backpack.isNotEmpty() == false)
         {
             cout << "Le Gobelin vous donne une giffle" << endl;
-            if (_hero->dodge())
-            {
-                cout << "Vous avez esquivez l'attaque" << endl;
-            }
             _hero->looseHp(cDamage, this->getStrength());
         }
         else /*|| ou alors que la chance sur 8 ne fonctionne pas*/
@@ -76,7 +72,7 @@ namespace HE_ARC::RPG
         _hero->looseHp(cDamage, this->getIntelligence());
     }
     /**
-    *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini, sauf pour Azazel ou c'est aléatoire
+    *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini
     *@param _hero pointeur sur le hero qu'il attaque
     */
     void Goblin::MonsterAttack(Hero *_hero)

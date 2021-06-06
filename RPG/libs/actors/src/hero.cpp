@@ -73,8 +73,8 @@ namespace HE_ARC::RPG
              << "Intelligence : " << this->intelligence << endl
              << "Objet : "; this->pObject->show();
              cout << "=========================" << endl
-             << endl;*/char buffer [50];
-        Logger::writeGame("\n=========================");
+             << endl;*/
+        Logger::writeGame("=========================");
         Logger::writeGame("Hero's name : " + this->name);
         Logger::writeGame("=========================");
         Logger::writeGame("Strength : " + to_string(this->strength));
@@ -83,7 +83,6 @@ namespace HE_ARC::RPG
         Logger::writeGame("Intelligence : " + to_string(this->intelligence));
         Logger::writeGame("Object : ");
         this->pObject->show();
-
         Logger::writeGame("=========================\n");
         Sleep(3000);
     }
@@ -97,6 +96,7 @@ namespace HE_ARC::RPG
     }
     /**
     *@brief Pour désequiper l'objet dans la main du joueur
+    *@returns pointeur sur l'objet anciennement équipé
     */
     IObject *Hero::unequip()
     {
@@ -113,10 +113,13 @@ namespace HE_ARC::RPG
         if (_heal >= (this->getHp() - this->getcHp()))
         {
             this->currentHp = this->getHp();
+            Logger::writeBattle("Vous regagnez tous vos Hp.");
         }
         else
         {
+            
             this->currentHp += _heal;
+            Logger::writeBattle("Vous vous soignez de " + to_string(_heal) + "Hp.");
         }
     }
     /**
@@ -185,13 +188,13 @@ namespace HE_ARC::RPG
         {
         case 0:
 
-            cout << "Vous mettez l'object en haut de votre sac" << endl;
+            Logger::writeGame("Vous mettez l'object en haut de votre sac");
             this->backpack.pack(tab[i]);
             Sleep(3000);
             break;
         case 1:
 
-            cout << "L'object n'est pas utile vous le laissez par terre" << endl;
+            Logger::writeGame("L'object n'est pas utile vous le laissez par terre");
             delete tab[i];
             tab[i] = nullptr;
             Sleep(3000);

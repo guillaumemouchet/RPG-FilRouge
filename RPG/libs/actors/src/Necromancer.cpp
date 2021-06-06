@@ -34,7 +34,7 @@ namespace HE_ARC::RPG
     */
     void Necromancer::RiseUndead(Monster *_monster)
     {
-        int cDamage = 3;
+        int cDamage = 4;
         int ManaCost = 4;
         if (this->cMana >= ManaCost)
         {

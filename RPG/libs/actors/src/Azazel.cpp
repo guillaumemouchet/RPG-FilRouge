@@ -27,7 +27,7 @@ namespace HE_ARC::RPG
     void Azazel::brimStorm(Hero *_hero)
     {
         int const cDamage = 8;
-        cout << "Votre adversaire lance une gigantesque Laser de sa bouche" << endl;
+        cout << "Votre adversaire lance une gigantesque Laser" << endl;
         _hero->looseHp(this->getIntelligence(), cDamage);
     }
     /**
@@ -59,36 +59,36 @@ namespace HE_ARC::RPG
         _hero->looseHp(this->getStrength() + random, cDamage);
     }
     /**
-    *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini, sauf pour Azazel ou c'est aléatoire
+    *@brief permet de définir les attaques du monstre, elles sont aléatoires
     *@param _hero pointeur sur le hero qu'il attaque
     */
     void Azazel::MonsterAttack(Hero *_hero)
     {
-        
-            Azazel *_azazel = dynamic_cast<Azazel *>(this);
-            srand(time(nullptr));
-            int random = rand() % 3;
-            switch (random)
-            {
-            case 0:
-                _azazel->manaDrain(_hero);
 
-                break;
-            case 1:
-                _azazel->brimStorm(_hero);
+        Azazel *_azazel = dynamic_cast<Azazel *>(this);
+        srand(time(nullptr));
+        int random = rand() % 3;
+        switch (random)
+        {
+        case 0:
+            _azazel->manaDrain(_hero);
 
-                break;
-            case 2:
-                _azazel->doubleSlash(_hero);
-                break;
-            case 3:
-                _azazel->apocalypse(_hero);
-            default:
-                //si jamais le random fait une mauvaise valeur (ce qui ne devrait pas mais double protection)
-                cout << "Mauvaise Valeur, reessai" << endl;
-                this->MonsterAttack(_hero);
-                break;
-            }
+            break;
+        case 1:
+            _azazel->brimStorm(_hero);
+
+            break;
+        case 2:
+            _azazel->doubleSlash(_hero);
+            break;
+        case 3:
+            _azazel->apocalypse(_hero);
+        default:
+            //si jamais le random fait une mauvaise valeur (ce qui ne devrait pas mais double protection)
+            cout << "Mauvaise Valeur, reessai" << endl;
+            this->MonsterAttack(_hero);
+            break;
+        }
         cout << "========================================" << endl;
         Sleep(3000);
     }

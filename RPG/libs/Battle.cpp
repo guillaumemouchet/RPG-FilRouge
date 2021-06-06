@@ -12,19 +12,18 @@ namespace HE_ARC::RPG
     */
     void Battle::Fight(Hero *_hero, Monster *_monster)
     {
-        cout << endl
-             << "=======================================" << endl;
-        cout << "Le combat commence" << endl;
-        cout << "=======================================" << endl;
+        Logger::writeBattle("=======================================");
+        Logger::writeBattle("Le combat commence");
+        Logger::writeBattle("=======================================");
         Sleep(3000);
         cout << endl;
         while ((_hero->isHAlive() && _monster->isMAlive())) // vérifie si quelqu'un est mort
         {
             cout << "========================================" << endl;
             _monster->MonsterAttack(_hero);
-            
+
             show(_hero, _monster);
-            
+
             if (not _hero->isHAlive()) //Pour éviter que le héro attaque en étant mort
             {
                 break;
@@ -32,12 +31,11 @@ namespace HE_ARC::RPG
             _hero->HeroAction(_monster);
             show(_hero, _monster);
         }
-        cout << "Fin du combat" << endl;
+        Logger::writeBattle("Fin du combat");
         Sleep(500);
         if (_hero->isHAlive() == true)
         {
-            cout << "BRAVO!!!" << endl
-                 << endl;
+            Logger::writeBattle("BRAVO!!!");
             _monster->resetcHp();                    //on le ramène à la vie si jamais on doit le réutiliser
             if (typeid(*_monster) != typeid(Azazel)) //si c'est le boss final pas besoin de loot
             {
@@ -45,14 +43,13 @@ namespace HE_ARC::RPG
             }
             else
             {
-                cout << "Victoire, Vous avez battu le boss final" << endl;
+                Logger::writeBattle("Victoire, Vous avez battu le boss final");
             }
         }
         else
         {
-            cout << "le monstre a gagné ='(" << endl
-                 << "Game Over"
-                 << endl;
+            Logger::writeBattle("le monstre a gagné ='(");
+            Logger::writeBattle("Game Over");
             exit(-1); // il est mort donc fin de la partie, et du programme
         }
     }
@@ -70,11 +67,10 @@ namespace HE_ARC::RPG
         {
             Wizard *_wizard = dynamic_cast<Wizard *>(_hero);
             Logger::writeBattle("Hero current MP: " + to_string(_wizard->getcMana()));
-           }
+        }
         Logger::writeBattle("Monster current HP: " + to_string(_monster->getcHp()));
         Logger::writeBattle("========================================");
         Sleep(3000);
-        
     }
 
     /**
@@ -85,7 +81,7 @@ namespace HE_ARC::RPG
     void Battle::Restsite(Hero *_hero)
     {
 
-        cout << "Vous vous reposez et regagnez de HP" << endl;
+        Logger::writeGame("Vous vous reposez et regagnez de HP et du Mana");
         _hero->heal((_hero->getHp() * 30 / 100));
         if (typeid(*_hero) == typeid(Wizard))
         {
@@ -97,7 +93,7 @@ namespace HE_ARC::RPG
             Necromancer *_necromancer = dynamic_cast<Necromancer *>(_hero);
             _necromancer->mHeal(_necromancer->getMana() * 30 / 100);
         }
-Sleep(3000);
+        Sleep(3000);
         _hero->show();
 
         //Rangement du sac
