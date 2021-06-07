@@ -15,7 +15,7 @@ namespace HE_ARC::RPG
         Logger::writeBattle("=======================================");
         Logger::writeBattle("Le combat commence");
         Logger::writeBattle("=======================================");
-        Sleep(3000);
+        Sleep(lTime);
         cout << endl;
         while ((_hero->isHAlive() && _monster->isMAlive())) // vérifie si quelqu'un est mort
         {
@@ -32,7 +32,7 @@ namespace HE_ARC::RPG
             show(_hero, _monster);
         }
         Logger::writeBattle("Fin du combat");
-        Sleep(500);
+        Sleep(sTime);
         if (_hero->isHAlive() == true)
         {
             Logger::writeBattle("BRAVO!!!");
@@ -70,7 +70,7 @@ namespace HE_ARC::RPG
         }
         Logger::writeBattle("Monster current HP: " + to_string(_monster->getcHp()));
         Logger::writeBattle("========================================");
-        Sleep(3000);
+        Sleep(lTime);
     }
 
     /**
@@ -93,13 +93,13 @@ namespace HE_ARC::RPG
             Necromancer *_necromancer = dynamic_cast<Necromancer *>(_hero);
             _necromancer->mHeal(_necromancer->getMana() * 30 / 100);
         }
-        Sleep(3000);
+        Sleep(lTime);
         _hero->show();
 
         //Rangement du sac
 
         cout << "Ouverture du sac pour le trier" << endl;
-        Sleep(3000);
+        Sleep(lTime);
         //on détermine la taille du sac
         int size = _hero->backpack.getSize();
         IObject *Sac[size];
@@ -110,7 +110,7 @@ namespace HE_ARC::RPG
         }
 
         int status = 0;
-        int action = 0;
+        int action = -1;
         //on fait ranger le sac tant qu'il n'est pas vide
         while (_hero->backpack.isNotEmpty() == true)
         {
@@ -118,7 +118,7 @@ namespace HE_ARC::RPG
 
             cout << "Choissiez l'emplacement dans votre sac, 0 étant le fond de votre sac" << endl;
             cout << "Votre sac à une taille de " << size << endl;
-            Sleep(3000);
+            Sleep(lTime);
             //on sort de ce qui il y en haut du sac et on demande ou il veut le stocker
             do
             {
@@ -140,7 +140,7 @@ namespace HE_ARC::RPG
             {
 
                 cout << "Erreur, place déjà prise, veuillez prendre une autre valeur que " << action << endl;
-                Sleep(3000);
+                Sleep(lTime);
                 //on rerange pour faire denouveau la boucle
                 _hero->backpack.pack(Item);
             }

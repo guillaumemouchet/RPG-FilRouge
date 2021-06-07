@@ -11,6 +11,7 @@
 #include "..\..\Stuff\include\Sword.h"
 #include "..\..\Stuff\include\Shield.h"
 #include "..\..\Stuff\include\IObject.h"
+#include "..\..\Enum.h"
 
 using namespace std;
 
@@ -84,7 +85,7 @@ namespace HE_ARC::RPG
         Logger::writeGame("Object : ");
         this->pObject->show();
         Logger::writeGame("=========================\n");
-        Sleep(3000);
+        Sleep(lTime);
     }
     /**
     *@brief pour équiper un objet dans la main du joueur, depuis son sac
@@ -117,7 +118,7 @@ namespace HE_ARC::RPG
         }
         else
         {
-            
+
             this->currentHp += _heal;
             Logger::writeBattle("Vous vous soignez de " + to_string(_heal) + "Hp.");
         }
@@ -146,8 +147,8 @@ namespace HE_ARC::RPG
                 damage = (_stat * _damage) / 2.0;
             }
             this->currentHp -= damage;
-            
-            Logger::writeBattle("Vous perdez " +  to_string(damage) + " Hp");
+
+            Logger::writeBattle("Vous perdez " + to_string(damage) + " Hp");
         }
     }
     /**
@@ -167,20 +168,20 @@ namespace HE_ARC::RPG
     {
 
         srand(time(nullptr));
-        int valeur = rand() % 10 + 5;
-        int i = rand() % 3;
+        int valeur = rand() % 6 + 5;
         IObject *tab[] = {new Sword(valeur), new Shield(valeur), new Potion(valeur)};
+        int i = rand() % 3;
         cout << "Vous trouvez l'objet: ";
         tab[i]->show();
-        Sleep(3000);
+        Sleep(lTime);
         int action = -1;
         int status = 0;
         do
         {
 
             cout << "Voulez vous le mettre dans votre sac?" << endl;
-            cout << "[0] Oui" << endl
-                 << "[1] Non" << endl;
+            cout << "[" << oui << "] Oui" << endl
+                 << "[" << non << "] Non" << endl;
             fflush(stdin);
             status = scanf("%d", &action);
         } while (not(0 <= action && action <= 1 && status == 1));
@@ -190,14 +191,14 @@ namespace HE_ARC::RPG
 
             Logger::writeGame("Vous mettez l'object en haut de votre sac");
             this->backpack.pack(tab[i]);
-            Sleep(3000);
+            Sleep(lTime);
             break;
         case 1:
 
             Logger::writeGame("L'object n'est pas utile vous le laissez par terre");
             delete tab[i];
             tab[i] = nullptr;
-            Sleep(3000);
+            Sleep(lTime);
         default:
             break;
         }
@@ -214,23 +215,23 @@ namespace HE_ARC::RPG
         do
         {
 
-            cout << "[0] Attack" << endl;
-            cout << "[1] Backpack " << endl;
-            cout << "[2] Concede" << endl;
+            cout << "[" << hAction::attack << "] Attack" << endl;
+            cout << "[" << hAction::backpack << "] Backpack " << endl;
+            cout << "[" << hAction::concede << "] Concede" << endl;
             fflush(stdin);
             status = scanf("%d", &action);
         } while (not(0 <= action && action <= 2 && status == 1));
         switch (action)
         {
-        case 0:
+        case hAction::attack:
             Logger::writeBattle("Vous choissisez de combattre");
             this->HeroAttack(_monster);
             break;
-        case 1:
+        case hAction::backpack:
             Logger::writeBattle("Vous ouvrez votre sac");
             this->UseBackpack(_monster);
             break;
-        case 2:
+        case hAction::concede:
             Logger::writeBattle("Vous avez abondonné la partie");
             this->Concede(); // on met ses points de vie à 0
             break;
@@ -254,7 +255,7 @@ namespace HE_ARC::RPG
             IObject *mItem = this->backpack.unPack();
             cout << "Il y a tout en haut ";
             mItem->show();
-            Sleep(3000);
+            Sleep(lTime);
 
             if (typeid(*mItem) == typeid(Potion))
             {
@@ -264,25 +265,25 @@ namespace HE_ARC::RPG
                 {
 
                     cout << "Voulez vous boire la potion?" << endl;
-                    cout << "[0] Oui" << endl
-                         << "[1] Non" << endl
-                         << "[2] Jeter" << endl;
+                    cout << "["<< oui << "] Oui" << endl
+                         << "["<< non << "] Non" << endl
+                         << "["<< jeter << "] Jeter" << endl;
                     fflush(stdin);
                     status = scanf("%d", &action);
                 } while (not(0 <= action && action <= 2 && status == 1));
 
                 switch (action)
                 {
-                case 0:
+                case oui:
                     //on utilise l'objet
                     this->heal(mItem->getFeature() * 10.0);
                     break;
-                case 1:
+                case non:
                     // vu qu'on ne l'utilise pas on le remet au dessus
                     this->backpack.pack(mItem);
                     this->HeroAction(_monster);
                     break;
-                case 2:
+                case jeter:
                     // on jete l'objet du coup rien n'est fait on passe à la suite
                     cout << "Vous jetez votre objet: ";
                     mItem->show();
@@ -300,16 +301,16 @@ namespace HE_ARC::RPG
                 {
 
                     cout << "Voulez vous équipez l'objet?" << endl;
-                    cout << "[0] Oui" << endl
-                         << "[1] Non" << endl
-                         << "[2] Jeter" << endl;
+                    cout << "["<< oui << "] Oui" << endl
+                         << "["<< non << "] Non" << endl
+                         << "["<< jeter << "] Jeter" << endl;
                     fflush(stdin);
                     status = scanf("%d", &action);
                 } while (not(0 <= action && action <= 2 && status == 1));
 
                 switch (action)
                 {
-                case 0:
+                case oui:
                 {
                     //on va d'abord enlever l'équipement actif
                     IObject *mItem1 = this->unequip();
@@ -319,12 +320,12 @@ namespace HE_ARC::RPG
                     this->backpack.pack(mItem1);
                     break;
                 }
-                case 1:
+                case non:
                     // on la range et on refait le tour
                     this->backpack.pack(mItem);
                     this->HeroAction(_monster);
                     break;
-                case 2:
+                case jeter:
                     // on jete l'objet du coup rien n'est fait on passe à la suite
 
                     cout << "Vous jetez votre objet: ";

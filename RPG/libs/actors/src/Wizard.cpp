@@ -6,6 +6,7 @@
 #include "..\..\Stuff\include\Shield.h"
 #include "..\..\Stuff\include\Sword.h"
 #include "..\..\Logger.h"
+#include "..\..\Enum.h"
 #include <iostream>
 #include <windows.h>
 using namespace std;
@@ -89,13 +90,12 @@ namespace HE_ARC::RPG
     void Wizard::Fireball(Monster *_monster)
     {
 
-        int cDamage = 3; //constante de dégat du sort
-        int ManaCost = 3;
-        if (this->cMana >= ManaCost)
+
+        if (this->cMana >= aWizard::mFireball)
         {
             cout << this->getName() << " lance une violente boule de feu" << endl;
-            _monster->looseHp(cDamage, this->getIntelligence());
-            this->looseMana(ManaCost);
+            _monster->looseHp(aWizard::cFireball, this->getIntelligence());
+            this->looseMana(aWizard::mFireball);
         }
         else
         {
@@ -109,14 +109,11 @@ namespace HE_ARC::RPG
     */
     void Wizard::Blizzard(Monster *_monster)
     {
-        int cDamage = 4;
-        int ManaCost = 5;
-
-        if (this->cMana >= ManaCost)
+        if (this->cMana >= aWizard::mBlizzard)
         {
             cout << this->getName() << " lance un magnifique Blizzard" << endl;
-            _monster->looseHp(cDamage, this->getIntelligence());
-            this->looseMana(ManaCost);
+            _monster->looseHp(aWizard::cBlizzard, this->getIntelligence());
+            this->looseMana(aWizard::mBlizzard);
         }
         else
         {
@@ -130,14 +127,13 @@ namespace HE_ARC::RPG
     */
     void Wizard::Leech(Monster *_monster)
     {
-        int cDamage = 4;
-        int ManaCost = 8;
-        if (this->cMana >= ManaCost)
+
+        if (this->cMana >= aWizard::mLeech)
         {
             cout << this->getName() << " Inflige des dégats à l'adversaire et se soigne" << endl;
-            _monster->looseHp(cDamage, this->getIntelligence());
-            this->looseMana(ManaCost);
-            this->heal((cDamage * this->getIntelligence() / 2.0));
+            _monster->looseHp(aWizard::cLeech, this->getIntelligence());
+            this->looseMana(aWizard::mLeech);
+            this->heal((aWizard::cLeech * this->getIntelligence() / 2.0));
         }
         else
         {
@@ -200,7 +196,7 @@ namespace HE_ARC::RPG
         {
             cout << "Tu n'as pas assez de mana" << endl;
             cout << "Tu frappe l'adversaire à main nue" << endl;
-            _monster->looseHp(4, this->getStrength());
+            _monster->looseHp(2, this->getStrength());
         }
     }
 
@@ -216,25 +212,25 @@ namespace HE_ARC::RPG
         do
         {
 
-            cout << "[0] Fireball (3)" << endl;
-            cout << "[1] Blizzard (5)" << endl;
-            cout << "[2] Leech (8)" << endl;
+            cout << "[" << aWizard::fireball << "] Fireball (" << aWizard::mFireball << ")" << endl;
+            cout << "[" << aWizard::blizzard << "] Blizzard (" << aWizard::mBlizzard << ")" << endl;
+            cout << "[" <<aWizard::leech << "] Leech (" << aWizard::mLeech << ")" << endl;
             fflush(stdin);
             status = scanf("%d", &action);
         } while (not(0 <= action && action <= 2 && status == 1));
-        Wizard *_wizard = dynamic_cast<Wizard *>(this);
+
         cout << "========================================" << endl;
 
         switch (action)
         {
-        case 0:
-            _wizard->Fireball(_monster);
+        case aWizard::fireball:
+            this->Fireball(_monster);
             break;
-        case 1:
-            _wizard->Blizzard(_monster);
+        case aWizard::blizzard:
+            this->Blizzard(_monster);
             break;
-        case 2:
-            _wizard->Leech(_monster);
+        case aWizard::leech:
+            this->Leech(_monster);
             break;
         default:
             this->HeroAttack(_monster);
@@ -242,6 +238,6 @@ namespace HE_ARC::RPG
         }
 
         cout << "========================================" << endl;
-        Sleep(3000);
+        Sleep(lTime);
     }
 }

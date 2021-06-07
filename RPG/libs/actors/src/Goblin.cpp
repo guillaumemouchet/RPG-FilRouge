@@ -1,5 +1,6 @@
 #include "..\include\Goblin.h"
 #include "..\include\Monster.h"
+#include "..\..\Enum.h"
 #include <iostream>
 using namespace std;
 
@@ -26,9 +27,9 @@ namespace HE_ARC::RPG
     */
     void Goblin::rallye(Hero *_hero)
     {
-        int cDamage = 6; // constante de dégat de l'attaque
+ 
         cout << "Des Goblins aux alentours sont venus vous faire des dégats" << endl;
-        _hero->looseHp(cDamage, this->getStrength());
+        _hero->looseHp(aGoblin::cRallye, this->getStrength());
     }
 
     /**
@@ -37,11 +38,11 @@ namespace HE_ARC::RPG
     */
     void Goblin::steal(Hero *_hero)
     {
-        int cDamage = 4; // constante de dégat de l'attaque
+        
         if (_hero->backpack.isNotEmpty() == false)
         {
             cout << "Le Gobelin vous donne une giffle" << endl;
-            _hero->looseHp(cDamage, this->getStrength());
+            _hero->looseHp(aGoblin::cSteal, this->getStrength());
         }
         else /*|| ou alors que la chance sur 8 ne fonctionne pas*/
         {
@@ -50,14 +51,14 @@ namespace HE_ARC::RPG
             if ((rand() % 8 + 1) == 8)
             {
                 IObject *Item = _hero->backpack.unPack();
-                cout << "Il vous a volé " << Item->getName() << "(" << Item->getFeature() << ")" << endl;
+                cout << "Il vous a volé "; Item->show();
             }
             else
             {
                 cout << "ouf, il a échoué." << endl;
             }
 
-            _hero->looseHp(cDamage, this->getStrength());
+            _hero->looseHp(aGoblin::cSteal, this->getStrength());
         }
     }
     /**
@@ -66,10 +67,10 @@ namespace HE_ARC::RPG
     */
     void Goblin::slingShot(Hero *_hero)
     {
-        int cDamage = 3; // constante de dégat de l'attaque
+     
 
         cout << "Le Gobelin vous tire dessus avec une fronde" << endl;
-        _hero->looseHp(cDamage, this->getIntelligence());
+        _hero->looseHp(aGoblin::cSlingshot, this->getIntelligence());
     }
     /**
     *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini
@@ -77,25 +78,23 @@ namespace HE_ARC::RPG
     */
     void Goblin::MonsterAttack(Hero *_hero)
     {
-
-        Goblin *_goblin = dynamic_cast<Goblin *>(this);
         switch (Monster::mCounter)
         {
-        case 0:
-            _goblin->steal(_hero);
+        case aGoblin::steal:
+            this->steal(_hero);
             Monster::mCounter++;
             break;
-        case 1:
-            _goblin->rallye(_hero);
+        case aGoblin::rallye:
+            this->rallye(_hero);
             Monster::mCounter++;
             break;
-        case 2:
-            _goblin->slingShot(_hero);
+        case aGoblin::slingshot:
+            this->slingShot(_hero);
             Monster::mCounter = 0;
         default:
             break;
         }
         cout << "========================================" << endl;
-        Sleep(3000);
+        Sleep(lTime);
     }
 }

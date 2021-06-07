@@ -21,7 +21,8 @@ Après il se repose, il soignera ses points de vie et regagnera un peu de mana, 
 
 Ensuite il reprend sa course et rentre dans la prochaine salle du dongeon, tout ça jusqu'à ce que le combat de boss ou si il remporte c'est la fin du jeu.
 
-
+Amélioration :
+Changer une partie de l'enum en dictionnaire avec une classe Personnage qui englobe les attaques puis qui ensuite auront leur constante de dégat, leur cout en mana et leur numéro d'action.
 
 
 

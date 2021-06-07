@@ -25,6 +25,7 @@
 //inclusions du sytème de combat
 #include "libs\Battle.h"
 #include "libs\Logger.h"
+#include "libs\Enum.h"
 
 using namespace std;
 using namespace HE_ARC::RPG;
@@ -35,8 +36,6 @@ void WhileStat(int tab[], int size);
 
 int chooseStat(int i, int tot, int size);
 
-//Valeur global pour avoir les actions en erreur de base (souvent compris entre 0 et x)
-int action = -1;
 //Valeur global pour le numéro de la salle
 int nSalle = 0;
 /* 
@@ -54,19 +53,21 @@ int main()
     Azazel *ptrA = new Azazel(6, 6, 6, 150);
 
     //Valeur par défaut des objects pour les personnages
-    Sword *ptrS = new Sword(5);
-    Potion *ptrP = new Potion(5);
-    Shield *ptrSh = new Shield(5);
+    int oDefault = 3;
+    Sword *ptrS = new Sword(oDefault);
+    Potion *ptrP = new Potion(oDefault);
+    Shield *ptrSh = new Shield(oDefault);
 
     //sélection de la classe
     int status = 0;
+    int action = -1;
     do
     {
         cout << "======================================= " << endl;
         cout << "Veuillez selectionner votre classe, cela déterminera vos attaques" << endl;
-        cout << "[0] Warrior" << endl;
-        cout << "[1] Wizard" << endl;
-        cout << "[2] Necromancer " << endl;
+        cout << "["<<warrior<<"] Warrior" << endl;
+        cout << "["<<wizard<<"] Wizard" << endl;
+        cout << "["<<necromancer<<"] Necromancer " << endl;
         cout << "======================================= " << endl;
 
         fflush(stdin);
@@ -80,7 +81,7 @@ int main()
     cout << "======================================= " << endl;
 
     //Création du personnage en fonction de sa classe
-    if (action == 0)
+    if (action == warrior)
     {
         Logger::writeGame("Vous avez choisi un Warrior");
 
@@ -91,8 +92,8 @@ int main()
         Warrior *hero = new Warrior(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Chandra", ptrSh);
 
         //Stockage d'objet par défaut
-        hero->backpack.pack(new Sword(3));
-        hero->backpack.pack(new Potion(3));
+        hero->backpack.pack(new Sword(oDefault));
+        hero->backpack.pack(new Potion(oDefault));
         //on affiche le héro
         hero->show();
         //Combat de goblin
@@ -102,7 +103,7 @@ int main()
         //Combat de Boss contre Azazel
         Room(hero, ptrA);
     }
-    else if (action == 1)
+    else if (action == wizard)
     {
         Logger::writeGame("Vous avez choisi un Wizard");
         int StatSize = 5;
@@ -111,8 +112,8 @@ int main()
         Wizard *hero = new Wizard(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Jace", ptrS, (tab[4] * 10));
 
         //Stockage d'objet par défaut
-        hero->backpack.pack(new Shield(3));
-        hero->backpack.pack(new Potion(3));
+        hero->backpack.pack(new Shield(oDefault));
+        hero->backpack.pack(new Potion(oDefault));
 
         //on affiche le héro
         hero->show();
@@ -123,7 +124,7 @@ int main()
         //Combat de Boss contre Azazel
         Room(hero, ptrA);
     }
-    else if (action == 2)
+    else if (action == necromancer)
     {
         Logger::writeGame("Vous avez choisi un Necromancer");
         int StatSize = 5;
@@ -132,8 +133,8 @@ int main()
         Necromancer *hero = new Necromancer(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Liliana", ptrS, (tab[4] * 10));
 
         //Stockage d'objet par défaut
-        hero->backpack.pack(new Shield(3));
-        hero->backpack.pack(new Potion(3));
+        hero->backpack.pack(new Shield(oDefault));
+        hero->backpack.pack(new Potion(oDefault));
 
         //on affiche le héro
         hero->show();
@@ -157,19 +158,19 @@ void Room(Hero *_hero, Monster *_monster)
 {
     string tab[] = {"première", "deuxième", "troisième", "quatrième", "cinquième"};
 
-    cout << "Vous entrez dans la " << tab[nSalle] << " salle du donjon " << endl;
+    Logger::writeBattle("Vous entrez dans la " + tab[nSalle] + " salle du donjon ");
 
     if (typeid(*_monster) == typeid(Goblin))
     {
-        cout << "Vous tombez sur un goblin, préparez-vous au combat " << endl;
+        Logger::writeBattle("Vous tombez sur un goblin, préparez-vous au combat ");
     }
     else if (typeid(*_monster) == typeid(Undead))
     {
-        cout << "Vous tombez sur un mort-vivant, préparez-vous au combat " << endl;
+        Logger::writeBattle("Vous tombez sur un mort-vivant, préparez-vous au combat ");
     }
     else if (typeid(*_monster) == typeid(Azazel))
     {
-        cout << "Vous tombez sur Azazel, préparez vous pour votre ultime combat " << endl;
+        Logger::writeBattle("Vous tombez sur Azazel, préparez vous pour votre ultime combat ");
     }
     Sleep(3000);
 

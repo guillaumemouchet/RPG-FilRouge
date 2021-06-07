@@ -3,6 +3,7 @@
 #include "..\include\Hero.h"
 #include "..\include\Necromancer.h"
 #include "..\include\Wizard.h"
+#include "..\..\Enum.h"
 #include <iostream>
 using namespace std;
 
@@ -26,9 +27,8 @@ namespace HE_ARC::RPG
     */
     void Azazel::brimStorm(Hero *_hero)
     {
-        int const cDamage = 8;
         cout << "Votre adversaire lance une gigantesque Laser" << endl;
-        _hero->looseHp(this->getIntelligence(), cDamage);
+        _hero->looseHp(this->getIntelligence(), aAzazel::cBrimstorm);
     }
     /**
     *@brief Le monstre frappe 2 fois avec un fouet le joueur, c'est une attaque physique
@@ -36,11 +36,10 @@ namespace HE_ARC::RPG
     */
     void Azazel::doubleSlash(Hero *_hero)
     {
-        int const cDamage = 4;
         cout << "Votre adversaire vous frappe avec un fouet" << endl;
-        _hero->looseHp(this->getStrength(), cDamage);
+        _hero->looseHp(this->getStrength(), aAzazel::cDoubleslash);
         cout << "Attention! le coup revient" << endl;
-        _hero->looseHp(this->getStrength(), cDamage);
+        _hero->looseHp(this->getStrength(), aAzazel::cDoubleslash);
     }
     /**
     *@brief Le monstre invoque un cataclysme sur le joueur, c'est une attaque physique
@@ -49,14 +48,13 @@ namespace HE_ARC::RPG
     */
     void Azazel::apocalypse(Hero *_hero)
     {
-        int const cDamage = 5;
         string furniture[] = {"Une chaise", "Une tuile", "Un parpaing", "Une fenêtre", "Un mur", "Une cheminée", "Un toit"};
         srand(time(nullptr));
-        int random = rand() % 6;
+        int random = rand() % 7;
 
         cout << "Votre adversaire crée une apocalypse autour de vous" << endl;
         cout << furniture[random] << " vous tombe violamment dessus pendant ce déluge" << endl;
-        _hero->looseHp(this->getStrength() + random, cDamage);
+        _hero->looseHp(this->getStrength() + random, aAzazel::cApocalypse);
     }
     /**
     *@brief permet de définir les attaques du monstre, elles sont aléatoires
@@ -65,24 +63,23 @@ namespace HE_ARC::RPG
     void Azazel::MonsterAttack(Hero *_hero)
     {
 
-        Azazel *_azazel = dynamic_cast<Azazel *>(this);
         srand(time(nullptr));
         int random = rand() % 3;
         switch (random)
         {
-        case 0:
-            _azazel->manaDrain(_hero);
+        case aUndead::manadrain:
+            this->manaDrain(_hero);
 
             break;
-        case 1:
-            _azazel->brimStorm(_hero);
+        case aAzazel::brimstorm:
+            this->brimStorm(_hero);
 
             break;
-        case 2:
-            _azazel->doubleSlash(_hero);
+        case aAzazel::doubleslash:
+            this->doubleSlash(_hero);
             break;
-        case 3:
-            _azazel->apocalypse(_hero);
+        case aAzazel::apocalypse:
+            this->apocalypse(_hero);
         default:
             //si jamais le random fait une mauvaise valeur (ce qui ne devrait pas mais double protection)
             cout << "Mauvaise Valeur, reessai" << endl;
@@ -90,6 +87,6 @@ namespace HE_ARC::RPG
             break;
         }
         cout << "========================================" << endl;
-        Sleep(3000);
+        Sleep(lTime);
     }
 }

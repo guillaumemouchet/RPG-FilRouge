@@ -5,6 +5,7 @@
 #include "..\..\Stuff\include\Potion.h"
 #include "..\..\Stuff\include\Shield.h"
 #include "..\..\Stuff\include\Sword.h"
+#include "..\..\Enum.h"
 #include <iostream>
 #include <windows.h>
 using namespace std;
@@ -34,13 +35,12 @@ namespace HE_ARC::RPG
     */
     void Necromancer::RiseUndead(Monster *_monster)
     {
-        int cDamage = 4;
-        int ManaCost = 4;
-        if (this->cMana >= ManaCost)
+
+        if (this->cMana >= aUndead::mRiseundead)
         {
             cout << this->getName() << " invoque des morts pour attaquer votre ennemi" << endl;
-            this->looseMana(ManaCost);
-            _monster->looseHp(cDamage, this->getStrength());
+            this->looseMana(aUndead::mRiseundead);
+            _monster->looseHp(aUndead::cRiseundead, this->getStrength());
         }
         else
         {
@@ -54,14 +54,13 @@ namespace HE_ARC::RPG
     */
     void Necromancer::Cataclysme(Monster *_monster)
     {
-        int cDamage = 5;
-        int ManaCost = 6;
-        if (this->cMana >= ManaCost)
+
+        if (this->cMana >= aNecromancer::mCataclysme)
         {
             cout << this->getName() << " lance un cataclyme sur votre ennemi" << endl;
-            _monster->looseHp(cDamage, this->getIntelligence());
-            this->looseHp(cDamage, this->getIntelligence() / 2.0);
-            this->looseMana(ManaCost);
+            _monster->looseHp(aNecromancer::cCataclysme, this->getIntelligence());
+            this->looseHp(aNecromancer::cCataclysme, this->getIntelligence() / 2.0);
+            this->looseMana(aNecromancer::mCataclysme);
         }
         else
         {
@@ -79,32 +78,32 @@ namespace HE_ARC::RPG
         do
         {
 
-            cout << "[0] Leech (8)" << endl;
-            cout << "[1] RiseUndead (4)" << endl;
-            cout << "[2] Cataclysme (6)" << endl;
+            cout << "[" << aWizard::leech << "] Leech ("<< aWizard::mLeech <<")" << endl;
+            cout << "[" << aUndead::riseundead << "] RiseUndead ("<< aUndead::mRiseundead<<")" << endl;
+            cout << "[" << aNecromancer::cataclysme << "] Cataclysme ("<< aNecromancer::mCataclysme<<")" << endl;
             fflush(stdin);
             status = scanf("%d", &action);
         } while (not(0 <= action && action <= 4 && status == 1));
-        Necromancer *_necromancer = dynamic_cast<Necromancer *>(this);
+
         cout << "========================================" << endl;
 
         switch (action)
         {
-        case 0:
-            _necromancer->Leech(_monster);
+        case aWizard::leech:
+            this->Leech(_monster);
             break;
-        case 1:
-            _necromancer->RiseUndead(_monster);
+        case aUndead::riseundead:
+            this->RiseUndead(_monster);
             break;
-        case 2:
-            _necromancer->Cataclysme(_monster);
+        case aNecromancer::cataclysme:
+            this->Cataclysme(_monster);
             break;
         default:
             this->HeroAttack(_monster);
             break;
 
             cout << "========================================" << endl;
-            Sleep(3000);
+            Sleep(lTime);
         }
     }
 }

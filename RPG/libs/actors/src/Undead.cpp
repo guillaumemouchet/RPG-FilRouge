@@ -3,6 +3,7 @@
 #include "..\include\Hero.h"
 #include "..\include\Necromancer.h"
 #include "..\include\Wizard.h"
+#include "..\..\Enum.h"
 #include <iostream>
 using namespace std;
 
@@ -28,9 +29,9 @@ namespace HE_ARC::RPG
     */
     void Undead::RiseUndead(Hero *_hero)
     {
-        int cDamage = 5;
+        
         cout << "votre adversaire invoque un monstre pour vous blesser" << endl;
-        _hero->looseHp(cDamage, this->getStrength());
+        _hero->looseHp(aUndead::cRiseundead, this->getStrength());
     }
 
     /**
@@ -39,12 +40,12 @@ namespace HE_ARC::RPG
     */
     void Undead::manaDrain(Hero *_hero)
     {
-        int cDamage = 3;
+
         if (typeid(*_hero) == typeid(Wizard) || typeid(*_hero) == typeid(Necromancer))
         {
             Wizard *_wizard = dynamic_cast<Wizard *>(_hero);
             cout << "votre adversaire absorbe votre mana" << endl;
-            _wizard->looseMana(this->getIntelligence() * cDamage / 2.0);
+            _wizard->looseMana(this->getIntelligence() * aUndead::cManadrain / 2.0);
         }
         else
         {
@@ -58,37 +59,36 @@ namespace HE_ARC::RPG
     */
     void Undead::PoisonGrip(Hero *_hero)
     {
-        int cDamage = 7;
+
         cout << "Votre adversaire vous empoigne et vous blesse" << endl;
-        _hero->looseHp(cDamage, this->getStrength());
+        _hero->looseHp(aUndead::cPoisongrip, this->getStrength());
     }
-/**
+    /**
     *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini
     *@param _hero pointeur sur le hero qu'il attaque
     */
     void Undead::MonsterAttack(Hero *_hero)
     {
-      
-            Undead *_undead = dynamic_cast<Undead *>(this);
-            switch (Monster::mCounter)
-            {
-            case 0:
-                _undead->PoisonGrip(_hero);
-                Monster::mCounter++;
-                break;
-            case 1:
-                _undead->manaDrain(_hero);
-                Monster::mCounter++;
-                break;
-            case 2:
-                _undead->RiseUndead(_hero);
-                Monster::mCounter = 0;
-                break;
-            default:
-                break;
-            }
-        
+
+        switch (Monster::mCounter)
+        {
+        case aUndead::poisongrip:
+            this->PoisonGrip(_hero);
+            Monster::mCounter++;
+            break;
+        case aUndead::manadrain:
+            this->manaDrain(_hero);
+            Monster::mCounter++;
+            break;
+        case aUndead::riseundead:
+            this->RiseUndead(_hero);
+            Monster::mCounter = 0;
+            break;
+        default:
+            break;
+        }
+
         cout << "========================================" << endl;
-        Sleep(3000);
+        Sleep(lTime);
     }
 }

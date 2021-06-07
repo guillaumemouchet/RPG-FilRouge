@@ -6,6 +6,7 @@
 #include "..\include\Goblin.h"
 #include "..\include\Undead.h"
 #include "..\include\Azazel.h"
+#include "..\..\Enum.h"
 
 using namespace std;
 
