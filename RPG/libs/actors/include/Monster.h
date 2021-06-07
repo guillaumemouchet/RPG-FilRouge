@@ -37,7 +37,7 @@ namespace HE_ARC::RPG
         void looseHp(int _damage, int _stat);
         bool dodge();
         //les attaques du monstre
-        void virtual MonsterAttack(Hero *_hero) = 0;
+        void virtual monsterAttack(Hero *_hero) = 0;
 
         //Pour le pattern des monstres
         static int mCounter;

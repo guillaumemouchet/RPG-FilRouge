@@ -60,7 +60,7 @@ namespace HE_ARC::RPG
     *@brief permet de définir les attaques du monstre, elles sont aléatoires
     *@param _hero pointeur sur le hero qu'il attaque
     */
-    void Azazel::MonsterAttack(Hero *_hero)
+    void Azazel::monsterAttack(Hero *_hero)
     {
 
         srand(time(nullptr));
@@ -83,7 +83,7 @@ namespace HE_ARC::RPG
         default:
             //si jamais le random fait une mauvaise valeur (ce qui ne devrait pas mais double protection)
             cout << "Mauvaise Valeur, reessai" << endl;
-            this->MonsterAttack(_hero);
+            this->monsterAttack(_hero);
             break;
         }
         cout << "========================================" << endl;

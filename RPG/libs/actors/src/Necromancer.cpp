@@ -33,7 +33,7 @@ namespace HE_ARC::RPG
     *@brief Le joueur invoque des morts pour blesser son ennemi
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
-    void Necromancer::RiseUndead(Monster *_monster)
+    void Necromancer::riseUndead(Monster *_monster)
     {
 
         if (this->cMana >= aUndead::mRiseundead)
@@ -44,7 +44,7 @@ namespace HE_ARC::RPG
         }
         else
         {
-            Attack(_monster);
+            attack(_monster);
         }
     }
 
@@ -52,7 +52,7 @@ namespace HE_ARC::RPG
     *@brief Le joueur invoque un cataclysme pour blesser l'ennemi, mais se prend des dégats en contre-coup
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
-    void Necromancer::Cataclysme(Monster *_monster)
+    void Necromancer::cataclysme(Monster *_monster)
     {
 
         if (this->cMana >= aNecromancer::mCataclysme)
@@ -64,23 +64,23 @@ namespace HE_ARC::RPG
         }
         else
         {
-            Attack(_monster);
+            attack(_monster);
         }
     }
     /**
     *@brief Permet au joueur de choisir quelle attaque utiliser en combat, cela dépend de sa classe
     *@param _monster le pointeur sur le monstre qui est combattu
     */
-    void Necromancer::HeroAttack(Monster *_monster)
+    void Necromancer::heroAttack(Monster *_monster)
     {
         int action = -1;
         int status = 0;
         do
         {
 
-            cout << "[" << aWizard::leech << "] Leech ("<< aWizard::mLeech <<")" << endl;
-            cout << "[" << aUndead::riseundead << "] RiseUndead ("<< aUndead::mRiseundead<<")" << endl;
-            cout << "[" << aNecromancer::cataclysme << "] Cataclysme ("<< aNecromancer::mCataclysme<<")" << endl;
+            cout << "[" << aNecromancer::cataclysme << "] Cataclysme (" << aNecromancer::mCataclysme << ")" << endl;
+            cout << "[" << aUndead::riseundead << "] RiseUndead (" << aUndead::mRiseundead << ")" << endl;
+            cout << "[" << aWizard::leech << "] Leech (" << aWizard::mLeech << ")" << endl;
             fflush(stdin);
             status = scanf("%d", &action);
         } while (not(0 <= action && action <= 4 && status == 1));
@@ -90,16 +90,16 @@ namespace HE_ARC::RPG
         switch (action)
         {
         case aWizard::leech:
-            this->Leech(_monster);
+            this->leech(_monster);
             break;
         case aUndead::riseundead:
-            this->RiseUndead(_monster);
+            this->riseUndead(_monster);
             break;
         case aNecromancer::cataclysme:
-            this->Cataclysme(_monster);
+            this->cataclysme(_monster);
             break;
         default:
-            this->HeroAttack(_monster);
+            this->heroAttack(_monster);
             break;
 
             cout << "========================================" << endl;

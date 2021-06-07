@@ -34,9 +34,9 @@ namespace HE_ARC::RPG
         //DESTRUCTEUR
         ~Battle() = default;
         //création du combat
-        void Fight(Hero *_hero, Monster *_monster);
+        void fight(Hero *_hero, Monster *_monster);
         //création de la zone de repos
-        void Restsite(Hero *_hero);
+        void restsite(Hero *_hero);
         
     };
 }

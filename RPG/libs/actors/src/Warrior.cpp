@@ -51,7 +51,7 @@ namespace HE_ARC::RPG
     *@brief Le joueur insulte l'ennemi pour le blesser, c'est une attaque magique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
-    void Warrior::Taunt(Monster *_monster)
+    void Warrior::taunt(Monster *_monster)
     {
         cout << this->getName() << " insulte l'adversaire" << endl;
         _monster->looseHp(aWarrior::cTaunt, this->getIntelligence());
@@ -61,7 +61,7 @@ namespace HE_ARC::RPG
     *@brief Le joueur frappe avec son bouclier si il en possède un sinon il fait avec ce qu'il a, attaque physique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
-    void Warrior::ShieldBash(Monster *_monster)
+    void Warrior::shieldBash(Monster *_monster)
     {
 
         if (typeid(*pObject) == typeid(Shield))
@@ -85,7 +85,7 @@ namespace HE_ARC::RPG
     *@brief Le joueur frappe tout ce qui bouge, lui compris, attaque physique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
-    void Warrior::Rampage(Monster *_monster)
+    void Warrior::rampage(Monster *_monster)
     {
         cout << this->getName() << " Devient fou et frappe tout ce qui bouge" << endl;
 
@@ -104,7 +104,7 @@ namespace HE_ARC::RPG
     *@brief Permet au joueur de choisir quelle attaque utiliser en combat, cela dépend de sa classe
     *@param _monster le pointeur sur le monstre qui est combattu
     */
-    void Warrior::HeroAttack(Monster *_monster)
+    void Warrior::heroAttack(Monster *_monster)
     {
         int action = -1;
         int status = 0;
@@ -122,16 +122,16 @@ namespace HE_ARC::RPG
         switch (action)
         {
         case aWarrior::rampage:
-            this->Rampage(_monster);
+            this->rampage(_monster);
             break;
         case aWarrior::shieldbash:
-            this->ShieldBash(_monster);
+            this->shieldBash(_monster);
             break;
         case aWarrior::taunt:
-            this->Taunt(_monster);
+            this->taunt(_monster);
             break;
         default:
-            this->HeroAttack(_monster);
+            this->heroAttack(_monster);
             break;
         }
         cout << "========================================" << endl;

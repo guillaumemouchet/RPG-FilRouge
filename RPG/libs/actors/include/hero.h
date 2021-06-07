@@ -41,7 +41,7 @@ namespace HE_ARC::RPG
         double getcHp() const { return this->currentHp; }
         string getName() const { return this->name; }
 
-        void Concede() { this->currentHp=0;}
+        void concede() { this->currentHp=0;}
         //FONCTIONS
         void virtual show();
         void virtual interact(const Hero &) = 0;
@@ -52,10 +52,10 @@ namespace HE_ARC::RPG
 
 
         bool isHAlive() const { return (this->getcHp() > 0); }
-        void HeroAction(Monster *_monster);
-        void virtual HeroAttack(Monster *_monster) = 0;
+        void heroAction(Monster *_monster);
+        void virtual heroAttack(Monster *_monster) = 0;
         //utilisation du BackPack
-        void UseBackpack(Monster *_monster);
+        void useBackpack(Monster *_monster);
 
         void heal(double _heal);
         void looseHp(int _damage, int _stat);

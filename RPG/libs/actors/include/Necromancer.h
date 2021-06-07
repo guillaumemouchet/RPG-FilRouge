@@ -19,9 +19,9 @@ namespace HE_ARC::RPG
         ~Necromancer() = default;
         
         //Liste des sorts du héro
-        void RiseUndead(Monster *_monster);
-        void Cataclysme(Monster *_monster);
-        void virtual HeroAttack(Monster *_monster) override;
+        void riseUndead(Monster *_monster);
+        void cataclysme(Monster *_monster);
+        void virtual heroAttack(Monster *_monster) override;
         
        
 

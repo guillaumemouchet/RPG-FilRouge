@@ -22,10 +22,10 @@ namespace HE_ARC::RPG
         void interact(const Hero &) override;
 
         //Liste des capacités du Héro
-        void Taunt(Monster *_monster);
-        void ShieldBash(Monster *_monster);
-        void Rampage(Monster *_monster);
-        void HeroAttack(Monster *_monster) override;
+        void taunt(Monster *_monster);
+        void shieldBash(Monster *_monster);
+        void rampage(Monster *_monster);
+        void heroAttack(Monster *_monster) override;
 
     };
     

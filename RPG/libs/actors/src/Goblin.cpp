@@ -76,7 +76,7 @@ namespace HE_ARC::RPG
     *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini
     *@param _hero pointeur sur le hero qu'il attaque
     */
-    void Goblin::MonsterAttack(Hero *_hero)
+    void Goblin::monsterAttack(Hero *_hero)
     {
         switch (Monster::mCounter)
         {

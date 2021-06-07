@@ -45,7 +45,6 @@ namespace HE_ARC::RPG
 
         Logger::pathRoot = Logger::pathBin + DIR_LOG + "/" + folderLogName + "/";
         Logger::pathBattles = Logger::pathRoot + "Battles/";
-        //Logger::pathMovements = Logger::pathRoot + "Movements/";
 
         mkdir(Logger::pathRoot.c_str());
 

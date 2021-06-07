@@ -22,7 +22,7 @@ namespace HE_ARC::RPG
         void rallye(Hero *_hero);
         void steal(Hero *_hero);
         void slingShot(Hero *_hero);
-        void MonsterAttack(Hero *_hero) override;
+        void monsterAttack(Hero *_hero) override;
 
     };
     

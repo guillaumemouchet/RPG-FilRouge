@@ -10,7 +10,7 @@ namespace HE_ARC::RPG
     *@param _hero le pointeur du joueur
     *@param _monster le pointeur du monstre qu'il combat
     */
-    void Battle::Fight(Hero *_hero, Monster *_monster)
+    void Battle::fight(Hero *_hero, Monster *_monster)
     {
         Logger::writeBattle("=======================================");
         Logger::writeBattle("Le combat commence");
@@ -20,7 +20,7 @@ namespace HE_ARC::RPG
         while ((_hero->isHAlive() && _monster->isMAlive())) // vérifie si quelqu'un est mort
         {
             cout << "========================================" << endl;
-            _monster->MonsterAttack(_hero);
+            _monster->monsterAttack(_hero);
 
             show(_hero, _monster);
 
@@ -28,7 +28,7 @@ namespace HE_ARC::RPG
             {
                 break;
             }
-            _hero->HeroAction(_monster);
+            _hero->heroAction(_monster);
             show(_hero, _monster);
         }
         Logger::writeBattle("Fin du combat");
@@ -78,7 +78,7 @@ namespace HE_ARC::RPG
     *@param _hero le pointeur du joueur
     *@param _monster le pointeur du monstre qu'il combat
     */
-    void Battle::Restsite(Hero *_hero)
+    void Battle::restsite(Hero *_hero)
     {
 
         Logger::writeGame("Vous vous reposez et regagnez de HP et du Mana");

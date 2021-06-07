@@ -87,7 +87,7 @@ namespace HE_ARC::RPG
     *@brief Le joueur lance une boule de feu sur le monstre, attaque magique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
-    void Wizard::Fireball(Monster *_monster)
+    void Wizard::fireball(Monster *_monster)
     {
 
 
@@ -99,7 +99,7 @@ namespace HE_ARC::RPG
         }
         else
         {
-            Attack(_monster);
+            attack(_monster);
         }
     }
 
@@ -107,7 +107,7 @@ namespace HE_ARC::RPG
     *@brief Le joueur invoque un grand blizzard, attaque magique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
-    void Wizard::Blizzard(Monster *_monster)
+    void Wizard::blizzard(Monster *_monster)
     {
         if (this->cMana >= aWizard::mBlizzard)
         {
@@ -117,7 +117,7 @@ namespace HE_ARC::RPG
         }
         else
         {
-            Attack(_monster);
+            attack(_monster);
         }
     }
 
@@ -125,7 +125,7 @@ namespace HE_ARC::RPG
     *@brief Le joueur inflige des points de dégats au monstre et les reconvertis en points de vie, attaque magique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
-    void Wizard::Leech(Monster *_monster)
+    void Wizard::leech(Monster *_monster)
     {
 
         if (this->cMana >= aWizard::mLeech)
@@ -137,7 +137,7 @@ namespace HE_ARC::RPG
         }
         else
         {
-            Attack(_monster);
+            attack(_monster);
         }
     }
     /**
@@ -177,7 +177,7 @@ namespace HE_ARC::RPG
     *@brief Le joueur frappe avec ce qu'il a sous la main quand il n'a plus de mana, attaque physique
     *@param _monster pointeur sur le monstre que le joueur attaque
     */
-    void Wizard::Attack(Monster *_monster)
+    void Wizard::attack(Monster *_monster)
     {
         if (typeid(*pObject) == typeid(Sword))
         {
@@ -204,7 +204,7 @@ namespace HE_ARC::RPG
     *@brief Permet au joueur de choisir quelle attaque utiliser en combat, cela dépend de sa classe
     *@param _monster le pointeur sur le monstre qui est combattu
     */
-    void Wizard::HeroAttack(Monster *_monster)
+    void Wizard::heroAttack(Monster *_monster)
     {
 
         int action = -1;
@@ -224,16 +224,16 @@ namespace HE_ARC::RPG
         switch (action)
         {
         case aWizard::fireball:
-            this->Fireball(_monster);
+            this->fireball(_monster);
             break;
         case aWizard::blizzard:
-            this->Blizzard(_monster);
+            this->blizzard(_monster);
             break;
         case aWizard::leech:
-            this->Leech(_monster);
+            this->leech(_monster);
             break;
         default:
-            this->HeroAttack(_monster);
+            this->heroAttack(_monster);
             break;
         }
 

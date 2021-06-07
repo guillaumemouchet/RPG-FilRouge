@@ -34,12 +34,12 @@ namespace HE_ARC::RPG
         void looseMana(double _lMana);
 
         //liste des sorts du héros
-        void Leech(Monster *_monster);
-        void Attack(Monster *_monster);
+        void leech(Monster *_monster);
+        void attack(Monster *_monster);
         // on ne veut pas que Necromancer ait trop de sort
-        virtual void Fireball(Monster *_monster);
-        virtual void Blizzard(Monster *_monster);
-        void virtual HeroAttack(Monster *_monster)override;
+        virtual void fireball(Monster *_monster);
+        virtual void blizzard(Monster *_monster);
+        void virtual heroAttack(Monster *_monster)override;
 
     };
     

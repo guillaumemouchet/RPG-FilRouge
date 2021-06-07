@@ -20,10 +20,10 @@ namespace HE_ARC::RPG
         Undead(int _strength, int _agility, int _intelligence, double _hp);
         virtual ~Undead() = default;
         //liste des sorts du monstre
-        virtual void RiseUndead(Hero *_hero);
+        virtual void riseUndead(Hero *_hero);
         void manaDrain(Hero *_hero);
-        virtual void PoisonGrip(Hero *_hero);
-        void MonsterAttack(Hero *_hero)override;
+        virtual void poisonGrip(Hero *_hero);
+        void monsterAttack(Hero *_hero)override;
 
     };
     

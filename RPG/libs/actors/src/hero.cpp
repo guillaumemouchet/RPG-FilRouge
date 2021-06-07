@@ -208,7 +208,7 @@ namespace HE_ARC::RPG
     *@brief Permet au joueur de choisir qu'elle action faire dans son combat
     *@param _monster le pointeur sur le monstre qui est combattu
     */
-    void Hero::HeroAction(Monster *_monster)
+    void Hero::heroAction(Monster *_monster)
     {
         int action = -1;
         int status = 0;
@@ -225,19 +225,19 @@ namespace HE_ARC::RPG
         {
         case hAction::attack:
             Logger::writeBattle("Vous choissisez de combattre");
-            this->HeroAttack(_monster);
+            this->heroAttack(_monster);
             break;
         case hAction::backpack:
             Logger::writeBattle("Vous ouvrez votre sac");
-            this->UseBackpack(_monster);
+            this->useBackpack(_monster);
             break;
         case hAction::concede:
             Logger::writeBattle("Vous avez abondonné la partie");
-            this->Concede(); // on met ses points de vie à 0
+            this->concede(); // on met ses points de vie à 0
             break;
         default:
             cout << "Erreur" << endl;
-            this->HeroAttack(_monster); // on fait un retour à la fonction en cas d'erreur qu'il puisse rejouer son tour
+            this->heroAttack(_monster); // on fait un retour à la fonction en cas d'erreur qu'il puisse rejouer son tour
             break;
         }
     }
@@ -246,7 +246,7 @@ namespace HE_ARC::RPG
     *@brief Permet au joueur d'ouvrir son sac et de voir ce qu'il y a dedans, il peut soit l'utiliser, ou non, ou la jeter
     *@param _monster le pointeur sur le monstre qui est combattu
     */
-    void Hero::UseBackpack(Monster *_monster)
+    void Hero::useBackpack(Monster *_monster)
     {
 
         if (this->backpack.isNotEmpty() == true)
@@ -281,7 +281,7 @@ namespace HE_ARC::RPG
                 case non:
                     // vu qu'on ne l'utilise pas on le remet au dessus
                     this->backpack.pack(mItem);
-                    this->HeroAction(_monster);
+                    this->heroAction(_monster);
                     break;
                 case jeter:
                     // on jete l'objet du coup rien n'est fait on passe à la suite
@@ -323,7 +323,7 @@ namespace HE_ARC::RPG
                 case non:
                     // on la range et on refait le tour
                     this->backpack.pack(mItem);
-                    this->HeroAction(_monster);
+                    this->heroAction(_monster);
                     break;
                 case jeter:
                     // on jete l'objet du coup rien n'est fait on passe à la suite
@@ -340,7 +340,7 @@ namespace HE_ARC::RPG
         else
         {
             cout << "votre sac est vide" << endl;
-            this->HeroAction(_monster);
+            this->heroAction(_monster);
         }
     }
     //----------------FONCTION ET CONSTRUCTEUR QUI NE SONT PLUS UTILE--------------------------------------

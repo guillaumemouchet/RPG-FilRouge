@@ -27,7 +27,7 @@ namespace HE_ARC::RPG
     *@brief Le monstre invoque des morts pour blesser le joueur, attaque physique
     *@param _hero pointeur sur le joueur
     */
-    void Undead::RiseUndead(Hero *_hero)
+    void Undead::riseUndead(Hero *_hero)
     {
         
         cout << "votre adversaire invoque un monstre pour vous blesser" << endl;
@@ -57,7 +57,7 @@ namespace HE_ARC::RPG
     *@brief Le monstre aggripe le joueur et lui inflige de lourd dégat, attaque physique
     *@param _hero pointeur sur le joueur
     */
-    void Undead::PoisonGrip(Hero *_hero)
+    void Undead::poisonGrip(Hero *_hero)
     {
 
         cout << "Votre adversaire vous empoigne et vous blesse" << endl;
@@ -67,13 +67,13 @@ namespace HE_ARC::RPG
     *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini
     *@param _hero pointeur sur le hero qu'il attaque
     */
-    void Undead::MonsterAttack(Hero *_hero)
+    void Undead::monsterAttack(Hero *_hero)
     {
 
         switch (Monster::mCounter)
         {
         case aUndead::poisongrip:
-            this->PoisonGrip(_hero);
+            this->poisonGrip(_hero);
             Monster::mCounter++;
             break;
         case aUndead::manadrain:
@@ -81,7 +81,7 @@ namespace HE_ARC::RPG
             Monster::mCounter++;
             break;
         case aUndead::riseundead:
-            this->RiseUndead(_hero);
+            this->riseUndead(_hero);
             Monster::mCounter = 0;
             break;
         default:

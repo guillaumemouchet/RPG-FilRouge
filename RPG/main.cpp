@@ -30,20 +30,15 @@
 using namespace std;
 using namespace HE_ARC::RPG;
 
-void Room(Hero *_hero, Monster *_monster);
+void room(Hero *_hero, Monster *_monster);
 
-void WhileStat(int tab[], int size);
+void whileStat(int tab[], int size);
 
 int chooseStat(int i, int tot, int size);
 
 //Valeur global pour le numéro de la salle
 int nSalle = 0;
-/* 
-REGARDER AVEC TIECHE POUR LE FICHIER DE LOG 
-    recupéré début du combat et le temps voir les hp
-    fin du combat, avec le temps et points de vie perdue
-    TODO faire que l'affichage des Hp soit moins long
-    */
+
 int main()
 {
     Logger mylog;
@@ -87,7 +82,7 @@ int main()
 
         int StatSize = 4;
         int tab[StatSize];
-        WhileStat(tab, StatSize);
+        whileStat(tab, StatSize);
 
         Warrior *hero = new Warrior(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Chandra", ptrSh);
 
@@ -97,18 +92,18 @@ int main()
         //on affiche le héro
         hero->show();
         //Combat de goblin
-        Room(hero, ptrG1);
+        room(hero, ptrG1);
         //Combat de mort-vivant
-        Room(hero, ptrU1);
+        room(hero, ptrU1);
         //Combat de Boss contre Azazel
-        Room(hero, ptrA);
+        room(hero, ptrA);
     }
     else if (action == wizard)
     {
         Logger::writeGame("Vous avez choisi un Wizard");
         int StatSize = 5;
         int tab[StatSize];
-        WhileStat(tab, StatSize);
+        whileStat(tab, StatSize);
         Wizard *hero = new Wizard(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Jace", ptrS, (tab[4] * 10));
 
         //Stockage d'objet par défaut
@@ -118,18 +113,18 @@ int main()
         //on affiche le héro
         hero->show();
         //Combat de goblin
-        Room(hero, ptrG1);
+        room(hero, ptrG1);
         //Combat de mort-vivant
-        Room(hero, ptrU1);
+        room(hero, ptrU1);
         //Combat de Boss contre Azazel
-        Room(hero, ptrA);
+        room(hero, ptrA);
     }
     else if (action == necromancer)
     {
         Logger::writeGame("Vous avez choisi un Necromancer");
         int StatSize = 5;
         int tab[StatSize];
-        WhileStat(tab, StatSize);
+        whileStat(tab, StatSize);
         Necromancer *hero = new Necromancer(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Liliana", ptrS, (tab[4] * 10));
 
         //Stockage d'objet par défaut
@@ -140,13 +135,13 @@ int main()
         hero->show();
 
         //Combat de goblin
-        Room(hero, ptrG1);
+        room(hero, ptrG1);
 
         //Combat de mort-vivant
-        Room(hero, ptrU1);
+        room(hero, ptrU1);
 
         //Combat de Boss contre Azazel
-        Room(hero, ptrA);
+        room(hero, ptrA);
     }
 }
 /**
@@ -154,7 +149,7 @@ int main()
 *@param _hero le pointeur du joueur
 *@param _monster le pointeur du monstre qu'il combat
 */
-void Room(Hero *_hero, Monster *_monster)
+void room(Hero *_hero, Monster *_monster)
 {
     string tab[] = {"première", "deuxième", "troisième", "quatrième", "cinquième"};
 
@@ -177,17 +172,17 @@ void Room(Hero *_hero, Monster *_monster)
     //création du système de combat
     Battle bataille;
     //Combat
-    bataille.Fight(_hero, _monster);
+    bataille.fight(_hero, _monster);
     nSalle++;
     //Une fois le combat fini le héro se repose
-    bataille.Restsite(_hero);
+    bataille.restsite(_hero);
 }
 /**
 *@brief fait une boucle pour le choix des compétences
 *@param tab[] les différentes compétences rangée dans un tableau
 *@param size le nombre de compétence du héro (4 warrior, 5 wizard et necromancer)
 */
-void WhileStat(int tab[], int size)
+void whileStat(int tab[], int size)
 {
     int total = 0;
     int erreur = 0;
@@ -238,6 +233,6 @@ int chooseStat(int i, int tot, int size)
         status = scanf(" %d", &stat);
         cout << endl;
 
-    } while (status != 1);
+    } while (not(stat > 1 && status == 1));
     return stat;
 }
