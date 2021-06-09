@@ -101,8 +101,15 @@ Soit des monstres préfait qu'on choisi suivant la difficulté ou que leur stat 
 
 ## UML
 
-Le diagramme de class se trouve dans le fichier [UML.uxf](UML.uxf) pour plus d'informations.
-
+Le diagramme de class global se trouve dans le fichier [UML.uxf](UML.uxf) pour plus d'informations.
+Un diagramme simplifier pour juste voir les relations se trouve ici [UML_simplify.uxf](UML_simplify.uxf)
+Un diagramme spécifique au :
+<ul>
+<li>Hero</li> 
+se trouve ici [UML_Hero.uxf](UML_Hero.uxf)
+<li>Monster se trouve ici [UML_Monster.uxf](UML_Monster.uxf)</li>
+<li>Object et interaction se trouve ici [UML_Object.uxf](UML_Object.uxf)</li>
+</ul>
 ## Versions
 
 Liste des versions : [Cliquer pour afficher](https://gitlab-etu.ing.he-arc.ch/guillaum.mouchet/cpp_filrouge_iscc_mouchetg)

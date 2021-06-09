@@ -1,0 +1,98 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;1400&lt;/x&gt;&lt;y&gt;140&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;IObject
+--
+
+--
++IObject()
++~IObject
++/getName(): string {virtual} query/
++/getFeature(): int {virtual} query/
++show() query
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;240&lt;/x&gt;&lt;y&gt;270&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;1258&lt;/x&gt;&lt;y&gt;524&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;Shield
+--
+-solidity: int
+--
++Shield()
++Shield(int)
++Shield(Potion&amp;amp;)
++~Shield
++getName(): string query
++getFeature(): int query
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;1329&lt;/x&gt;&lt;y&gt;369&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;Potion
+--
+-power: int
+--
++Potion()
++Potion(int)
++Potion(Potion&amp;amp;)
++~Potion
++getName(): string query
++getFeature(): int query
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;1310&lt;/x&gt;&lt;y&gt;140&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;IObject
+--
+
+--
++IObject()
++~IObject
++/getName(): string {virtual}/
++/getFeature(): int {virtual}/
++show() query
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;130&lt;/x&gt;&lt;y&gt;30&lt;/y&gt;&lt;w&gt;100&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;/AbstractClass/
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;580&lt;/x&gt;&lt;y&gt;390&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;320&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;Undead
+--
+
+
+--
++Undead() 
++Undead(int , int , int , double)
++~Undead() {virtual}
+
++RiseUndead(Hero*) {virtual}
++manaDrain(Hero*)
++PoisonGrip(Hero*) {virtual}&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;220&lt;/x&gt;&lt;y&gt;562&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;Wizard
+--
+#mana: int
+#cMana : int
+--
++Wizard()
++Wizard((int , int , int , double , string , IObject*)
++~Wizard() {virtual}
+
++getcMana() query
++getMana()
+
++interact(Hero&amp;amp;)
++show()
+
++mHeal(double)
++looseMana(double)
+
++Leech(Monster*)
++Attack(Monster*)
++Fireball(Monster*) {virtual}
++Blizzard(Monster*) {virtual}
+
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;Space for diagram notes&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;230&lt;/x&gt;&lt;y&gt;270&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;240&lt;/x&gt;&lt;y&gt;270&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;</help_text><element><id>UMLClass</id><coordinates><x>587</x><y>110</y><w>210</w><h>30</h></coordinates><panel_attributes>/Hero/
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>507</x><y>210</y><w>210</w><h>30</h></coordinates><panel_attributes>Warrior
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>767</x><y>212</y><w>210</w><h>30</h></coordinates><panel_attributes>Wizard
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>767</x><y>274</y><w>210</w><h>30</h></coordinates><panel_attributes>Necromancer
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>587</x><y>130</y><w>110</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>777</x><y>130</y><w>120</w><h>100</h></coordinates><panel_attributes>
+lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;100;80</additional_attributes></element><element><id>Relation</id><coordinates><x>857</x><y>230</y><w>30</w><h>60</h></coordinates><panel_attributes>
+lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>17</x><y>310</y><w>210</w><h>30</h></coordinates><panel_attributes>Azazel
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>47</x><y>110</y><w>210</w><h>30</h></coordinates><panel_attributes>/Monster/
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>23</x><y>209</y><w>210</w><h>30</h></coordinates><panel_attributes>Undead
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>263</x><y>210</y><w>210</w><h>30</h></coordinates><panel_attributes>Goblin
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>247</x><y>130</y><w>90</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;80</additional_attributes></element><element><id>Relation</id><coordinates><x>107</x><y>230</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>297</x><y>10</y><w>210</w><h>30</h></coordinates><panel_attributes>Battle
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1087</x><y>100</y><w>210</w><h>30</h></coordinates><panel_attributes>IObject
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1176</x><y>199</y><w>70</w><h>30</h></coordinates><panel_attributes>Potion
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1065</x><y>204</y><w>90</w><h>30</h></coordinates><panel_attributes>Shield
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1261</x><y>200</y><w>90</w><h>30</h></coordinates><panel_attributes>Sword
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1093</x><y>120</y><w>60</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>40;10;12;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1187</x><y>120</y><w>40</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>20;10;19;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1257</x><y>120</y><w>90</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;80</additional_attributes></element><element><id>Relation</id><coordinates><x>247</x><y>30</y><w>70</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>787</x><y>30</y><w>70</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;80;50;15</additional_attributes></element><element><id>UMLClass</id><coordinates><x>843</x><y>15</y><w>210</w><h>30</h></coordinates><panel_attributes>Backpack
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>97</x><y>130</y><w>50</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>30;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>1047</x><y>30</y><w>60</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;15;40;70</additional_attributes></element><element><id>Relation</id><coordinates><x>787</x><y>120</y><w>320</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;300;10</additional_attributes></element><element><id>Relation</id><coordinates><x>497</x><y>30</y><w>110</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;90;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>11</y><w>150</w><h>30</h></coordinates><panel_attributes>Logger
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>247</x><y>120</y><w>360</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;340;10</additional_attributes></element><element><id>Relation</id><coordinates><x>247</x><y>120</y><w>360</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>340;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>20</y><w>180</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>160;10;10;10</additional_attributes></element></diagram>

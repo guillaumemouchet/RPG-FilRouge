@@ -8,13 +8,10 @@ namespace HE_ARC::RPG
     string Logger::pathBin = "";
     string Logger::pathRoot = "";
     string Logger::pathBattles = "";
-    string Logger::pathMovements = "";
 
     string Logger::battleLogName = "";
 
-    /**
-     * @brief Constructor of logger
-     */
+    
     Logger::Logger()
     {
         // Get the .exe path
@@ -53,20 +50,13 @@ namespace HE_ARC::RPG
         Logger::writeGame("Initialization completed");
     }
 
-    /**
-     * @brief Checks if logger is initialized
-     * @returns True if it is
-     */
+    
     bool Logger::isInitialized()
     {
         return Logger::isOk;
     }
 
-    /**
-     * @brief Write on battle log
-     * @param _log The log
-     * @param _fileName The file name
-     */
+    
     void Logger::writeBattle(string _log, string _fileName)
     {
         if (_fileName != "")
@@ -83,10 +73,7 @@ namespace HE_ARC::RPG
         Logger::writeLog(Logger::pathBattles, index + _fileName, _log);
     }
 
-    /**
-     * @brief Write on game log
-     * @param _log The log
-     */
+    
     void Logger::writeGame(string _log)
     {
         Logger::writeLog(Logger::pathRoot, "Game.log", _log);
@@ -97,11 +84,7 @@ namespace HE_ARC::RPG
     // Private Methods
     // =================================================
 
-    /**
-     * @brief Creates a new log file
-     * @param _path The path
-     * @param _fileName The name
-     */
+    
     void Logger::createFile(string _path, string _fileName)
     {
         if (!Logger::isOk)
@@ -124,23 +107,14 @@ namespace HE_ARC::RPG
         }
     }
 
-    /**
-     * @brief Tells if a file or folder exists
-     * @param _fullPath The path
-     * @returns True if it exists
-     */
+    
     bool Logger::exists(string _fullPath)
     {
         struct stat buffer;
         return (stat(_fullPath.c_str(), &buffer) == 0);
     }
 
-    /**
-     * @brief Write a log in a file
-     * @param _fullPath The full path
-     * @param _nameFile The file name
-     * @param _log The log to write
-     */
+    
     void Logger::writeLog(string _fullPath, string _nameFile, string _log)
     {
         if (!Logger::isOk)

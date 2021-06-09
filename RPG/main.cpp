@@ -5,14 +5,14 @@
 #include <fstream>
 #include <windows.h>
 
-//TOUJOURS inclure les headers !!
-//inclusion des objets utilisables
+//ALWAYS include .h (or .hpp) files
+//including all the objects
 #include "libs\Stuff\include\IObject.h"
 #include "libs\Stuff\include\Sword.h"
 #include "libs\Stuff\include\Shield.h"
 #include "libs\Stuff\include\Potion.h"
 
-//inclusions des personnages
+//including all of the Characters
 #include "libs\actors\include\Hero.h"
 #include "libs\actors\include\Warrior.h"
 #include "libs\actors\include\Wizard.h"
@@ -22,8 +22,10 @@
 #include "libs\actors\include\Undead.h"
 #include "libs\actors\include\Azazel.h"
 
-//inclusions du sytème de combat
+//including all of the battle system
 #include "libs\Battle.h"
+
+//including the rest
 #include "libs\Logger.h"
 #include "libs\Enum.h"
 
@@ -36,33 +38,30 @@ void whileStat(int tab[], int size);
 
 int chooseStat(int i, int tot, int size);
 
-//Valeur global pour le numéro de la salle
+//global variable for the actual number room
 int nSalle = 0;
 
 int main()
 {
     Logger mylog;
-    //Création des Monstres pour les combats (les monstres sont soigné en fin de combat)
+    //Creating monster for the figths (they are heal after the fight)
     Goblin *ptrG1 = new Goblin(3, 3, 3, 60);
     Undead *ptrU1 = new Undead(4, 4, 4, 80);
-    Azazel *ptrA = new Azazel(6, 6, 6, 150);
+    Azazel *ptrA = new Azazel(5, 5, 5, 150);
 
-    //Valeur par défaut des objects pour les personnages
+    //Default value for the items
     int oDefault = 3;
-    Sword *ptrS = new Sword(oDefault);
-    Potion *ptrP = new Potion(oDefault);
-    Shield *ptrSh = new Shield(oDefault);
 
-    //sélection de la classe
+    //The user is selecting the class
     int status = 0;
     int action = -1;
     do
     {
         cout << "======================================= " << endl;
         cout << "Veuillez selectionner votre classe, cela déterminera vos attaques" << endl;
-        cout << "["<<warrior<<"] Warrior" << endl;
-        cout << "["<<wizard<<"] Wizard" << endl;
-        cout << "["<<necromancer<<"] Necromancer " << endl;
+        cout << "[" << warrior << "] Warrior" << endl;
+        cout << "[" << wizard << "] Wizard" << endl;
+        cout << "[" << necromancer << "] Necromancer " << endl;
         cout << "======================================= " << endl;
 
         fflush(stdin);
@@ -75,27 +74,27 @@ int main()
     cout << "BRAVO, Vous avez crée votre premier héro! " << endl;
     cout << "======================================= " << endl;
 
-    //Création du personnage en fonction de sa classe
+    //Creating the character depending what he choose
     if (action == warrior)
     {
         Logger::writeGame("Vous avez choisi un Warrior");
 
-        int StatSize = 4;
+        int StatSize = 4; // Warrior has only for stats because he has no mana
         int tab[StatSize];
         whileStat(tab, StatSize);
 
-        Warrior *hero = new Warrior(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Chandra", ptrSh);
+        Warrior *hero = new Warrior(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Chandra", new Shield(oDefault));
 
-        //Stockage d'objet par défaut
+        //Putting the default items in the bag with potion on top
         hero->backpack.pack(new Sword(oDefault));
         hero->backpack.pack(new Potion(oDefault));
-        //on affiche le héro
+        //Show the hero
         hero->show();
-        //Combat de goblin
+        //fight against Goblin
         room(hero, ptrG1);
-        //Combat de mort-vivant
+        //fight against Undead
         room(hero, ptrU1);
-        //Combat de Boss contre Azazel
+        //fight against Azazel
         room(hero, ptrA);
     }
     else if (action == wizard)
@@ -104,19 +103,19 @@ int main()
         int StatSize = 5;
         int tab[StatSize];
         whileStat(tab, StatSize);
-        Wizard *hero = new Wizard(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Jace", ptrS, (tab[4] * 10));
+        Wizard *hero = new Wizard(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Jace", new Sword(oDefault), (tab[4] * 10.0));
 
-        //Stockage d'objet par défaut
+        //Putting the default items in the bag with potion on top
         hero->backpack.pack(new Shield(oDefault));
         hero->backpack.pack(new Potion(oDefault));
 
-        //on affiche le héro
+        //Show the hero
         hero->show();
-        //Combat de goblin
+        //fight against Goblin
         room(hero, ptrG1);
-        //Combat de mort-vivant
+        //fight against Undead
         room(hero, ptrU1);
-        //Combat de Boss contre Azazel
+        //fight against Azazel
         room(hero, ptrA);
     }
     else if (action == necromancer)
@@ -125,22 +124,19 @@ int main()
         int StatSize = 5;
         int tab[StatSize];
         whileStat(tab, StatSize);
-        Necromancer *hero = new Necromancer(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Liliana", ptrS, (tab[4] * 10));
+        Necromancer *hero = new Necromancer(tab[0], tab[1], tab[2], (tab[3] * 10.0), "Liliana", new Sword(oDefault), (tab[4] * 10.0));
 
-        //Stockage d'objet par défaut
+        //Putting the default items in the bag with potion on top
         hero->backpack.pack(new Shield(oDefault));
         hero->backpack.pack(new Potion(oDefault));
-
-        //on affiche le héro
+        
+        //Show the hero
         hero->show();
-
-        //Combat de goblin
+        //fight against Goblin
         room(hero, ptrG1);
-
-        //Combat de mort-vivant
+        //fight against Undead
         room(hero, ptrU1);
-
-        //Combat de Boss contre Azazel
+        //fight against Azazel
         room(hero, ptrA);
     }
 }
@@ -169,18 +165,18 @@ void room(Hero *_hero, Monster *_monster)
     }
     Sleep(3000);
 
-    //création du système de combat
+    //Creation of the fight system
     Battle bataille;
-    //Combat
+    //start a fight
     bataille.fight(_hero, _monster);
     nSalle++;
-    //Une fois le combat fini le héro se repose
+    //Once the fight ended the hero rest and heal
     bataille.restsite(_hero);
 }
 /**
-*@brief fait une boucle pour le choix des compétences
-*@param tab[] les différentes compétences rangée dans un tableau
-*@param size le nombre de compétence du héro (4 warrior, 5 wizard et necromancer)
+*@brief do a while for the user to choose each stat he wants
+*@param tab[] All the stats are in an array
+*@param size The total number of stat of the hero(4 warrior, 5 wizard et necromancer)
 */
 void whileStat(int tab[], int size)
 {
@@ -200,15 +196,15 @@ void whileStat(int tab[], int size)
             tab[i] = chooseStat(i, total, size);
             total += tab[i];
         }
-        erreur = -1; // comme ça si on répère le while on sait si c'était une erreur ou non;
+        erreur = -1; // To know if we repeat the while that their is a mistake
     } while (total != 30);
 }
 /**
-*@brief Le joueur fait sa séléction de compétences
-*@param i la compétence "active"
-*@param tot la valeur total des points distribué
-*@param size le nombre de compétence du héro (4 warrior, 5 wizard et necromancer)
-*@returns un entier représentant la valeur choisie
+*@brief The player choose his stats
+*@param i the actuel stat he is choosing for
+*@param tot the total stat point choosed from the start
+*@param size The total number of stat of the hero(4 warrior, 5 wizard et necromancer)
+*@returns An int with the choosen value for tue actual stat
 */
 int chooseStat(int i, int tot, int size)
 {
@@ -225,7 +221,8 @@ int chooseStat(int i, int tot, int size)
             cout << ", " + tab[k];
         }
 
-        cout <<":" << endl<<"Vous avez dépensé un total de (" << tot << "/"
+        cout << ":" << endl
+             << "Vous avez dépensé un total de (" << tot << "/"
              << "30) points de compétances " << endl;
         cout << "Choissisez le nombre de point pour: " << tab[i] << "" << endl;
         cout << "======================================= " << endl;

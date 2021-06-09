@@ -124,7 +124,7 @@ namespace HE_ARC::RPG
             {
 
                 cout << "Rentrez des valeurs entre 0 et " << size - 1 << endl;
-                cout << "Ou voulez vous ranger l'objet -> " << Item->getName() << "(" << Item->getFeature() << ")" << endl;
+                cout << "Ou voulez vous ranger l'objet -> "; Item->show();
                 fflush(stdin);
                 status = scanf("%d", &action);
                 //on fait un premier controle pour savoir si la saisie est juste et est dans la taille du tab

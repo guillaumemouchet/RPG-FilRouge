@@ -1,0 +1,162 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;1400&lt;/x&gt;&lt;y&gt;140&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;IObject
+--
+
+--
++IObject()
++~IObject
++/getName(): string {virtual} query/
++/getFeature(): int {virtual} query/
++show() query
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;240&lt;/x&gt;&lt;y&gt;270&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;1258&lt;/x&gt;&lt;y&gt;524&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;Shield
+--
+-solidity: int
+--
++Shield()
++Shield(int)
++Shield(Potion&amp;amp;)
++~Shield
++getName(): string query
++getFeature(): int query
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;1329&lt;/x&gt;&lt;y&gt;369&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;Potion
+--
+-power: int
+--
++Potion()
++Potion(int)
++Potion(Potion&amp;amp;)
++~Potion
++getName(): string query
++getFeature(): int query
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;1310&lt;/x&gt;&lt;y&gt;140&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;IObject
+--
+
+--
++IObject()
++~IObject
++/getName(): string {virtual}/
++/getFeature(): int {virtual}/
++show() query
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;130&lt;/x&gt;&lt;y&gt;30&lt;/y&gt;&lt;w&gt;100&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;/AbstractClass/
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;580&lt;/x&gt;&lt;y&gt;390&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;320&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;Undead
+--
+
+
+--
++Undead() 
++Undead(int , int , int , double)
++~Undead() {virtual}
+
++RiseUndead(Hero*) {virtual}
++manaDrain(Hero*)
++PoisonGrip(Hero*) {virtual}&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;UMLClass&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;220&lt;/x&gt;&lt;y&gt;562&lt;/y&gt;&lt;w&gt;210&lt;/w&gt;&lt;h&gt;190&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;Wizard
+--
+#mana: int
+#cMana : int
+--
++Wizard()
++Wizard((int , int , int , double , string , IObject*)
++~Wizard() {virtual}
+
++getcMana() query
++getMana()
+
++interact(Hero&amp;amp;)
++show()
+
++mHeal(double)
++looseMana(double)
+
++Leech(Monster*)
++Attack(Monster*)
++Fireball(Monster*) {virtual}
++Blizzard(Monster*) {virtual}
+
+&lt;/panel_attributes&gt;&lt;additional_attributes&gt;&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;Space for diagram notes&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;230&lt;/x&gt;&lt;y&gt;270&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;240&lt;/x&gt;&lt;y&gt;270&lt;/y&gt;&lt;w&gt;190&lt;/w&gt;&lt;h&gt;30&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=&amp;lt;&amp;lt;&amp;lt;-&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;170;10&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;</help_text><element><id>UMLClass</id><coordinates><x>60</x><y>0</y><w>210</w><h>570</h></coordinates><panel_attributes>/Hero/
+--
+#strength: int
+#agility: int
+#intelligence: int
+#hp: double
+#currentHp: double
+#name: string
+#pObject: *IObject
++backpack: Backpack
+--
++Hero() 
++Hero(int , int , int , double , string , IObject*)
++~Hero() {virtual}
+
++getStrength(): int query
++getAgility(): int query
++getIntelligence(): int query
++getHp(): double query
++getcHp(): double query
++getName(): string query
++isAliveH(): Bool query
+
++Concede()
++show(): virtual
+/+interact(Hero&amp;) {virtual}/
+
++loot()
++equip(IObject*)
++unequip(): IObject*
+
++HeroAction(Hero*, Monster*)
+/+HeroAttack(Hero*, Monster*){virtual}/ 
++UseBackpack(Hero*, Monster*)
+
++heal(double)
++looseHp(int, int)
++dodge: bool
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>640</y><w>210</w><h>190</h></coordinates><panel_attributes>Warrior
+--
+
+--
++Warrior()
++Warrior((int , int , int , double , string , IObject*)
++~Warrior()
+
++interact(Hero&amp;)
+
++Taunt(Monster*)
++ShieldBash(Monster*)
++Rampage(Monster*)
++HeroAttack(Hero*, Monster*) override</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>220</x><y>642</y><w>210</w><h>330</h></coordinates><panel_attributes>Wizard
+--
+#mana: int
+#cMana: int
+--
++Wizard()
++Wizard(int , int , int , double , string , IObject*)
++~Wizard() {virtual}
+
++getcMana() double query
++getMana() double query
+
++interact(Hero&amp;)
++show()
+
++mHeal(double)
++looseMana(double)
+
++Leech(Monster*)
++Attack(Monster*)
++Fireball(Monster*) {virtual}
++Blizzard(Monster*) {virtual}
++HeroAttack(Hero*, Monster*) override
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>220</x><y>994</y><w>210</w><h>190</h></coordinates><panel_attributes>Necromancer
+--
+
+--
++Necormancer()
++Necromancer((int , int , int , double , string , IObject*)
++~Necromancer()
+
++RiseUndead(Monster*)
++Cataclysme(Monster*)
++HeroAttack(Hero*, Monster*) override</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>100</x><y>560</y><w>70</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>560</y><w>100</w><h>100</h></coordinates><panel_attributes>
+lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;80;80</additional_attributes></element><element><id>Relation</id><coordinates><x>310</x><y>960</y><w>30</w><h>50</h></coordinates><panel_attributes>
+lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;30</additional_attributes></element></diagram>

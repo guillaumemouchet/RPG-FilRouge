@@ -18,15 +18,7 @@ using namespace std;
 namespace HE_ARC::RPG
 {
     //CONSTUCTEURS
-    /**
-    *@brief constructeur par paramètres
-    *@param _strength la force qui défini les dégats de ses attaques physiques
-    *@param _agility l'agilité qui permet d'esquiver les attaques
-    *@param _intelligence l'intelligence qui défini les dégats de ses attaques phsychique et magique
-    *@param _hp ses points de vie totaux
-    *@param _name son nom prédéfini selon la classe
-    *@param _PObject un pointeur sur un objet équipé
-    */
+    
     Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pObject) : pObject(_pObject)
     {
         // cout << "CONSTRUCTEUR par parametres: " << _name << endl;
@@ -38,10 +30,7 @@ namespace HE_ARC::RPG
         this->currentHp = _hp;
     }
 
-    //DESTRUCTEUR
-    /**
-    *@brief destructeur, on y détruit les éléments courant et ceux dans le sac
-    */
+    //DESTRUCTEUR  
     Hero::~Hero()
     {
         // cout << "DESTRUCTEUR: " << this->name << endl;
@@ -59,9 +48,7 @@ namespace HE_ARC::RPG
     }
 
     //FONCTIONS
-    /**
-    *@brief Affiche le héro et toutes ses compétences
-    */
+    
     void Hero::show()
     {
         /*cout << endl
@@ -87,28 +74,19 @@ namespace HE_ARC::RPG
         Logger::writeGame("=========================\n");
         Sleep(lTime);
     }
-    /**
-    *@brief pour équiper un objet dans la main du joueur, depuis son sac
-    *@param _PObject un pointeur sur un objet 
-    */
+
     void Hero::equip(IObject *_pObject)
     {
         this->pObject = _pObject;
     }
-    /**
-    *@brief Pour désequiper l'objet dans la main du joueur
-    *@returns pointeur sur l'objet anciennement équipé
-    */
+
     IObject *Hero::unequip()
     {
         IObject *mItem = this->pObject;
         this->pObject = nullptr;
         return mItem;
     }
-    /**
-    *@brief Pour rendre des points de vie au héro
-    *@param _heal les points de vie qu'il va être rendu
-    */
+
     void Hero::heal(double _heal)
     {
         if (_heal >= (this->getHp() - this->getcHp()))
@@ -123,11 +101,7 @@ namespace HE_ARC::RPG
             Logger::writeBattle("Vous vous soignez de " + to_string(_heal) + "Hp.");
         }
     }
-    /**
-    *@brief Le calcul et la perte de point de vie du héro
-    *@param _stat la valeur de la compétence utilisée
-    *@param _damage la constante de dégat du sort
-    */
+
     void Hero::looseHp(int _damage, int _stat)
     {
 
@@ -151,19 +125,14 @@ namespace HE_ARC::RPG
             Logger::writeBattle("Vous perdez " + to_string(damage) + " Hp");
         }
     }
-    /**
-    *@brief Pour que le héro puisse éviter les attaques du monstre, cela dépend de son agilité
-    *@returns Vrai si l'attaque a été esquivée sinon faux
-    */
+
     bool Hero::dodge()
     {
         srand(time(nullptr));
         //return (((rand() % 15 + 1) + this->getAgility()) >= 15);
         return (rand() % 100 + 1 <= this->getAgility());
     }
-    /**
-    *@brief La fonction qui de manière aléatoire donne un objet au héro, il peut soit le mettre dans son sac ou le jeter
-    */
+
     void Hero::loot()
     {
 
@@ -204,10 +173,7 @@ namespace HE_ARC::RPG
         }
     }
 
-    /**
-    *@brief Permet au joueur de choisir qu'elle action faire dans son combat
-    *@param _monster le pointeur sur le monstre qui est combattu
-    */
+
     void Hero::heroAction(Monster *_monster)
     {
         int action = -1;
@@ -242,10 +208,7 @@ namespace HE_ARC::RPG
         }
     }
 
-    /**
-    *@brief Permet au joueur d'ouvrir son sac et de voir ce qu'il y a dedans, il peut soit l'utiliser, ou non, ou la jeter
-    *@param _monster le pointeur sur le monstre qui est combattu
-    */
+
     void Hero::useBackpack(Monster *_monster)
     {
 

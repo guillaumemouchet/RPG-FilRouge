@@ -44,7 +44,9 @@ namespace HE_ARC::RPG
         this->mana = 0;
     }
 
-    //Fonction
+    /**
+    *@brief Interaction between two heroes 
+    */
     void Wizard::interact(const Hero &hero)
     {
         cout << this->name << " do a magic trick for " << hero.getName() << endl;
