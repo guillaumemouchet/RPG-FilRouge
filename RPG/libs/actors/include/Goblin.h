@@ -16,14 +16,14 @@ namespace HE_ARC::RPG
         public:
         /**
         *@brief Constructeur par paramètre
-        *@param _strength la force qui défini les dégats de ses attaques physiques
-        *@param _agility l'agilité qui permet d'esquiver les attaques
-        *@param _intelligence l'intelligence qui défini les dégats de ses attaques phsychique et magique
-        *@param _hp ses points de vie totaux
+        *@param _strength the strength defines the damages of the physical attacks
+        *@param _agility The agility is used to dodge the ennemis attack
+        *@param _intelligence the intelligence defines the damages of the magical attacks
+        *@param _hp it's the total life of the monster
         */
         Goblin(int _strength, int _agility, int _intelligence, double _hp);
         /**
-        *@brief Constructeur par default
+        *@brief Default Constructor
         */
         Goblin() = default;
         /**
@@ -32,25 +32,26 @@ namespace HE_ARC::RPG
         ~Goblin() = default;
 
 
-        //liste des sorts du monstre
+        //Monster's spells
         /**
-        *@brief le monstre demande de l'aide des monstres aux alentours pour blesser le joueur, c'est une attaque physique
-        *@param _hero le joueur qui combat le monstre
+        *@brief the monster calls for help from other monsters, it's a physical attack
+        *@param _hero pointer on the hero he's attacking
         */
         void rallye(Hero *_hero);
+
         /**
-        *@brief le monstre essaie de voler le sac du joueur et de le blesser, il a une chance sur 8 de réussir son vol, c'est une attaque physique
-        *@param _hero le joueur qui combat le monstre
+        *@brief the monster try to hit and steal the item on top on your backpack, it's a physical attack
+        *@param _hero pointer on the hero he's attacking
         */
         void steal(Hero *_hero);
         /**
-        *@brief le monstre tire avec une fronde sur le joueur, c'est une attaque magique
-        *@param _hero le joueur qui combat le monstre
+        *@brief the monster use a slingshot to hit the player,it's a magical attack
+        *@param _hero pointer on the hero he's attacking
         */
         void slingShot(Hero *_hero);
         /**
-        *@brief permet de définir les attaques du monstre, elles marchent sur un pattern défini
-        *@param _hero pointeur sur le hero qu'il attaque
+        *@brief Defines a pattern for the attack of the monster
+        *@param _hero pointer on the hero he's attacking
         */
         void monsterAttack(Hero *_hero) override;
 

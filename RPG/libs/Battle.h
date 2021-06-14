@@ -19,25 +19,40 @@ namespace HE_ARC::RPG
 {
     class Monster;
     class Hero;
-    
+
     class Battle
     {
     private:
-        //affiche l'état du monstre et du joueur
+        /**
+        *@brief Affichage des points de vie du monster et du joueur (et du mana si il en )
+        *@param _hero le pointeur du joueur
+        *@param _monster le pointeur du monstre qu'il combat
+        */
         void show(Hero *_hero, Monster *_monster) const;
-        
-        
+
     public:
         //CONSTRUCTEUR
-        //par défaut ne fait rien
+        /**
+        *@brief Constructeur par défault
+        */
         Battle() = default;
         //DESTRUCTEUR
+        /**
+        *@brief Destructeur par défault
+        */
         ~Battle() = default;
-        //création du combat
+        /**
+        *@brief le joueur combat un monstre, le monstre aura soit un pattern défini ou aura des attaques aléatoire
+        *@param _hero le pointeur du joueur
+        *@param _monster le pointeur du monstre qu'il combat
+        */
         void fight(Hero *_hero, Monster *_monster);
-        //création de la zone de repos
+        /**
+        *@brief le joueur regagne une partie de ses points de vie et de son mana, il doit aussi trier son sac
+        *@param _hero le pointeur du joueur
+        *@param _monster le pointeur du monstre qu'il combat
+        */
         void restsite(Hero *_hero);
-        
     };
 }
 #endif

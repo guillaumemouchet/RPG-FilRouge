@@ -18,7 +18,15 @@ namespace HE_ARC::RPG
         Potion(Potion &s) : power(s.power) {}
         ~Potion() = default;
         //GETTER
+        /**
+        *@brief Give the Feature of the Item
+        *@return an int with the value
+        */
         int getFeature() const override;
+        /**
+        *@brief Give the name of the item
+        *@return a string with the name
+        */
         string getName() const override;
 
     private:

@@ -13,25 +13,14 @@ using namespace std;
 
 namespace HE_ARC::RPG
 {
-    /**
-    *@brief Constructeur par paramètre
-    *@param _strength la force qui défini les dégats de ses attaques physiques
-    *@param _agility l'agilité qui permet d'esquiver les attaques
-    *@param _intelligence l'intelligence qui défini les dégats de ses attaques phsychique et magique
-    *@param _hp ses points de vie totaux
-    *@param _name son nom prédéfini selon la classe
-    *@param _PObject un pointeur sur un objet équipé
-    *@param _mana le mana qui doit être dépensé pour attaquer
-    */
+   
     Wizard::Wizard(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pObject, int _mana) : Hero(_strength, _agility, _intelligence, _hp, _name, _pObject)
     {
         mana = _mana;
         cMana = _mana;
         this->currentHp = _hp;
     }
-    /**
-    *@brief Constructeur par défaut
-    */
+    
     Wizard::Wizard()
     {
         cout << "CONSTRUCTEUR par defaut" << endl;
@@ -52,9 +41,7 @@ namespace HE_ARC::RPG
         cout << this->name << " do a magic trick for " << hero.getName() << endl;
     }
 
-    /**
-    *@brief Affiche le héro et ses compétences (override car il y le mana en plus)
-    */
+    
     void Wizard::show()
     {
        /* cout << endl
@@ -85,10 +72,7 @@ namespace HE_ARC::RPG
 
     //Liste des sorts du Héro
 
-    /**
-    *@brief Le joueur lance une boule de feu sur le monstre, attaque magique
-    *@param _monster pointeur sur le monstre que le joueur attaque
-    */
+    
     void Wizard::fireball(Monster *_monster)
     {
 
@@ -105,10 +89,7 @@ namespace HE_ARC::RPG
         }
     }
 
-    /**
-    *@brief Le joueur invoque un grand blizzard, attaque magique
-    *@param _monster pointeur sur le monstre que le joueur attaque
-    */
+    
     void Wizard::blizzard(Monster *_monster)
     {
         if (this->cMana >= aWizard::mBlizzard)
@@ -123,10 +104,7 @@ namespace HE_ARC::RPG
         }
     }
 
-    /**
-    *@brief Le joueur inflige des points de dégats au monstre et les reconvertis en points de vie, attaque magique
-    *@param _monster pointeur sur le monstre que le joueur attaque
-    */
+    
     void Wizard::leech(Monster *_monster)
     {
 
@@ -142,10 +120,7 @@ namespace HE_ARC::RPG
             attack(_monster);
         }
     }
-    /**
-    *@brief Pour rendre des points de mana au joueur
-    *@param _mHeal quantité de mana rendu
-    */
+    
     void Wizard::mHeal(double _mHeal)
     {
         if (_mHeal >= (this->getMana() - this->getcMana()))
@@ -159,10 +134,7 @@ namespace HE_ARC::RPG
             Logger::writeBattle("Vous vous soignez de " + to_string(_mHeal) + "Mp.");
         }
     }
-    /**
-    *@brief pour faire perdre des points de mana au joueur
-    *@param _lMana quantité de mana dépensé
-    */
+    
     void Wizard::looseMana(double _lMana)
     {
         if (_lMana > this->getcMana())
@@ -175,10 +147,7 @@ namespace HE_ARC::RPG
         }
         cout << "vous perdez " << _lMana << " MP" << endl;
     }
-    /**
-    *@brief Le joueur frappe avec ce qu'il a sous la main quand il n'a plus de mana, attaque physique
-    *@param _monster pointeur sur le monstre que le joueur attaque
-    */
+    
     void Wizard::attack(Monster *_monster)
     {
         if (typeid(*pObject) == typeid(Sword))
@@ -202,10 +171,7 @@ namespace HE_ARC::RPG
         }
     }
 
-    /**
-    *@brief Permet au joueur de choisir quelle attaque utiliser en combat, cela dépend de sa classe
-    *@param _monster le pointeur sur le monstre qui est combattu
-    */
+    
     void Wizard::heroAttack(Monster *_monster)
     {
 

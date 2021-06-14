@@ -11,7 +11,15 @@ namespace HE_ARC::RPG
     {
     protected:
     public:
+        /**
+        *@brief Give the name of the item
+        *@return a string with the name
+        */
         virtual string getName() const = 0;
+        /**
+        *@brief Give the Feature of the Item
+        *@return an int with the value
+        */
         virtual int getFeature() const = 0;
         /**
         *@brief Affiche le nom et les caractéristiques de l'objet
@@ -20,7 +28,14 @@ namespace HE_ARC::RPG
         {
             Logger::writeGame(this->getName() + "(" + to_string(this->getFeature()) + ")");
         }
+        /**
+        *@brief default constructor
+        */
         IObject() = default;
+        
+        /**
+        *@brief default destructor
+        */
         ~IObject() = default;
     };
 }

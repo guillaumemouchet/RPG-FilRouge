@@ -12,16 +12,7 @@ using namespace std;
 
 namespace HE_ARC::RPG
 {
-    /**
-    *@brief Constructeur par paramètre
-    *@param _strength la force qui défini les dégats de ses attaques physiques
-    *@param _agility l'agilité qui permet d'esquiver les attaques
-    *@param _intelligence l'intelligence qui défini les dégats de ses attaques phsychique et magique
-    *@param _hp ses points de vie totaux
-    *@param _name son nom prédéfini selon la classe
-    *@param _PObject un pointeur sur un objet équipé
-    *@param _mana le mana qui doit être dépensé pour attaquer
-    */
+    
     Necromancer::Necromancer(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pObject, int _mana) : Wizard(_strength, _agility, _intelligence, _hp, _name, _pObject, _mana)
     {
         this->cMana = _mana;
@@ -29,10 +20,7 @@ namespace HE_ARC::RPG
     }
 
     //Liste des sorts du Héro
-    /**
-    *@brief Le joueur invoque des morts pour blesser son ennemi
-    *@param _monster pointeur sur le monstre que le joueur attaque
-    */
+    
     void Necromancer::riseUndead(Monster *_monster)
     {
 
@@ -48,10 +36,7 @@ namespace HE_ARC::RPG
         }
     }
 
-    /**
-    *@brief Le joueur invoque un cataclysme pour blesser l'ennemi, mais se prend des dégats en contre-coup
-    *@param _monster pointeur sur le monstre que le joueur attaque
-    */
+    
     void Necromancer::cataclysme(Monster *_monster)
     {
 
@@ -67,10 +52,7 @@ namespace HE_ARC::RPG
             attack(_monster);
         }
     }
-    /**
-    *@brief Permet au joueur de choisir quelle attaque utiliser en combat, cela dépend de sa classe
-    *@param _monster le pointeur sur le monstre qui est combattu
-    */
+    
     void Necromancer::heroAttack(Monster *_monster)
     {
         int action = -1;

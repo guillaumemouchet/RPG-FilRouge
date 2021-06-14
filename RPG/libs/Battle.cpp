@@ -5,11 +5,7 @@
 using namespace std;
 namespace HE_ARC::RPG
 {
-    /**
-    *@brief le joueur combat un monstre, le monstre aura soit un pattern défini ou aura des attaques aléatoire
-    *@param _hero le pointeur du joueur
-    *@param _monster le pointeur du monstre qu'il combat
-    */
+    
     void Battle::fight(Hero *_hero, Monster *_monster)
     {
         Logger::writeBattle("=======================================");
@@ -53,11 +49,7 @@ namespace HE_ARC::RPG
             exit(-1); // il est mort donc fin de la partie, et du programme
         }
     }
-    /**
-    *@brief Affichage des points de vie du monster et du joueur (et du mana si il en )
-    *@param _hero le pointeur du joueur
-    *@param _monster le pointeur du monstre qu'il combat
-    */
+
     void Battle::show(Hero *_hero, Monster *_monster) const
     {
 
@@ -73,11 +65,7 @@ namespace HE_ARC::RPG
         Sleep(lTime);
     }
 
-    /**
-    *@brief le joueur regagne une partie de ses points de vie et de son mana, il doit aussi trier son sac
-    *@param _hero le pointeur du joueur
-    *@param _monster le pointeur du monstre qu'il combat
-    */
+    
     void Battle::restsite(Hero *_hero)
     {
 

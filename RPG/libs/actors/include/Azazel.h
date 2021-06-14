@@ -1,4 +1,3 @@
-
 #ifndef AZAZEL_H
 #define AZAZEL_H
 
@@ -15,17 +14,16 @@ namespace HE_ARC::RPG
     {
     protected:
     public:
-        // constructeurs
         /**
-        *@brief Constructeur par défault
+        *@brief Default Constructor
         */
         Azazel() = default;
         /**
         *@brief Constructeur par paramètre
-        *@param _strength la force qui défini les dégats de ses attaques physiques
-        *@param _agility l'agilité qui permet d'esquiver les attaques
-        *@param _intelligence l'intelligence qui défini les dégats de ses attaques phsychique et magique
-        *@param _hp ses points de vie totaux
+        *@param _strength the strength defines the damages of the physical attacks
+        *@param _agility The agility is used to dodge the ennemis attack
+        *@param _intelligence the intelligence defines the damages of the magical attacks
+        *@param _hp it's the total life of the monster
         */
         Azazel(int _strength, int _agility, int _intelligence, double _hp);
         /**
@@ -34,26 +32,26 @@ namespace HE_ARC::RPG
         ~Azazel() = default;
 
 
-        //liste des sorts du monstre
+        //Monster's spells
         /**
-        *@brief Le monstre lance un gigantesque laser sur le joueur, c'est une attaque magique
-        *@param _hero le joueur qui combat le monstre
+        *@brief the monster throw a Laser on the player, it's a magical attack
+        *@param _hero pointer on the hero he's attacking
         */
         void brimStorm(Hero *_hero);
         /**
-        *@brief Le monstre frappe 2 fois avec un fouet le joueur, c'est une attaque physique
-        *@param _hero le joueur qui combat le monstre
+        *@brief The monster hit the player twice with a whip, it's a physical attack
+        *@param _hero pointer on the hero he's attacking
         */
         void doubleSlash(Hero *_hero);
         /**
-        *@brief Le monstre invoque un cataclysme sur le joueur, c'est une attaque physique
-        il y a des dégats aléatoire en rapport à l'objet qu'il se prend
-        *@param _hero le joueur qui combat le monstre
+        *@brief The monster creates a cataclysme on the player, it's a physical attack
+        There is also a random damage depending on the item he get hit by
+        *@param _hero pointer on the hero he's attacking
         */
         void apocalypse(Hero *_hero);
         /**
-        *@brief permet de définir les attaques du monstre, elles sont aléatoires
-        *@param _hero pointeur sur le hero qu'il attaque
+        *@brief Defines a pattern for the attack of the monster, they are random
+        *@param _hero pointer on the hero he's attacking
         */
         void monsterAttack(Hero *_hero) override;
     };

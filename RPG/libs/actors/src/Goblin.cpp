@@ -7,7 +7,6 @@ using namespace std;
 namespace HE_ARC::RPG
 {
     //CONSTRUCTEUR
-    
     Goblin::Goblin(int _strength, int _agility, int _intelligence, double _hp) : Monster(_strength, _agility, _intelligence, _hp)
     {
         this->currentHp = _hp;

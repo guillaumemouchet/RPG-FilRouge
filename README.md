@@ -24,7 +24,7 @@ Une fois que le monstre est vaincu et que le héro ait ramassé l'objet, il se r
 Puis il commencera le deuxième combat etc.
 
 
-## Explication
+## Explications
 
 ### Compétences:
 
@@ -100,25 +100,29 @@ Soit des monstres préfait qu'on choisi suivant la difficulté ou que leur stat 
 </ul>
 
 ## UML
+<!-- peut être utiliser les images à faire sur 
+http://www.umlet.com/umletino/umletino.html.--->
 
-Le diagramme de class global se trouve dans le fichier [UML.uxf](UML.uxf) pour plus d'informations.
-Un diagramme simplifier pour juste voir les relations se trouve ici [UML_simplify.uxf](UML_simplify.uxf)
+Le diagramme de class global se trouve dans le fichier [UML.uxf](UML/UML.uxf) pour plus d'informations.
+Un diagramme simplifier pour juste voir les relations se trouve ici [UML_simplify.uxf](UML/UML_simplify.uxf).
+
 Un diagramme spécifique au :
-<ul>
-<li>Hero</li> 
-se trouve ici [UML_Hero.uxf](UML_Hero.uxf)
-<li>Monster se trouve ici [UML_Monster.uxf](UML_Monster.uxf)</li>
-<li>Object et interaction se trouve ici [UML_Object.uxf](UML_Object.uxf)</li>
-</ul>
+
+Hero se trouve ici -->[UML_Hero.uxf](UML/UML_Hero.uxf).
+
+Monster se trouve ici --> [UML_Monster.uxf](UML/UML_Monster.uxf).
+
+Object et interaction se trouve ici --> [UML_Object.uxf](UML/UML_Object.uxf).
+
 ## Versions
 
-Liste des versions : [Cliquer pour afficher](https://gitlab-etu.ing.he-arc.ch/guillaum.mouchet/cpp_filrouge_iscc_mouchetg)
+Liste des versions : [Cliquer pour afficher](https://gitlab-etu.ing.he-arc.ch/guillaum.mouchet/cpp_filrouge_iscc_mouchetg).
 
 ## Auteurs
- **Guillaume Mouchet** _alias_ [@guillaum.mouchet](https://github.com/guillaum.mouchet)
+ **Guillaume Mouchet** _alias_ [@guillaum.mouchet](https://github.com/guillaum.mouchet).
 
 _mail_:<a href="mailto:guillaume.mouchet@he-arc.ch">
-  guillaume.mouchet@he-arc.ch </a>
+  guillaume.mouchet@he-arc.ch. </a>
 
 
 
