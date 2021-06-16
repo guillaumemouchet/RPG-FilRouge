@@ -129,7 +129,6 @@ namespace HE_ARC::RPG
     bool Hero::dodge()
     {
         srand(time(nullptr));
-        //return (((rand() % 15 + 1) + this->getAgility()) >= 15);
         return (rand() % 100 + 1 <= this->getAgility());
     }
 

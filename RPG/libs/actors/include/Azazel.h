@@ -18,6 +18,7 @@ namespace HE_ARC::RPG
         *@brief Default Constructor
         */
         Azazel() = default;
+
         /**
         *@brief Constructeur par paramètre
         *@param _strength the strength defines the damages of the physical attacks
@@ -26,6 +27,7 @@ namespace HE_ARC::RPG
         *@param _hp it's the total life of the monster
         */
         Azazel(int _strength, int _agility, int _intelligence, double _hp);
+        
         /**
         *@brief Destructeur par défault
         */

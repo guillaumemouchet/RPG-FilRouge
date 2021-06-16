@@ -18,7 +18,7 @@ namespace HE_ARC::RPG
     
     void Azazel::brimStorm(Hero *_hero)
     {
-        cout << "Votre adversaire lance une gigantesque Laser" << endl;
+        cout << "Votre adversaire lance un gigantesque Laser" << endl;
         _hero->looseHp(this->getIntelligence(), aAzazel::cBrimstorm);
     }
     
