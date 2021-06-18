@@ -12,9 +12,9 @@ Dans ce RPG il vous sera possible de choisir parmis 3 classes qui sont le Warrio
 
 Le jeu se passe en tour par tour avec le monstre qui attaque en premier, le Goblin et le Undead marchent sur un pattern prédéfini alors que Azazel attaque de manière aléatoire. 
 
-Ensuite c'est au tour du joueur, il pourra choisir parmis 3 actions, attaquer, sac ou abondonner:
+Ensuite c'est au tour du joueur, il pourra choisir parmis 3 actions, attaquer, sac à dos ou abondonner:
 1) Attaquer permet ensuite de choisir parmis une des 3 attaques du héro choisi
-2) Sac permet d'ouvrir le sac et de voir ce qu'il y a en haut, puis de soit l'équiper ou non, ou le jeter.
+2) Sac à dos permet d'ouvrir le sac et de voir ce qu'il y a en haut, puis de soit l'équiper ou non, ou le jeter.
 3) Abondonner permet d'arrêter le jeu complétement
 Ces actions seront donc faite en boucle jusqu'à qu'un des personnages meurt.
 
@@ -28,14 +28,14 @@ Puis il commencera le deuxième combat etc.
 
 ### Compétences:
 
-Le joueur doit distribuer 30 points de compétences dans son héros, il peut mettre des compétences au minimum 1 point par compétence. 
+Le joueur doit distribuer 30 points de compétences dans son héros, il peut mettre des minimum 1 point par compétence. 
 <ul>
 <li>La Strength permet de faire des attaques physiques plus puissante</li>
 <li>L'Agility permet de potentiellement esquiver des attaques ennemies</li>
 <li>Les Hps determinent vos points de vie avec un facteur 10</li>
 <li>L'Intelligence permet de faire des attaques magiques plus puissante</li>
 <li>Le nom est par défaut et détermine votre class (Chandra = warrior, Lilianna = Necromancer, Jace = Wizard)</li>
-<li>Le IObject défini l'objet que vous avez en main, soit une épée ou un bouclier, les potions ne peuvent que être bue depuis le haut du sac.</li>
+<li>Le IObject défini l'objet que vous avez en main, soit une épée ou un bouclier, les potions ne peuvent que être bu depuis le haut du sac.</li>
 <li>Le Mana determine ce qui peut être lancé comme sort, car les Necromancers et Wizards devront dépenser du mana pour pouvoir lancer des sorts, il y a aussi un facteur 10. </li>
 </ul>
 
@@ -87,10 +87,10 @@ Personnage, {
  Un équilibrage total du jeu avec une réflexion différente du calcul du dégat, ou il y aurait un ajout de stat de défence qui prendrait en compte la force et l'agilité.
 ### Idée 3:
 Faire un jeu multi joueur ou soit deux héros combattent entre eux ou alors que un joueur joue les héros et l'autre joue les monstres.
-Ce qui fait qu'en début de partie, le joueur  choisi entre les deux modes, et suivant la réponse il y aura un changement de comportement.
+Ce qui fait qu'en début de partie, le joueur  choisi entre les deux modes, et suivant la réponse il y aura un changement de comportement. (Pour ça il faudrait créer une classe Personnage qui regroupe Hero et Monster pour que les combats puissent se faire entre 2 personnages)
 
 ### Idée 4:
-Faire des niveaux de difficulté, qui rendent les monstres plus fort, comme avant ou en début de partie le joueur choisi la difficulté ce qui changerait la construction par paramêtre des monstres.
+Faire des niveaux de difficulté, qui rendent les monstres plus fort, comme avant ou en début de partie le joueur choisi la difficulté ce qui changerait la construction par paramètre des monstres.
 Soit des monstres préfait qu'on choisi suivant la difficulté ou que leur stat corresponde à x+difficulté, par exemple:
 <ul>
 <li>très facile =-1</li>
@@ -104,7 +104,7 @@ Soit des monstres préfait qu'on choisi suivant la difficulté ou que leur stat 
 http://www.umlet.com/umletino/umletino.html.--->
 
 Le diagramme de class global se trouve dans le fichier [UML.uxf](UML/UML.uxf) pour plus d'informations.
-Un diagramme simplifier pour juste voir les relations se trouve ici [UML_simplify.uxf](UML/UML_simplify.uxf).
+Un diagramme simplifié pour juste voir les relations se trouve ici [UML_simplify.uxf](UML/UML_simplify.uxf).
 
 Un diagramme spécifique au :
 
